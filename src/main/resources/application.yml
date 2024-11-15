@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/brewit?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+
+#mybatis:
+#  type-aliases-package: com.pt.brewit.dto
+
+# logging
+logging:
+  level:
+    # DB JDBC 로그 설정
+    org.springframework.jdbc: debug
+    # sql 로그
+    com.example.memberSec.repository: trace

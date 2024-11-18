@@ -6,6 +6,116 @@
 
 <body class="index-page">
 
+
+<header id="header" class="header sticky-top">
+
+  <!--    <div class="topbar d-flex align-items-center">-->
+  <!--      <div class="container d-flex justify-content-center justify-content-md-between">-->
+  <!--&lt;!&ndash;        <div class="contact-info d-flex align-items-center">&ndash;&gt;-->
+  <!--&lt;!&ndash;          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>&ndash;&gt;-->
+  <!--&lt;!&ndash;          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>&ndash;&gt;-->
+  <!--&lt;!&ndash;        </div>&ndash;&gt;-->
+  <!--        <div class="social-links d-none d-md-flex align-items-center">-->
+  <!--          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>-->
+  <!--          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>-->
+  <!--          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>-->
+  <!--          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>&lt;!&ndash; End Top Bar &ndash;&gt;-->
+
+  <div class="branding d-flex align-items-cente">
+
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="main/assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Brewit</h1>
+      </a>
+      <!--   GNB 메뉴  -->
+      <nav id="navmenu" class="navmenu">
+        <ul class = "gnb">
+          <li>
+            <a href="#">Brewit 소개</a>
+              <ul>
+                <li><a href="#">Brewit 소개</a></li>
+                <li><a href="" th:text="@{item}">{{[Param]}}</a></li>
+                <li><a href="#">입점 브랜드 소개</a></li>
+              </ul>
+          </li>
+          <li><a href="#">정기구독</a></li>
+          <li>
+            <a href="#">차(Tea)</a>
+            <ul>
+              <li><a href="#">티백</a></li>
+              <li><a href="#">잎차</a></li>
+              <li><a href="#">디 카페인</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">커피</a>
+            <ul>
+              <li><a href="#">싱글 오리진</a></li>
+              <li><a href="#">블렌드</a></li>
+              <li><a href="#">디 카페인</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">관련용품</a>
+            <ul>
+              <li>
+                <a href="#">차</a>
+                  <ul>
+                       <li><a href="#">드립 주전자</a></li>
+                       <li><a href="#">전기 포트</a></li>
+                       <li><a href="#">핸드 드립세트</a></li>
+                       <li><a href="#">다기 세트</a></li>
+                  </ul>
+              </li>
+               <li>
+                <a href="#">커피</a>
+                  <ul>
+                    <li><a href="#">커피 머신</a></li>
+                    <li><a href="#">그라인더</a></li>
+                    <li><a href="#">커피 메이커</a></li>
+                    <li><a href="#">핸드 드립세트</a></li>
+                  </ul>
+                </li>
+            </ul>
+          <li><a href="#">공지사항</a></li>
+          <li><a href="#">고객지원</a></li>
+          <li><a href="#"><img src="../../static/img/cart.png"/>  장바구니</a></li>
+          <li><a href="/login" th:href="@{/login}"><img src="../../static/img/login.png"/>  로그인</a></li>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <!--   GNB 메뉴 끝     -->
+    </div>
+  </div>
+
+
+<!--      Dropdown menu   -->
+<!--          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>-->
+<!--            <ul>-->
+<!--              <li><a href="#">Dropdown 1</a></li>-->
+<!--              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>-->
+<!--                <ul>-->
+<!--                  <li><a href="#">Deep Dropdown 1</a></li>-->
+<!--                  <li><a href="#">Deep Dropdown 2</a></li>-->
+<!--                  <li><a href="#">Deep Dropdown 3</a></li>-->
+<!--                  <li><a href="#">Deep Dropdown 4</a></li>-->
+<!--                  <li><a href="#">Deep Dropdown 5</a></li>-->
+<!--                </ul>-->
+<!--              </li>-->
+<!--              <li><a href="#">Dropdown 2</a></li>-->
+<!--              <li><a href="#">Dropdown 3</a></li>-->
+<!--              <li><a href="#">Dropdown 4</a></li>-->
+<!--            </ul>-->
+<!--          </li>-->
+
+
+</header>
+
+
 <main class="main">
 
     <!-- Main Img Section -->

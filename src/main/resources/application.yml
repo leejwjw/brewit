@@ -5,8 +5,8 @@ spring:
     username: root
     password: 1234
 
-#mybatis:
-#  type-aliases-package: com.pt.brewit.dto
+mybatis:
+  type-aliases-package: com.pt.brewit.dto
 
 # logging
 logging:

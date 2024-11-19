@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pt.brewit.mapper.MainpageMapper">
+
+    <!-- "All" 탭: 카테고리별 BEST 2개 -->
+    <select id="findBestProductsForAll" resultType="ProductDTO">
+        select *
+        from tb_product
+        where category_id IN (1, 2, 3) and stock > 0
+        order by category_id, hit desc
+        limit 6
+    </select>
+
+    <!-- "차" 탭 -->
+    <select id="findBestProductsForTea" resultType="ProductDTO">
+        select *
+        from tb_product
+        where category_id = 1 and stock > 0
+        order by reg_date desc
+        limit 6
+    </select>
+
+    <!-- "커피" 탭 -->
+    <select id="findBestProductsForCoffee" resultType="ProductDTO">
+        select *
+        from tb_product
+        where category_id = 2 and stock > 0
+        order by reg_date desc
+        limit 6
+    </select>
+</mapper>

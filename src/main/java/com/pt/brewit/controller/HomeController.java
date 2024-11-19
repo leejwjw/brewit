@@ -124,14 +124,5 @@ public class HomeController {
         return "admin/index";
     }
 
-    //tea 상품페이지
-    //Test
-    //Test22
-    @GetMapping("/details")
-    public String details(Model model) {
-        model.addAttribute("name", "상품명1");
-        model.addAttribute("sale_price", "123,456");
 
-        return "main/productExample";
-    }
 }

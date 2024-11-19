@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+
+    <th:block th:fragment="content">
+        <div class="container-fluid">
+            <h2 align="center"> 회원가입 폼 </h2>
+            <form action="/members/new" method="post" id="form" name="inputForm" onsubmit="return fieldCheck()">
+                <table>
+                    <tr>
+                        <td>아이디*</td>
+                        <td><input type="text" name="id" id="id"/></td>
+                    </tr>
+                    <tr>
+                        <td>ajax 아이디 사용가능여부</td>
+                        <td><input type="text" id="idCheck" disabled/></td>
+                    </tr>
+                    <tr>
+                        <td>아이디 중복확인</td>
+                        <td><input type="button" value="아이디 중복확인" onclick="openIdAvail(this.form)"/></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호*</td>
+                        <td><input type="password" name="pw"/></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호 확인*</td>
+                        <td><input type="password" name="pwch"/></td>
+                    </tr>
+                    <tr>
+                        <td>이름*</td>
+                        <td><input type="text" name="name"/></td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td><input type="text" name="email"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="가입"/>
+                            <input type="reset" value="재작성"/>
+                            <input type="button" value="취소" onclick="window.location='/'"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // jquery 작성
+                    // id 값이 "id" 인 input 태그의 변경사항이 있으면 이벤트 발생!
+                    $("#id").change(function () {
+                        let id = $("#id").val(); // id input 태그에 작성한 값 꺼내기
+                        $.ajax({
+                            url: "/members/idAvailAjax",
+                            type: "post",
+                            data: {id: id},
+                            success: function (result) {
+                                console.log("ajax 요청 성공!!!");
+                                console.log(result); // 응답데이터 출력
+                                // 결과 화면에 붙히기
+                                $("#idCheck").val(result).css("color", "red");
+                            },
+                            error: function (e) {
+                                console.log("ajax 요청 실패.....");
+                                console.log(e); // error정보 출력
+                            }
+                        });
+
+                    });
+                });
+            </script>
+
+            <script th:inline="javascript">
+                // id 중복확인 함수
+                function openIdAvail(inputForm) {
+                    // id 입력란에 값 있는지부터 체크
+                    if (inputForm.id.value == "" || !inputForm.id.value) {
+                        alert("아이디를 입력하세요.");
+                        return;  // 함수 종료!
+                    }
+                    // 중복확인 팝업창 띄우기 : open(url, name, options)
+                    let url = "/members/idAvail?id=" + inputForm.id.value; // 팝업창으로 요청할 주소 준비
+                    open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, width=500, height=500");
+                }
+
+                // 유효성 검사 함수
+                function fieldCheck() {
+                    let form = document.getElementById("form");
+                    if (!form.id.value) {
+                        alert("아이디를 입력하세요");
+                        return false; // submit 실행 취소
+                    }
+                    if (!form.pw.value) {
+                        alert("비밀번호를 입력하세요");
+                        return false;
+                    }
+                    if (!form.pwch.value) {
+                        alert("비밀번호 확인란을 입력하세요");
+                        return false;
+                    }
+                    if (!form.name.value) {
+                        alert("이름을 입력하세요");
+                        return false;
+                    }
+                    if (form.pw.value != form.pwch.value) {
+                        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+                        return false;
+                    }
+                }
+            </script>
+        </div>
+    </th:block>
+
+</th:block>

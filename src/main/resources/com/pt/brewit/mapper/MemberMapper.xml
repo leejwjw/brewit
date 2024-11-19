@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pt.brewit.mapper.MemberMapper">
+
+    <insert id="insertMember">
+        insert into tb_member(member_id, name, password, cellphone,telephone,address1,address2,email,auth,is_subscribe,bank_id,bank_account,is_kakao)
+        values(#{member_id},#{name},#{password},#{cellphone},#telephone,#address1,#address2,#email,#auth,#is_subscribe,#bank_id,#bank_account,#is_kakao)
+    </insert>
+
+    <select id="selectAll" resultType="MemberDTO">
+        select * from tb_member
+    </select>
+
+    <select id="selectOne" resultType="MemberDTO">
+        select * from tb_member where email=#{email}
+    </select>
+
+    <update id="updateMember">
+        update tb_member set name=#{name}, email=#{email}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteMember">
+        delete from tb_member where id=#{id}
+    </delete>
+
+    <select id="emailPwCheck" resultType="MemberDTO">
+        select * from tb_member where email=#{email} and password=#{pw}
+    </select>
+
+
+
+</mapper>

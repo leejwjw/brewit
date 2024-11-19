@@ -602,28 +602,36 @@
                                 >
                                     <thead>
                                     <tr>
-                                        <th>Num</th>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>#</th>
+                                        <th>이름</th>
+                                        <th>휴대전화번호</th>
+                                        <th>E-mail</th>
+                                        <th>회원가입일</th>
+                                        <th>상태</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        <tr th:each="member : ${members}">
+                                            <td th:text="${member.member_id}"></td>
+                                            <td th:text="${member.name}"></td>
+                                            <td th:text="${member.cellphone}"></td>
+                                            <td th:text="${member.email}"></td>
+                                            <td th:text="${#dates.format(member.reg_date, 'yyyy-MM-dd HH:mm')}"></td>
+                                            <td th:text="${member.status == 'active' ? '활성' : '비활성'}"></td>
 
+                                            <td>
+                                                <!-- 수정 버튼 -->
+                                                <a th:href="@{/admin/allMember/edit/{id}(id=${member.member_id})}" class="btn btn-primary">수정</a>
+
+                                            <form th:action="@{/admin/allMember/delete/{id}(id=${member.member_id})}" method="post" style="display:inline;">
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+                                                </form>
+                                            </td>
+
+                                        </tr>
                                     </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                    </tfoot>
+
                                 </table>
                             </div>
                         </div>
@@ -669,6 +677,10 @@
      *       Basic Table                   *
      ****************************************/
     $("#zero_config").DataTable();
+
+
+
+
 </script>
 </body>
 </html>

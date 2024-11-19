@@ -121,7 +121,7 @@ public class HomeController {
 
     @GetMapping("/admin")
     public String admin() {
-        return "../static/admin/html/index";
+        return "admin/index";
     }
 
     //tea 상품페이지

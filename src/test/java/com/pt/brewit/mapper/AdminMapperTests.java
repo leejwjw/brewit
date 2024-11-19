@@ -32,5 +32,10 @@ public class AdminMapperTests {
             log.info("dto: {}", dto.toString());
         }
     }
+    @Test
+    public void testDeleteById() {
+        int testId = 1;
+        adminMapper.deleteMemberById(testId);
+    }
 
 }

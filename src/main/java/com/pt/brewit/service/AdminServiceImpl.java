@@ -15,16 +15,32 @@ import java.util.List;
 @Transactional
 public class AdminServiceImpl implements AdminService {
     private final AdminMapper adminMapper;
+
     @Override
     public List<MemberDTO> getMemberList() {
-
         List<MemberDTO> list = adminMapper.selectAllMember();
         return list;
     }
 
-//    @Override
-//    public List<MemberDTO> getBoardListWithPaging(PagerDTO pager) {
-//        List<MemberDTO> list = adminMapper.findListWithPaging(pager);
-//        return list;
-//    }
+    // 특정 회원 정보 가져오기
+    @Override
+    public MemberDTO getMemberById(int id) {
+        log.info("Fetching member with id: {}", id);
+        return adminMapper.selectMemberById(id); // Mapper에서 회원 정보 가져오기
+    }
+
+    // 회원 삭제
+    @Override
+    public void deleteMember(int id) {
+        log.info("Deleting member with id: {}", id);
+        log.info("삭제과정!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        adminMapper.deleteMemberById(id); // Mapper에서 회원 삭제
+    }
+    @Override
+    public void updateMember(int id, MemberDTO member) {
+        log.info("수정과정 !!!!!!!");
+        member.setMember_id(id);
+        log.info(member.toString());
+        adminMapper.updateMemberById(member);
+    }
 }

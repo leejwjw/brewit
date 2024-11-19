@@ -5,6 +5,27 @@
 <mapper namespace="com.pt.brewit.mapper.AdminMapper">
 
     <select id="selectAllMember">
-        SELECT * FROM TB_MEMBER ;
+        SELECT * FROM TB_MEMBER WHERE status='active';
     </select>
+<!--     회원 정보 조회 -->
+    <select id="selectMemberById" resultType="com.pt.brewit.dto.MemberDTO">
+        SELECT * FROM TB_MEMBER WHERE member_id = #{id}
+    </select>
+
+    <!-- 회원 삭제 -->
+    <update id="deleteMemberById">
+        UPDATE TB_MEMBER SET status="inactive" WHERE member_id = #{id}
+    </update>
+
+    <!-- 회원  수정 -->
+    <update id="updateMemberById" parameterType="MemberDTO">
+        UPDATE TB_MEMBER SET
+        name=#{name},
+        password=#{password},
+        cellphone=#{cellphone},
+        email=#{email}
+        WHERE member_id = #{member_id}
+
+    </update>
+
 </mapper>

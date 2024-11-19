@@ -24,6 +24,7 @@ public class HomeController {
 
     //tea 상품페이지
     //Test
+    //Test22
     @GetMapping("/details")
     public String details(Model model) {
         model.addAttribute("name", "상품명1");

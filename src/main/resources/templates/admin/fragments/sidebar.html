@@ -51,15 +51,15 @@
           >
           <ul aria-expanded="false" class="collapse first-level">
             <li class="sidebar-item">
-              <a href="form-basic.html" class="sidebar-link"
+              <a th:href="@{/admin/products}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-outline"></i
-              ><span class="hide-menu"> Form Basic </span></a
+              ><span class="hide-menu"> 상품 조회 </span></a
               >
             </li>
             <li class="sidebar-item">
-              <a href="form-wizard.html" class="sidebar-link"
+              <a th:href="@{/admin/productRegist}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-plus"></i
-              ><span class="hide-menu"> Form Wizard </span></a
+              ><span class="hide-menu">상품 등록</span></a
               >
             </li>
           </ul>

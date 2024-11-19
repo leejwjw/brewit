@@ -14,4 +14,4 @@ logging:
     # DB JDBC 로그 설정
     org.springframework.jdbc: debug
     # sql 로그
-    com.example.memberSec.repository: trace
+    com.pt.brewit.service: trace

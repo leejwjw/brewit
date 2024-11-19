@@ -1,77 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - BizLand Bootstrap Template</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
 
-    <!-- Favicons -->
-    <link href="../../static/../../static/main/assets/img/favicon.png" rel="icon">
-    <link href="../../static/../../static/main/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="../../static/../../static/main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../static/../../static/main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../static/../../static/main/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../../static/../../static/main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../../static/../../static/main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-    <link href="../../static/../../static/main/assets/css/main.css" rel="stylesheet">
-
-</head>
 
 <body class="index-page">
 
-<header id="header" class="header sticky-top">
-    <div class="branding d-flex align-items-cente">
-        <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                <h1 class="sitename">Brewit</h1>
-            </a>
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="#hero" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
-        </div>
-    </div>
-</header>
 
 <main class="main">
+    <!--카테고리-->
+    <h2 class="team" style="text-align: center">TEA</h2>
+
     <!-- Team Section -->
     <section id="team" class="team section light-background">
-        <!-- Section Title -->
+        <!-- 정렬 -->
         <div class="sort_bar container">
             <p class="right_line">낮은 가격순</p>
             <p class="right_line">높은 가격순</p>
@@ -91,36 +34,37 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/1.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="" th:onclick="|location.href='@{/}'|">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+<!--                           product_id의 name, sale_price 불러와야되는데... -->
+                            <h4><a href="" >[[${name}]]</a></h4>
+                            <h3><a href="">[[${sale_price}]]</a></h3>
                         </div>
                     </div>
-                </div><!-- End Team Member -->
+                </div>
 
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/2.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
 
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
-                        <img src="../../static/main/assets/img/team/3.jpg" class="img-fluid" alt="">
+                        <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         <div class="member-img">
 
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
@@ -128,141 +72,141 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch" >
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/4.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="team-member">
-                        <div class="member-img">
-                            <img src="../../static/main/assets/img/team/6.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/8.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member --><div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="../../static/main/assets/img/team/2.jpg" class="img-fluid" alt="">
+                        <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                     </div>
-                    <div class="member-info">
-                        <h4>Product Title</h4>
-                        <span>Product subtitle</span>
+                    <div class="member-info" style="text-align: left">
+                        <h4><a>[[${name}]]</a></h4>
+                        <h3><a>[[${sale_price}]]</a></h3>
                     </div>
                 </div>
             </div><!-- End Team Member --><div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="../../static/main/assets/img/team/7.jpg" class="img-fluid" alt="">
+                        <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                     </div>
-                    <div class="member-info">
-                        <h4>Product Title</h4>
-                        <span>Product subtitle</span>
+                    <div class="member-info" style="text-align: left">
+                        <h4><a>[[${name}]]</a></h4>
+                        <h3><a>[[${sale_price}]]</a></h3>
                     </div>
                 </div>
             </div><!-- End Team Member -->
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/3.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="team-member">
-                        <div class="member-img">
-                            <img src="../../static/main/assets/img/team/1.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/2.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="team-member">
-                        <div class="member-img">
-                            <img src="../../static/main/assets/img/team/9.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/8.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="team-member">
-                        <div class="member-img">
-                            <img src="../../static/main/assets/img/team/7.jpg" class="img-fluid" alt="">
-                        </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/6.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="../../static/main/assets/img/team/4.jpg" class="img-fluid" alt="">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
                         </div>
-                        <div class="member-info">
-                            <h4>Product Title</h4>
-                            <span>Product subtitle</span>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="member-info" style="text-align: left">
+                            <h4><a>[[${name}]]</a></h4>
+                            <h3><a>[[${sale_price}]]</a></h3>
                         </div>
                     </div>
                 </div><!-- End Team Member -->
@@ -342,18 +286,18 @@
 
 
 <!-- Vendor JS Files -->
-<script src="../../static/main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../../static/main/assets/vendor/php-email-form/validate.js"></script>
-<script src="../../static/main/assets/vendor/aos/aos.js"></script>
-<script src="../../static/main/assets/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="../../static/main/assets/vendor/waypoints/noframework.waypoints.js"></script>
-<script src="../../static/main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-<script src="../../static/main/assets/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="../../static/main/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-<script src="../../static/main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/main/assets/vendor/php-email-form/validate.js"></script>
+<script src="/main/assets/vendor/aos/aos.js"></script>
+<script src="/main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="/main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/main/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="/main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
 <!-- Main JS File -->
-<script src="../../static/main/assets/js/main.js"></script>
+<script src="/main/assets/js/main.js"></script>
 
 </body>
 

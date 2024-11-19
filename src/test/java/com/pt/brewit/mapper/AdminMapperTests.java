@@ -12,6 +12,7 @@ import java.util.List;
 
 @SpringBootTest
 @Slf4j
+
 public class AdminMapperTests {
     @Autowired
     private AdminMapper adminMapper;

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-@Mapper  // MyBatis에서 제공해주는 어노테이션 - 매퍼로 인식가능하게 해줌
+@Mapper
 public interface MemberMapper {
     // 회원가입
     void insertMember(MemberDTO member);

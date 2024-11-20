@@ -17,10 +17,10 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> selectBestProducts(int category_id) {
         return productMapper.selectBestProducts(category_id);
     }
-
-
-
-
-
+    @Override
+    public void registProduct(ProductDTO productDTO) {
+        // 상품 등록 로직
+        productMapper.insertProduct(productDTO);
+    }
 
 }

@@ -4,12 +4,21 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pt.brewit.mapper.ProductMapper">
 
+
     <!-- 상품 베스트순으로 가져오기-->
     <select id="selectBestProducts" resultType="ProductDTO">
         select * from tb_product where category_id = #{category_id}
         order by liked desc
     </select>
 
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO
+        tb_product
+        (seller_id, name, category_id, subcategory_id, info, nation, weight, is_caffeine, stock, attach_name, attach_origin_name , liked, reg_date, regular_price, discount_price, sale_price)
+        VALUES
+        (#{seller_id}, #{name}, #{category_id}, #{subcategory_id}, #{info}, #{nation}, #{weight}, #{is_caffeine}, #{stock}, #{attach_name}, #{attach_origin_name}, #{liked},  #{reg_date}, #{regular_price}, #{discount_price}, #{sale_price});
+
+    </insert>
 
 
 </mapper>

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/members")
+@RequestMapping("/main/")
 @Slf4j  // log 사용위해 추가 (lombok 어노테이션)
 @RequiredArgsConstructor // final, @NonNull 어노테이션붙은 변수를 매개변수로 갖는 생성자 자동생성
 public class MemberController {
@@ -44,7 +44,7 @@ public class MemberController {
     // 회원 가입 폼 요청
     @GetMapping("/new")
     public String newMember() {
-        return "members/newForm";
+        return "/main/members/newForm";
     }
 
     // 회원가입 처리 요청
@@ -103,28 +103,28 @@ public class MemberController {
         return "members/deletePro";
     }
 
-    // id 중복확인 팝업 요청
-    @GetMapping("/idAvail")
-    public String idAvail(String id, Model model) {
-        // 전달받은 id값이 DB에 존재하는지 여부 판단해서 view에 결과 전달
+    // email 중복확인 팝업 요청
+    @GetMapping("/emailAvail")
+    public String emailAvail(String email, Model model) {
+        // 전달받은 email값이 DB에 존재하는지 여부 판단해서 view에 결과 전달
         boolean result = true; // 초기값은 사용가능으로 넣어놓고 밑에서 판단
-        MemberDTO memberDTO = memberMapper.selectOne(id);
+        MemberDTO memberDTO = memberMapper.selectOne(email);
         if (memberDTO != null) {
             result = false; // 이미 사용중 -> 사용 불가
         }
-        // 이미 사용중이면 false, 사용가능한 id면 true
+        // 이미 사용중이면 false, 사용가능한 email면 true
         model.addAttribute("result", result);
 
-        return "members/idAvail";
+        return "main/members/emailAvail";
     }
 
-    // id 중복 ajax 요청 --> 리턴은 결과 데이터 (html X)
-    @PostMapping("/idAvailAjax")
+    // email 중복 ajax 요청 --> 리턴은 결과 데이터 (html X)
+    @PostMapping("/emailAvailAjax")
     @ResponseBody  // -> HTML 화면결과가 아닌, 데이터를 응답하겠다~~
-    public String idAvailAjax(String id) {
-        log.info("Ajax id: {}", id);
+    public String emailAvailAjax(String email) {
+        log.info("Ajax email: {}", email);
         String result = "사용가능합니다";
-        MemberDTO memberDTO = memberMapper.selectOne(id);
+        MemberDTO memberDTO = memberMapper.selectOne(email);
         if (memberDTO != null) {
             result = "이미사용중입니다..";
         }

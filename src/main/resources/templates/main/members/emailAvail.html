@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>emailAvail</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <h2 align="center"> 이메일 중복 확인 </h2>
+    <th:block th:if="${result == true}">
+        <table>
+            <tr>
+                <td>입력하신 [[${param.email}]]은 사용하실 수 있는  이메일 입니다. <br />
+                    <button type="button" onclick="setEmail()">닫기</button>
+                </td>
+            </tr>
+        </table>
+    </th:block>
+    <th:block th:if="${result == false}">
+        <table>
+            <tr>
+                <td>[[${param.email}]] 는 이미 사용중인 이메일 입니다.</td>
+            </tr>
+        </table>
+        <form action="/main/emailAvail">
+            <table>
+                <tr>
+                    <td>다른 이메일을 선택하세요. <br />
+                        <input type="text" name="email" />
+                        <input type="submit" value="이메일 중복확인" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </th:block>
+
+    <script th:inline="javascript">
+        function setEmail(){
+            let newEmail = [[${param.email}]];
+            opener.document.inputForm.email.value = newEmail;
+            self.close(); // 팝업 닫기
+        }
+    </script>
+
+</body>
+</html>

@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class PageDTO {
 
-    private final int PAGENUM_SIZE = 8;
+    private final int PAGENUM_SIZE = 12;
 
     private int startPage;   // 페이지 시작번호
     private int endPage;     // 페이지 끝번호

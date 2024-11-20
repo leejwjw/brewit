@@ -38,7 +38,7 @@
                         </div>
                         <div class="member-info" style="text-align: left">
                             <h4><a th:text="${product.name}"> </a></h4>
-                            <h3><a th:text="${product.sale_price}"> </a></h3>
+                            <h3><a th:text="${product.sale_price}"></a></h3>
                         </div>
                     </div>
                 </div>
@@ -48,22 +48,22 @@
 
         </div>
         <!--         Pagination : 페이지 번호  -->
-<!--            <div>-->
-<!--                <nav aria-label="Page navigation example">-->
-<!--                    <ul class="pagination justify-content-end">-->
-<!--                        <li th:if="${pageDTO.prev}" class="page-item">-->
-<!--                            <a th:href="@{/brewit/tea(page=${pageDTO.startPage - 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link"> < </a>-->
-<!--                        </li>-->
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li th:if="${pageDTO.prev}" class="page-item">
+                            <a th:href="@{/tea(page=${pageDTO.startPage - 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link"> 이전 </a>
+                        </li>
 
-<!--                        <li th:each="page : ${pageDTO.getPageNumbers()}" class="page-item" th:classappend="${pageDTO.pager.page == page} ? 'active'">-->
-<!--                            <a th:text="${page}" class="page-link" th:href="@{/brewit/tea(page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>-->
-<!--                        </li>-->
-<!--                        <li th:if="${pageDTO.next}" class="page-item">-->
-<!--                            <a th:href="@{/brewit/tea(page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#"> > </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
-<!--            </div>-->
+                        <li th:each="page : ${pageDTO.getPageNumbers()}" class="page-item" th:classappend="${pageDTO.pager.page == page} ? 'active'">
+                            <a th:text="${page}" class="page-link" th:href="@{/tea(page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>
+                        </li>
+                        <li th:if="${pageDTO.next}" class="page-item">
+                            <a th:href="@{/tea(page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#"> 다음 </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
     </section>
 
 

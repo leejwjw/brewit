@@ -16,7 +16,7 @@ public class ProductDTO {
     private boolean is_caffeine;
     private int stock;
     private String attach_id;
-    private Integer hit;
+    private Integer liked;
     private Date reg_date;
     private Integer regular_price;
     private Integer discount_price;

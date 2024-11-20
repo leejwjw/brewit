@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pt.brewit.mapper.ProductMapper">
+
+    <!-- 상품 베스트순으로 가져오기-->
+    <select id="selectBestProducts" resultType="ProductDTO">
+        select * from tb_product where category_id = #{category_id}
+        order by liked desc
+    </select>
+
+
+
+</mapper>

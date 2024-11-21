@@ -24,7 +24,7 @@
             <h2><a href="/tea">BEST</a></h2>
             <h2><a href="/tea/1">티백</a></h2>
             <h2><a href="/tea/2">잎차</a></h2>
-            <h2><a href="/tea/3">디카페인</a></h2>
+            <h2><a href="/tea/3">디 카페인</a></h2>
         </div>
 
         <div class="container">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="member-info" style="text-align: left">
                             <h4><a th:text="${product.name}"> </a></h4>
-                            <h3><a th:text="${product.sale_price}"></a></h3>
+                            <h3><a th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')}"></a>원</h3>
                         </div>
                     </div>
                 </div>
@@ -66,6 +66,15 @@
                 </ul>
             </nav>
         </div>
+                        <li th:each="page : ${pageDTO.getPageNumbers()}" class="page-item" th:classappend="${pageDTO.pager.page == page} ? 'active'">
+                            <a th:text="${page}" class="page-link" th:href="@{/tea/(page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>
+                        </li>
+                        <li th:if="${pageDTO.next}" class="page-item">
+                            <a th:href="@{/tea(page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#"> 다음 </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
     </section>
 
 

@@ -73,10 +73,8 @@ public class AdminProductController {
             productDTO.setIs_caffeine("false");
         }
 
+        log.info("product!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! :  {}",productDTO );
         productMapper.insertProduct(productDTO); // DB에 제품 정보 저장
         return "redirect:/admin/registProduct";
     }
-
-
-
 }

@@ -23,6 +23,6 @@ public class ProductDTO {
     private Integer liked;
     private Date reg_date;
     private Integer regular_price;
-    private Integer discount_price;
+    private Integer discount_percent;
     private Integer sale_price;
 }

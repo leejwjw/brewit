@@ -113,6 +113,21 @@
             height: 300px;
             width: 55%;
         }
+        div.price_box {
+            margin: 0 auto;
+            width:55%
+        }
+        div.price_box input {
+            width: 200px;
+        }
+        div.price_box > div.input_box {
+            display: flex;
+        }
+        div.price_box > div.input_box > span {
+            padding: 15px 0 0 10px;
+            height: 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -196,7 +211,7 @@
                             <form id="productForm" th:action="@{/admin/registProduct}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" id="attachOriginName" name="attach_origin_name">
                                 <input type="hidden" id="attachName" name="attach_name">
-
+                                <input type="hidden" name="info" id="info">
                                     <div class="flex_box">
                                     <div class="image-placeholder" id="imagePlaceholder">
                                         상품 이미지를 클릭하여 등록하세요
@@ -220,22 +235,40 @@
                                         <label for="nation" class="form-label">원산지</label>
                                         <input type="text" class="form-control" id="nation" name="nation" required>
                                         <label for="weight" class="form-label">무게</label>
-                                        <input type="text" class="form-control" id="weight" name="weight" required>
+                                        <input type="number" class="form-control" id="weight" name="weight" required>
+                                        <label for="nation" class="form-label">재고</label>
+                                        <input type="number" class="form-control" id="stock" name="stock" required>
                                         <label class="form-label">카페인 유무 <span>(미체크시 없음)</span></label>
                                         <div>
                                             <div class="form-check" >
                                                 <input class="form-check-input" type="checkbox" name="is_caffeine" id="caffeineYes" value="true">
                                                 <label class="form-check-label" for="caffeineYes">
-                                                 있음
+                                                    있음
                                                 </label>
                                             </div>
                                         </div>
-
                                     </div>
                                     </div>
                                     <div id="editor" style="height: 300px" name="info">
                                     </div>
-                                    <input type="hidden" name="info" id="info">
+                                    <div class="price_box">
+                                        <label for="name" class="form-label">정상가</label>
+                                        <div class="input_box">
+                                            <input type="text" class="form-control" id="regularPrice" name="regular_price" required>
+                                            <span>(단위 : 원)</span>
+                                        </div>
+                                            <label for="name" class="form-label">할인율</label>
+                                        <div class="input_box">
+                                            <input type="text" class="form-control" id="discountPercent" name="discount_percent" required>
+                                            <span>(단위 : 원)</span>
+                                        </div>
+                                        <label for="name" class="form-label">판매가</label>
+                                        <div class="input_box">
+                                            <input type="text" class="form-control" id="salePrice" name="sale_price" required>
+                                            <span>(단위 : 원)</span>
+                                        </div>
+                                    </div>
+
                                     <div class="button_box">
                                             <button type="submit" class="btn btn-primary">등록하기</button>
                                             <button class="btn btn-primary">목록으로</button>
@@ -356,7 +389,6 @@
             const img = document.createElement('img'); // 새로운 이미지 요소 생성
             img.src = e.target.result; // 파일의 데이터 URL 설정
             const placeholder = document.getElementById('imagePlaceholder');
-
             placeholder.append(img); // 이미지 추가
         }
         if (file) {
@@ -368,8 +400,25 @@
 
         }
     });
+    document.addEventListener('DOMContentLoaded', function() {
+        const regularPriceInput = document.getElementById('regularPrice');
+        const discountPercentInput = document.getElementById('discountPercent');
+        const salePriceInput = document.getElementById('salePrice');
+        function calculateSalePrice() {
+            const regularPrice = parseFloat(regularPriceInput.value);
+            const discountPercent = parseFloat(discountPercentInput.value);
+            if (!isNaN(regularPrice) && !isNaN(discountPercent)) {
+                const discountAmount = (regularPrice * discountPercent) / 100;
+                const salePrice = regularPrice - discountAmount;
+                salePriceInput.value = Math.floor(salePrice);
+            } else {
+                salePriceInput.value = '';
+            }
+        }
 
-
+        regularPriceInput.addEventListener('input', calculateSalePrice);
+        discountPercentInput.addEventListener('input', calculateSalePrice);
+    });
     document.getElementById("productForm").onsubmit = function(event) {
         var infoInput = document.getElementById("info");
         infoInput.value = quill.root.innerHTML;

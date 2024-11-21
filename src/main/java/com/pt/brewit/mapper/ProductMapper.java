@@ -27,4 +27,10 @@ public interface ProductMapper {
     List<ProductDTO> selectBestProductsSortByPrice(@Param("category_id")int category_id, @Param("pager") Pager pager, @Param("sortType") String sortType);
     //서브 상품 정렬
     List<ProductDTO> selectProductsBySubSort(@Param("subcategory_id") int subcategory_id,@Param("pager") Pager pager, @Param("sortType") String sortType);
+    // 상품 전체 조회
+    public List<ProductDTO> selectAllProducts();
+    // 상품 하나 조회
+    public  ProductDTO selectProductById(int id);
+    // 상품 수정
+    public void updateProductValue(@Param("id") int id, @Param("product") ProductDTO product);
 }

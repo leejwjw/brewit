@@ -5,6 +5,7 @@ import com.pt.brewit.dto.ProductDTO;
 import com.pt.brewit.mapper.AdminMapper;
 import com.pt.brewit.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
+    @Value("${file.dir}")
+    private String fileDir; // YAML에서 주입받은 파일 경로
 
     @Override
     public List<ProductDTO> selectBestProducts(int category_id, Pager pager) {
@@ -57,11 +60,44 @@ public class ProductServiceImpl implements ProductService {
         Long count = productMapper.countProductsBySub(subcategory_id);
         return count.intValue();
     }
+    @Override
+    public ProductDTO getProductById(int id) {
+        ProductDTO product = productMapper.selectProductById(id);
+        String filePath = getFilePath(product.getAttach_name());
+        product.setFilePath(filePath); // 파일 경로를 DTO에 추가
+       return product;
+    }
 
     @Override
     public void registProduct(ProductDTO productDTO) {
         // 상품 등록 로직
         productMapper.insertProduct(productDTO);
+    }
+    @Override
+    public  void updateProduct(int id, ProductDTO productDTO) {
+        productMapper .updateProductValue(id, productDTO);
+    }
+    @Override
+    public List<ProductDTO> selectAllProducts() {
+        List<ProductDTO> products = productMapper.selectAllProducts();
+        // 파일 경로를 추가로 처리할 수 있는 로직
+        for (ProductDTO product : products) {
+            String filePath = getFilePath(product.getAttach_name());
+            product.setFilePath(filePath); // 파일 경로를 DTO에 추가
+        }
+        return products;
+    }
+
+    private String getFilePath(String attachName) {
+        int index = fileDir.indexOf("/img");
+        if (index != -1) {
+            String result = fileDir.substring(index);
+            return result + "/" +  attachName;
+        } else {
+            System.out.println("'/img'가 경로에 없습니다.");
+            return "";
+        }
+
     }
 
 }

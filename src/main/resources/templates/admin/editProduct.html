@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+            name="keywords"
+            content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template"
+    />
+    <meta
+            name="description"
+            content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
+    <!-- Favicon icon -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/admin/assets/images/favicon.png"
+    />
+    <!-- Custom CSS -->
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="/admin/assets/libs/select2/dist/css/select2.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="/admin/assets/libs/jquery-minicolors/jquery.minicolors.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="/admin/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="/admin/assets/libs/quill/dist/quill.snow.css"
+    />
+    <link href="/admin/dist/css/style.min.css" rel="stylesheet" />
+    <link href="/admin/dist/css/productStyle.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .preview-img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .image-container {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+            display: none; /* 초기에는 숨김 */
+            cursor: pointer; /* 클릭 가능하게 커서 변경 */
+        }
+        .image-placeholder {
+            width: 30%;
+            height: 500px;
+            border: 1px solid #5e5e5e;
+            color: #5e5e5e;
+            margin-bottom: 20px;
+            position: relative; /* 자식 요소를 절대 위치로 배치하기 위해 필요 */
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute; /* 이미지가 네모 안에 위치하도록 설정 */
+            top: 0;
+            left: 0;
+            object-fit: cover; /* 이미지 비율 유지 */
+        }
+        div.col-md-6 {
+            width:90%;
+        }
+        div.card{
+            border-radius: 15px;
+        }
+        div.card > h2 {
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        div.card div.flex_box {
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            gap: 80px;
+        }
+        div.info_box{
+            width: 20%;
+        }
+        div.info_box > select{
+            width: 60%;
+        }
+        div.ql-snow {
+            margin: 0 auto;
+            width: 55%;
+        }
+        div#editor {
+            margin: 0 auto;
+            height: 300px;
+            width: 55%;
+        }
+        div.price_box {
+            margin: 0 auto;
+            width:55%
+        }
+        div.price_box input {
+            width: 200px;
+        }
+        div.price_box > div.input_box {
+            display: flex;
+        }
+        div.price_box > div.input_box > span {
+            padding: 15px 0 0 10px;
+            height: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+    </div>
+</div>
+<div
+        id="main-wrapper"
+        data-layout="vertical"
+        data-navbarbg="skin5"
+        data-sidebartype="full"
+        data-sidebar-position="absolute"
+        data-header-position="absolute"
+        data-boxed-layout="full"
+>
+    <header class="topbar" data-navbarbg="skin5">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header" data-logobg="skin5">
+                <a class="navbar-brand" href="/admin/../../templates/admin/index.html">
+                    <b class="logo-icon ps-2">
+                        <img
+                                src="/admin/assets/images/logo-icon.png"
+                                alt="homepage"
+                                class="light-logo"
+                                width="25"
+                        />
+                    </b>
+                    <span class="logo-text ms-2">
+                <img
+                        src="/admin/assets/images/logo-text.png"
+                        alt="homepage"
+                        class="light-logo"
+                />
+              </span>
+                </a>
+                <a
+                        class="nav-toggler waves-effect waves-light d-block d-md-none"
+                        href="javascript:void(0)"
+                ><i class="ti-menu ti-close"></i
+                ></a>
+            </div>
+            <div
+                    class="navbar-collapse collapse"
+                    id="navbarSupportedContent"
+                    data-navbarbg="skin5"
+            >
+                <ul class="navbar-nav float-start me-auto">
+                    <li class="nav-item d-none d-lg-block">
+                        <a
+                                class="nav-link sidebartoggler waves-effect waves-light"
+                                href="javascript:void(0)"
+                                data-sidebartype="mini-sidebar"
+                        ><i class="mdi mdi-menu font-24"></i
+                        ></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="left-sidebar" data-sidebarbg="skin5" th:replace="admin/fragments/sidebar :: sidebar">
+
+    </aside>
+    <div class="page-wrapper">
+
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">상품 등록</h4>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <h2>상품 등록</h2>
+                        <form id="productForm" th:action="@{/admin/products/editProduct/{id}(id=${product.product_id})}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" id="attachOriginName" name="attach_origin_name"  th:value="${product.attach_origin_name}">
+                            <input type="hidden" id="attachName" name="attach_name" th:value="${product.attach_name}">
+                            <input type="hidden" name="info" id="info">
+                            <div class="flex_box">
+                                <div class="image-placeholder" id="imagePlaceholder">
+                                    상품 이미지를 클릭하여 등록하세요
+                                    <img th:src="@{${product.filePath}}" />
+                                    <input type="file" id="productImage"  name="file" accept="image/*" style="display: none;">
+                                </div>
+
+                                <div class="info_box">
+                                    <label for="name" class="form-label">상품명</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           th:value="${product.name}"
+                                           required>
+                                    <label for="category" class="form-label">대분류</label>
+                                    <select class="form-select" id="category" name="category_id" required>
+                                        <option value="" disabled selected>선택</option>
+                                        <option th:each="category : ${categories}"
+                                                th:value="${category.category_id}"
+                                                th:text="${category.name}"></option>
+                                    </select>
+                                    <label for="subCategory" class="form-label">중분류</label>
+                                    <select class="form-select" id="subCategory" name="subcategory_id" required>
+                                        <option value="" disabled selected></option>
+                                    </select>
+                                    <label for="nation" class="form-label">원산지</label>
+                                    <input type="text" class="form-control" id="nation" name="nation"
+                                           th:value="${product.nation}"
+                                           required>
+                                    <label for="weight" class="form-label">무게</label>
+                                    <input type="number" class="form-control" id="weight" name="weight"
+                                           th:value="${product.weight}"
+                                           required>
+                                    <label for="nation" class="form-label">재고</label>
+                                    <input type="number" class="form-control" id="stock" name="stock"
+                                           th:value="${product.stock}"
+                                           required>
+                                    <label class="form-label">카페인 유무 <span>(미체크시 없음)</span></label>
+                                    <div>
+                                        <div class="form-check" >
+                                            <input class="form-check-input" type="checkbox" name="is_caffeine" id="caffeineYes" value="true">
+                                            <label class="form-check-label" for="caffeineYes">
+                                                있음
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="editor" style="height: 300px" name="info" th:utext="${product.info}">
+                            </div>
+                            <div class="price_box">
+                                <label for="name" class="form-label">정상가</label>
+                                <div class="input_box">
+                                    <input type="text" class="form-control" id="regularPrice" name="regular_price"
+                                           th:value="${product.regular_price}"
+                                           required>
+                                    <span>(단위 : 원)</span>
+                                </div>
+                                <label for="name" class="form-label">할인율</label>
+                                <div class="input_box">
+                                    <input type="text" class="form-control" id="discountPercent" name="discount_percent"
+                                           th:value="${product.discount_percent}"
+                                           required>
+                                    <span>(단위 : 원)</span>
+                                </div>
+                                <label for="name" class="form-label">판매가</label>
+                                <div class="input_box">
+                                    <input type="text" class="form-control" id="salePrice" name="sale_price"
+                                           th:value="${product.sale_price}"
+                                           required>
+                                    <span>(단위 : 원)</span>
+                                </div>
+                            </div>
+
+                            <div class="button_box">
+                                <button type="submit" class="btn btn-primary">등록하기</button>
+                                <button class="btn btn-primary">목록으로</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer text-center">
+            All Rights Reserved by Matrix-admin. Designed and Developed by
+            <a href="https://www.wrappixel.com">WrapPixel</a>.
+        </footer>
+    </div>
+</div>
+
+<script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="/admin/assets/extra-libs/sparkline/sparkline.js"></script>
+<script src="/admin/dist/js/waves.js"></script>
+<script src="/admin/dist/js/sidebarmenu.js"></script>
+<script src="/admin/dist/js/custom.min.js"></script>
+<script src="/admin/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+<script src="/admin/dist/js/pages/mask/mask.init.js"></script>
+<script src="/admin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+<script src="/admin/assets/libs/select2/dist/js/select2.min.js"></script>
+<script src="/admin/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+<script src="/admin/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+<script src="/admin/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+<script src="/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+<script src="/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/admin/assets/libs/quill/dist/quill.min.js"></script>
+<script>
+    $(".select2").select2();
+    $(".demo").each(function () {
+        $(this).minicolors({
+            control: $(this).attr("data-control") || "hue",
+            position: $(this).attr("data-position") || "bottom left",
+
+            change: function (value, opacity) {
+                if (!value) return;
+                if (opacity) value += ", " + opacity;
+                if (typeof console === "object") {
+                    console.log(value);
+                }
+            },
+            theme: "bootstrap",
+        });
+    });
+    /*datwpicker*/
+    jQuery(".mydatepicker").datepicker();
+    jQuery("#datepicker-autoclose").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+    });
+
+    // 대분류와 중분류 동적 변경
+    const categorySelect = document.getElementById('category');
+    const subCategorySelect = document.getElementById('subCategory');
+
+    const subCategories = {
+        1: [
+            { name: '티백', value: 1 },
+            { name: '잎차', value: 2 },
+            { name: '디카페인', value: 3 }
+        ],
+        2: [
+            { name: '싱글오리진', value: 4 },
+            { name: '블렌드', value: 5 },
+            { name: '디카페인', value: 6 }
+        ],
+        3: [
+            { name: '드립주전자', value: 7 },
+            { name: '전기포트', value: 8 },
+            { name: '핸드드립세트', value: 9 },
+            { name: '다기세트', value: 10 }
+        ],
+        4: [
+            { name: '커피머신', value: 11 },
+            { name: '그라인더', value: 12 },
+            { name: '커피메이커', value: 13 },
+            { name: '핸드드립 세트', value: 14 }
+        ]
+    };
+
+    categorySelect.addEventListener('change', function() {
+        const selectedValue = this.value;
+        // 중분류 선택 초기화
+        subCategorySelect.innerHTML = '<option value="" disabled selected>중분류를 선택하세요</option>';
+
+        if (selectedValue in subCategories) {
+            subCategories[selectedValue].forEach(function(subCategory) {
+                const option = document.createElement('option');
+                option.value = subCategory.value; // 중분류의 value 설정
+                option.textContent = subCategory.name; // 중분류의 텍스트 설정
+                subCategorySelect.appendChild(option); // 중분류 select에 추가
+            });
+        }
+    });
+    var quill = new Quill("#editor", {
+        theme: "snow",
+    });
+
+    // 박스클릭하면 이미지 노출시키는 트리거
+    // 네모 박스를 클릭하면 파일 입력을 트리거
+    document.getElementById('imagePlaceholder').addEventListener('click', function() {
+        document.getElementById('productImage').click();
+    });
+
+    // 파일 입력이 변경되면 이미지 미리보기
+    document.getElementById('productImage').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img'); // 새로운 이미지 요소 생성
+            img.src = e.target.result; // 파일의 데이터 URL 설정
+            const placeholder = document.getElementById('imagePlaceholder');
+            placeholder.append(img); // 이미지 추가
+        }
+        if (file) {
+            console.log("파일이 있다.");
+            document.getElementById('attachName').value = file.name;
+            document.getElementById('attachOriginName').value = file.name;
+            console.log(file);
+            reader.readAsDataURL(file);
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const regularPriceInput = document.getElementById('regularPrice');
+        const discountPercentInput = document.getElementById('discountPercent');
+        const salePriceInput = document.getElementById('salePrice');
+        function calculateSalePrice() {
+            const regularPrice = parseFloat(regularPriceInput.value);
+            const discountPercent = parseFloat(discountPercentInput.value);
+            if (!isNaN(regularPrice) && !isNaN(discountPercent)) {
+                const discountAmount = (regularPrice * discountPercent) / 100;
+                const salePrice = regularPrice - discountAmount;
+                salePriceInput.value = Math.floor(salePrice);
+            } else {
+                salePriceInput.value = '';
+            }
+        }
+
+        regularPriceInput.addEventListener('input', calculateSalePrice);
+        discountPercentInput.addEventListener('input', calculateSalePrice);
+    });
+    document.getElementById("productForm").onsubmit = function(event) {
+        var infoInput = document.getElementById("info");
+        infoInput.value = quill.root.innerHTML;
+    };
+
+
+
+</script>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.pt.brewit.controller.admin;
 import com.pt.brewit.dto.ProductDTO;
 import com.pt.brewit.dto.SubCategoryDTO;
 import com.pt.brewit.mapper.ProductMapper;
+import com.pt.brewit.service.ProductService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import com.pt.brewit.dto.CategoryDTO;
@@ -28,6 +29,7 @@ public class AdminProductController {
     private final AdminService adminService;
     private final CategoryMapper categoryMapper;
     private final ProductMapper productMapper;
+    private final ProductService productService;
 
     @Value("${file.dir}")
     private String fileDir;
@@ -43,8 +45,6 @@ public class AdminProductController {
 
     @PostMapping("/registProduct")
     public String registProduct(@ModelAttribute ProductDTO productDTO, Model model) {
-
-
         // 파일 저장 로직
 
         MultipartFile file = productDTO.getFile(); // ProductDTO에서 파일 가져오기
@@ -68,13 +68,46 @@ public class AdminProductController {
                 return "admin/registProduct"; // 오류 발생 시 다시 폼으로 돌아감
             }
         }
-
         if(productDTO.getIs_caffeine() == null) {
             productDTO.setIs_caffeine("false");
         }
-
         log.info("product!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! :  {}",productDTO );
         productMapper.insertProduct(productDTO); // DB에 제품 정보 저장
-        return "redirect:/admin/registProduct";
+        return "redirect:/admin/products";
     }
+
+    @GetMapping("/products")
+    public String showProducts(Model model) {
+        log.info("products site open !");
+        List<ProductDTO> products = productService.selectAllProducts();
+        model.addAttribute("products", products);
+        log.info("product array!!!! :{}", products);
+        return "admin/products";
+    }
+
+    //수정페이지
+    @GetMapping("products/edit/{id}")
+    public String editProduct(@PathVariable("id") int id, Model model) {
+        log.info("id값---> :{}",id);
+        ProductDTO product = productService.getProductById(id);
+        List<CategoryDTO> categories = categoryMapper.getAllCategories();
+
+        model.addAttribute("product", product);
+        model.addAttribute("categories", categories);
+        return "admin/editProduct";
+    }
+    //수정 요청
+    @PostMapping("products/editProduct/{id}")
+    public String updateProduct(@PathVariable("id") int id, @ModelAttribute ProductDTO product) {
+        //product 객체에 수정된 값 저장
+
+        if(product.getIs_caffeine() == null) {
+            product.setIs_caffeine("false");
+        }
+        log.info("Updating member  !!!!!!!!!!!!!!!!!!!!!with member: {}", product);
+        productService.updateProduct(id, product); // 서비스 레이어에서  정보 업데이트
+        return "redirect:/admin/products"; // 수정 후 회원 목록 페이지로 리다이렉트
+    }
+
+
 }

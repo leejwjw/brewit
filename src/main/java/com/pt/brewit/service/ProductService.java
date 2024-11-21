@@ -1,5 +1,6 @@
 package com.pt.brewit.service;
 
+import com.pt.brewit.dto.MemberDTO;
 import com.pt.brewit.dto.Pager;
 import com.pt.brewit.dto.ProductDTO;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,12 @@ public interface ProductService {
     public int getProductCount(int category_id);
     //서브카테고리별 데이터 전체 개수 조회
     public int countProductsBySub(int subcategory_id);
-
+    //상품정보 전체 조회
+    public List<ProductDTO> selectAllProducts();
+    //상품 등록
     void registProduct(ProductDTO productDTO);
-
+    //상품 조회
+    public ProductDTO getProductById(int id);
+    // 상품 수정
+    public void updateProduct(int id, ProductDTO productDTO);
 }

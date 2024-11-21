@@ -11,7 +11,7 @@ spring:
       max-request-size: 30MB
       max-file-size: 10MB
 
-file.dir: c:/junwoo/brewit/src/main/resources/static/img/product
+file.dir: D:\hyeok\framework\workspace\brewit\src\main\resources\static\img\product
 mybatis:
   type-aliases-package: com.pt.brewit.dto
 

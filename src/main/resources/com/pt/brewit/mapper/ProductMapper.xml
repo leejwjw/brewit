@@ -28,7 +28,7 @@
         select count(*) from tb_product where subcategory_id = #{subcategory_id}
     </select>
 
-    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productId">
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="product_id">
         INSERT INTO
         tb_product
         (seller_id, name, category_id, subcategory_id, info, nation, weight, is_caffeine, stock, attach_name, attach_origin_name , liked, reg_date, regular_price, discount_price, sale_price)

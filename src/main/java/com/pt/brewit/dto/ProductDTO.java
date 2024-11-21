@@ -5,11 +5,11 @@ import java.util.Date;
 
 @Data
 public class ProductDTO {
-    private int productId;
+    private int product_id;
     private int seller_id;
     private String name;
-    private int categoryId;
-    private int subcategoryId;
+    private int category_id;
+    private int subcategory_id;
     private String info;
     private String nation;
     private Integer weight;

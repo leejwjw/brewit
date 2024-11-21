@@ -11,10 +11,34 @@
         limit #{pager.offset}, #{pager.size}
     </select>
 
+    <select id="selectBestProductsSortByPrice" resultType="ProductDTO">
+        select * from tb_product where category_id = #{category_id}
+        <if test="sortType == 'low-price'.toString()">
+            order by sale_price asc
+        </if>
+        <if test="sortType == 'high-price'.toString()">
+            order by sale_price desc
+        </if>
+        limit #{pager.offset}, #{pager.size}
+    </select>
+
+
+
     <!-- 서브카테고리 가져오기-->
     <select id="selectProductsBySub" resultType="ProductDTO">
         select * from tb_product where subcategory_id = #{subcategory_id}
         order by liked desc
+        limit #{pager.offset}, #{pager.size}
+    </select>
+    <!--정렬-->
+    <select id="selectProductsBySubSort" resultType="ProductDTO">
+        select * from tb_product where subcategory_id = #{subcategory_id}
+        <if test="sortType == 'low-price'.toString()">
+            order by sale_price asc
+        </if>
+        <if test="sortType == 'high-price'.toString()">
+            order by sale_price desc
+        </if>
         limit #{pager.offset}, #{pager.size}
     </select>
 

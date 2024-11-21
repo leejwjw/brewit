@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<link rel="stylesheet" href="styles.css">
 
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 
@@ -15,13 +15,13 @@
     <section id="team" class="team section light-background">
         <!-- 정렬 -->
         <div class="sort_bar container">
-            <p class="right_line" onclick="">낮은가격순</p>
-            <p class="right_line" onclick="">높은가격순</p>
-            <p onclick="">리뷰많은순</p>
+            <p class="right_line sort-item" onclick="requestSort('low-price', this)">낮은가격순</p>
+            <p class="right_line sort-item" onclick="requestSort('high-price', this)">높은가격순</p>
+            <p class="sort-item" onclick="requestSort('many-review', this)">리뷰많은순</p>
         </div>
         <!--subcategory-->
         <div class="product_tab container">
-            <h2><a href="/tea">BEST</a></h2>
+            <h2><a href="/tea/0">BEST</a></h2>
             <h2><a href="/tea/1">티백</a></h2>
             <h2><a href="/tea/2">잎차</a></h2>
             <h2><a href="/tea/3">디 카페인</a></h2>
@@ -52,29 +52,21 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end">
                     <li th:if="${pageDTO.prev}" class="page-item">
-                        <a th:href="@{/tea(page=${pageDTO.startPage - 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link">Previous</a>
+                        <a th:href="@{/tea/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${pageDTO.startPage - 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link">Previous</a>
                     </li>
 
                     <li th:each="page : ${pageDTO.getPageNumbers()}" class="page-item" th:classappend="${pageDTO.pager.page == page} ? 'active'">
-                        <a th:text="${page}" class="page-link" th:href="@{/tea(page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>
+                        <a th:text="${page}" class="page-link" th:href="@{/tea/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>
                     </li>
 
 
                     <li th:if="${pageDTO.next}" class="page-item">
-                        <a th:href="@{/tea(page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#">Next</a>
+                        <a th:href="@{/tea/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#">Next</a>
                     </li>
                 </ul>
             </nav>
         </div>
-                        <li th:each="page : ${pageDTO.getPageNumbers()}" class="page-item" th:classappend="${pageDTO.pager.page == page} ? 'active'">
-                            <a th:text="${page}" class="page-link" th:href="@{/tea/(page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>
-                        </li>
-                        <li th:if="${pageDTO.next}" class="page-item">
-                            <a th:href="@{/tea(page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#"> 다음 </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+
     </section>
 
 
@@ -88,6 +80,32 @@
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+    <script th:inline="javascript">
+        function requestSort(sortType, element) {
+            // pageDTO 객체 접근 (기존 코드)
+            let pageDTO = [[${pageDTO}]];
+            console.log(pageDTO.pager);
+            let host = window.location.host;
+            let path = window.location.pathname;
+            console.log(host + path);
+            // 쿼리 스트링 생성 (기존 코드)
+            let queryStr = "&page=" + pageDTO.pager.page + "&size=" + pageDTO.pager.size + "&keyword=" + pageDTO.pager.keyword + "&searchType=" + pageDTO.pager.searchType;
+            // 모든 .sort-item에서 'selected' 클래스 제거 (클릭된 항목을 제외한 나머지 항목에서 볼드체 제거)
+            var items = document.querySelectorAll('.sort-item');
+            items.forEach(function(item) {
+                item.classList.remove('selected');
+            });
+            // 클릭된 항목에 'selected' 클래스 추가하여 볼드체 유지
+            element.classList.add('selected');
+            // 페이지 요청 (기존 코드)
+            window.location.href = "http://" + host + path + "?sortType=" + sortType + queryStr;
+        }
+    </script>
+
+
+
+
+    </script>
 
 
 <!-- Vendor JS Files -->

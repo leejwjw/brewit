@@ -23,4 +23,8 @@ public interface ProductMapper {
     Long countAllProducts(int category_id);
     //서브카테고리별 데이터 전체 개수 조회
     Long countProductsBySub(int subcategory_id);
+    //베스트순 상품 정렬
+    List<ProductDTO> selectBestProductsSortByPrice(@Param("category_id")int category_id, @Param("pager") Pager pager, @Param("sortType") String sortType);
+    //서브 상품 정렬
+    List<ProductDTO> selectProductsBySubSort(@Param("subcategory_id") int subcategory_id,@Param("pager") Pager pager, @Param("sortType") String sortType);
 }

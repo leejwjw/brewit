@@ -1979,3 +1979,17 @@ div.product_tab > h2 {
   font-size: 18px;
 
 }
+/*윤서 추가*/
+/* .sort-item 클래스에만 호버 시 볼드체 적용 */
+.sort-item:hover {
+  font-weight: bold;
+}
+/* 클릭된 항목에 볼드체 유지 */
+.sort-item.selected {
+  font-weight: bold;
+}
+/* right_line에 기본 스타일 추가 */
+.right_line {
+  cursor: pointer;
+}
+

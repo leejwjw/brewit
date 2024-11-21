@@ -1,10 +1,13 @@
 package com.pt.brewit.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Date;
 
 @Data
 public class ProductDTO {
+    private MultipartFile file; // 파일 업로드를 위한 필드
     private int product_id;
     private int seller_id;
     private String name;

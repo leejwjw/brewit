@@ -4,7 +4,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1234
+  # file-upload
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 30MB
+      max-file-size: 10MB
 
+file.dir: c:/junwoo/brewit/src/main/resources/static/img/product
 mybatis:
   type-aliases-package: com.pt.brewit.dto
 

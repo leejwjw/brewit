@@ -200,7 +200,7 @@
                                     <div class="flex_box">
                                     <div class="image-placeholder" id="imagePlaceholder">
                                         상품 이미지를 클릭하여 등록하세요
-                                        <input type="file" id="productImage"  style="display: none;" accept="image/*">
+                                        <input type="file" id="productImage"  name="file" accept="image/*" style="display: none;">
                                     </div>
 
                                     <div class="info_box">
@@ -356,22 +356,23 @@
             const img = document.createElement('img'); // 새로운 이미지 요소 생성
             img.src = e.target.result; // 파일의 데이터 URL 설정
             const placeholder = document.getElementById('imagePlaceholder');
-            placeholder.innerHTML = ''; // 기존 내용 제거
-            placeholder.appendChild(img); // 이미지 추가
+
+            placeholder.append(img); // 이미지 추가
         }
         if (file) {
             console.log("파일이 있다.");
-            document.getElementById('attachName').value = "test" + file.name;
+            document.getElementById('attachName').value = file.name;
             document.getElementById('attachOriginName').value = file.name;
+            console.log(file);
             reader.readAsDataURL(file);
+
         }
     });
+
+
     document.getElementById("productForm").onsubmit = function(event) {
         var infoInput = document.getElementById("info");
         infoInput.value = quill.root.innerHTML;
-
-
-
     };
 
 

@@ -16,7 +16,7 @@ public class ProductDTO {
     private String info;
     private String nation;
     private Integer weight;
-    private boolean is_caffeine;
+    private String is_caffeine;
     private int stock;
     private String attach_name;
     private String attach_origin_name;

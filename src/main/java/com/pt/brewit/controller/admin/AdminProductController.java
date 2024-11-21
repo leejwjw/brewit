@@ -44,7 +44,7 @@ public class AdminProductController {
     @PostMapping("/registProduct")
     public String registProduct(@ModelAttribute ProductDTO productDTO, Model model) {
 
-        log.info("productDTO !!!!!!!!!!: {}", productDTO);
+
         // 파일 저장 로직
 
         MultipartFile file = productDTO.getFile(); // ProductDTO에서 파일 가져오기
@@ -68,11 +68,13 @@ public class AdminProductController {
                 return "admin/registProduct"; // 오류 발생 시 다시 폼으로 돌아감
             }
         }
-        if (!productDTO.is_caffeine()) {
-            productDTO.set_caffeine(false);
+
+        if(productDTO.getIs_caffeine() == null) {
+            productDTO.setIs_caffeine("false");
         }
+
         productMapper.insertProduct(productDTO); // DB에 제품 정보 저장
-        return "redirect:/admin/registProduct"; // 성공적으로 등록 후 리다이렉트
+        return "redirect:/admin/registProduct";
     }
 
 

@@ -38,7 +38,7 @@ public class AdminHistoryController {
     @PostMapping("orders/delete/{id}")
     public String deleteOrder(@PathVariable("id") int id) {
         log.info("Deleting order with id: {}", id);
-        HistoryService.deleteOrder(id);
+        historyService.deleteOrder(id);
 
         return "redirect:/admin/orders"; // 삭제 후 목록으로 리다이렉트
     }

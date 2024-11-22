@@ -51,7 +51,7 @@ public class HomeProductController {
         }
         model.addAttribute("products", products);
         model.addAttribute("tab_id", tab_id);
-        return "main/fragments/productList :: product-list";
+        return "main/fragments/productList";
     }
 
 }

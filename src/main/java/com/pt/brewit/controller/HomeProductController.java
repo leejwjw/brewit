@@ -8,30 +8,50 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 @Slf4j
 @AllArgsConstructor
 public class HomeProductController {
     private final MainProductService mainProductService;
 
-    //  인기 상품을 All / 차 / 커피 / 관련용품 등 눌러서 표기하는 프로그램 영역.
     @GetMapping("/products")
-    public List<ProductDTO> getProducts(@RequestParam String tab_id) {
-        switch (tab_id) {
-            case "best":
-                return mainProductService.getBestProducts();
-            case "tea":
-                return mainProductService.getProductsByCategory(1);
-            case "coffee":
-                return mainProductService.getProductsByCategory(2);
-            case "tool":
-                return mainProductService.getProductsByTool();
-            default:
-                throw new IllegalArgumentException("탭 이름이 잘못되었습니다.");
+    public String getProducts(@RequestParam String tab_id, Model model) {
+        List<ProductDTO> products;
+        try {
+            switch (tab_id) {
+                case "best":
+                    products = mainProductService.getBestProducts();
+                    log.info("productBest: {}", products);
+                    log.info("best_tab_id: {}", tab_id);
+                    break;
+                case "tea":
+                    products = mainProductService.getProductsByCategory(1);
+                    log.info("productTea: {}", products);
+                    log.info("tea_tab_id: {}", tab_id);
+                    break;
+                case "coffee":
+                    products = mainProductService.getProductsByCategory(2);
+                    log.info("productCoffee: {}", products);
+                    log.info("coffee_tab_id: {}", tab_id);
+                    break;
+                case "tool":
+                    products = mainProductService.getProductsByTool();
+                    log.info("productTool: {}", products);
+                    log.info("tool_tab_id: {}", tab_id);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid tab_id: " + tab_id);
+            }
+        } catch (Exception e) {
+            log.error("Error fetching products for tab_id: {}", tab_id, e);
+            throw new RuntimeException("Error fetching products", e);
         }
+        model.addAttribute("products", products);
+        model.addAttribute("tab_id", tab_id);
+        return "main/fragments/productList :: product-list";
     }
+
 }

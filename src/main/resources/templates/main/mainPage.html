@@ -15,8 +15,57 @@
     <!-- /History Section Close -->
 
     <!-- ProductList Section -->
-    <th:block th:replace="~{/main/fragments/productList :: fragment-productList}"></th:block>
-    <!-- /Item Section Close -->
+    <section id="portfolio" class="portfolio section">
+        <div class="container section-title" data-aos="fade-up">
+            <h2></h2>
+            <p><span>Brewit의&nbsp;</span> <span class="description-title">인기 제품</span></p>
+        </div>
+
+        <div class="container">
+            <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                    <li class="filter-active" data-tab="best">Best</li>
+                    <li data-tab="tea">차(Tea)</li>
+                    <li data-tab="coffee">커피</li>
+                    <li data-tab="tool">관련용품</li>
+                </ul>
+
+                <div id="product-container" data-aos="fade-up" data-aos-delay="200">
+                    <!-- script 영역 -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabs = document.querySelectorAll(".portfolio-filters li");
+
+            window.fetchProducts = function (tab_id) { // 전역 함수 선언
+                fetch(`/products?tab_id=${tab_id}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        console.log("Response HTML:", html); // 응답 확인
+                        const container = document.getElementById("product-container");
+                        container.innerHTML = html;
+                    })
+                    .catch(error => console.error("Error fetching products:", error));
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function () {
+                    tabs.forEach(t => t.classList.remove("filter-active")); // 기존 활성화된 탭 비활성화
+                    this.classList.add("filter-active"); // 클릭된 탭 활성화
+                    const tabId = this.getAttribute("data-tab");
+                    fetchProducts(tabId);
+                });
+            });
+
+            // 초기 데이터 로드
+            fetchProducts("best");
+        });
+
+    </script>
+    <!-- /ProductList Section Close -->
 
     <!-- Subscribe Section -->
     <th:block th:replace="~{/main/fragments/subscribe :: fragment-subscribe}"></th:block>

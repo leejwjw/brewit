@@ -8,15 +8,16 @@
     <select id="findBestProducts" resultType="ProductDTO">
         select *
         from tb_product
+        where STATUS = 'active' <!-- 활성 상태인 상품만 가져옴 -->
         order by liked desc
         limit 6;
     </select>
 
     <!-- Tea 또는 Coffee 상품 가져오기 -->
     <select id="findProductsByCategory" resultType="ProductDTO">
-        select product_id, name, attach_name, category_id, subcategory_id, liked, sale_price
+        select *
         from tb_product
-        where category_id = #{category_id} and stock > 0 <!-- 1 들어오면 차 / 2 들어오면 커피 -->
+        where category_id = #{category_id} and stock > 0 and STATUS = 'active' <!-- 활성 상태인 상품만 가져옴 --><!-- 1 들어오면 차 / 2 들어오면 커피 -->
         order by reg_date desc
         limit 6
     </select>
@@ -26,9 +27,9 @@
         select *
         from (
         <!-- 카테고리 3번(차)에서 최신순 3개 가져오기 -->
-        select product_id, name, category_id, reg_date, sale_price, liked
+        select *
         from tb_product
-        where category_id = 3 and stock > 0
+        where category_id = 3 and stock > 0 and STATUS = 'active'
         order by reg_date desc
         limit 3
         ) as category_3
@@ -38,9 +39,9 @@
         select *
         from (
         <!-- 카테고리 4번(커피)에서 최신순 3개 가져오기 -->
-        select product_id, name, category_id, reg_date, sale_price, liked
+        select *
         from tb_product
-        where category_id = 4 and stock > 0
+        where category_id = 4 and stock > 0 and STATUS = 'active'
         order by reg_date desc
         limit 3
         ) as category_4

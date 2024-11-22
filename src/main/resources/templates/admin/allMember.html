@@ -527,18 +527,18 @@
                                         <th>휴대전화번호</th>
                                         <th>E-mail</th>
                                         <th>회원가입일</th>
-                                        <th>상태</th>
+                                        <th>구분</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="member : ${members}">
-                                            <td th:text="${member.member_id}"></td>
+                                        <tr th:each="member, iterStat : ${members}">
+                                            <td th:text="${iterStat.index + 1}"> </td>
                                             <td th:text="${member.name}"></td>
                                             <td th:text="${member.cellphone}"></td>
                                             <td th:text="${member.email}"></td>
                                             <td th:text="${#dates.format(member.reg_date, 'yyyy-MM-dd HH:mm')}"></td>
-                                            <td th:text="${member.status == 'active' ? '활성' : '비활성'}"></td>
+                                            <td th:text="${member.auth == 'seller' ? '판매자' : '일반회원'}"></td>
 
                                             <td>
                                                 <!-- 수정 버튼 -->

@@ -529,12 +529,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="product : ${products}" class="product_tr">
-                                        <td></td>
+                                    <tr th:each="product, iterStat : ${products}" class="product_tr">
+                                        <td th:text="${iterStat.index + 1}"> </td>
                                         <td style="padding: 0">
-                                            <a th:href="@{${product.filePath}}">
-                                                <img th:src="@{${product.filePath}}" style="width: 50%;" />
-                                            </a>
+                                            <img th:src="@{/admin/img/product/{filename}(filename=${product.attach_name})}" style="width: 50%;" />
                                         </td>
                                         <td th:text="${product.name}"></td>
                                         <td th:text="${product.seller_id}"></td>

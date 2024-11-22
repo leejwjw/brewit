@@ -13,7 +13,7 @@ public class MemberDTO {
     private String address1;        // 주소1
     private String address2;        // 세부주소
     private String email;           // 이메일
-    private int auth;               // 권한
+    private String auth;               // 권한
     private int is_subscribe;        // 구독여부
     private int bank_id;             // 은행아이디
     private String bank_account;     // 계좌번호

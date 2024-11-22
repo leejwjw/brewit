@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO getProductById(int id) {
         ProductDTO product = productMapper.selectProductById(id);
-        String filePath = getFilePath(product.getAttach_name());
+        String filePath = getFullPath(product.getAttach_name());
         product.setFilePath(filePath); // 파일 경로를 DTO에 추가
        return product;
     }
@@ -90,22 +90,27 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDTO> products = productMapper.selectAllProducts();
         // 파일 경로를 추가로 처리할 수 있는 로직
         for (ProductDTO product : products) {
-            String filePath = getFilePath(product.getAttach_name());
-            product.setFilePath(filePath); // 파일 경로를 DTO에 추가
+            String file = getFullPath(product.getAttach_name());
+            product.setFilePath(file); // 파일 경로를 DTO에 추가
         }
         return products;
     }
 
-    private String getFilePath(String attachName) {
-        int index = fileDir.indexOf("/img");
-        if (index != -1) {
-            String result = fileDir.substring(index);
-            return result + "/" +  attachName;
-        } else {
-            System.out.println("'/img'가 경로에 없습니다.");
-            return "";
-        }
-
+    // 파일 전체 경로 리턴
+    @Override
+    public String getFullPath(String filename) {
+        return fileDir + '/' +filename;
     }
+//    private String getFilePath(String attachName) {
+//        int index = fileDir.indexOf("/img");
+//        if (index != -1) {
+//            String result = fileDir.substring(index);
+//            return result + "/" +  attachName;
+//        } else {
+//            System.out.println("'/img'가 경로에 없습니다.");
+//            return "";
+//        }
+//
+//    }
 
 }

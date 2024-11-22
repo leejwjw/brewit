@@ -28,6 +28,25 @@ public class AdminMemberController {
 
         return "admin/allMember";
     }
+    @GetMapping("/confirmSeller")
+    public String getConfirmSeller(Model model) {
+        log.info("confirmSeller Site Open !!");
+        // 회원 목록
+        List<MemberDTO> members = adminService.getSellerConfrimList();
+        model.addAttribute("members", members);
+        log.info("GET /admin/allMember - members : {}", members);
+
+        return "admin/confirmSeller";
+    }
+    // 승인 처리
+    @PostMapping("confirmSeller/confirm/{id}")
+    public String confirmMember(@PathVariable("id") int id) {
+        log.info("confrim member with id: {}", id);
+        log.info("confrim!!!");
+        adminService.confirmSeller(id);
+
+        return "redirect:/admin/confirmSeller"; // 삭제 후 목록으로 리다이렉트
+    }
 
     // 수정 페이지로 이동
     @GetMapping("allMember/edit/{id}")
@@ -42,8 +61,6 @@ public class AdminMemberController {
     public String updateMember(@PathVariable("id") int id, @ModelAttribute MemberDTO member) {
         //member 객체에 수정된 값 저장
         log.info("Updating member with member: {}", member);
-
-
         adminService.updateMember(id, member); // 서비스 레이어에서 회원 정보 업데이트
         return "redirect:/admin/allMember"; // 수정 후 회원 목록 페이지로 리다이렉트
     }
@@ -52,7 +69,6 @@ public class AdminMemberController {
     @PostMapping("allMember/delete/{id}")
     public String deleteMember(@PathVariable("id") int id) {
         log.info("Deleting member with id: {}", id);
-        log.info("삭제요청!!!");
         adminService.deleteMember(id);
 
         return "redirect:/admin/allMember"; // 삭제 후 목록으로 리다이렉트

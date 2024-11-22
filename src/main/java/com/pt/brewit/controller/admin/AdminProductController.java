@@ -5,6 +5,8 @@ import com.pt.brewit.dto.SubCategoryDTO;
 import com.pt.brewit.mapper.ProductMapper;
 import com.pt.brewit.service.ProductService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.ui.Model;
 import com.pt.brewit.dto.CategoryDTO;
 import com.pt.brewit.dto.MemberDTO;
@@ -15,9 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,6 +80,7 @@ public class AdminProductController {
         return "redirect:/admin/products";
     }
 
+
     @GetMapping("/products")
     public String showProducts(Model model) {
         log.info("products site open !");
@@ -84,6 +89,15 @@ public class AdminProductController {
         log.info("product array!!!! :{}", products);
         return "admin/products";
     }
+    // 이미지 요청
+    @ResponseBody // 데이터 리턴
+    @GetMapping("/img/product/{filename}")
+    public Resource getImages(@PathVariable("filename") String filename) throws MalformedURLException {
+        log.info("GET /product/images - filename : {}", filename);
+        log.info("testsetset");
+        return new UrlResource("file:" + productService.getFullPath(filename));
+    }
+
 
     //수정페이지
     @GetMapping("products/edit/{id}")

@@ -22,6 +22,16 @@ public class AdminServiceImpl implements AdminService {
         return list;
     }
 
+    @Override
+    public List<MemberDTO> getSellerConfrimList() {
+        List<MemberDTO> list = adminMapper.selectSellerConfrimList();
+        return list;
+    }
+    @Override
+    public void confirmSeller(int id) {
+        adminMapper.confirmSellerMember(id);
+    }
+
     // 특정 회원 정보 가져오기
     @Override
     public MemberDTO getMemberById(int id) {

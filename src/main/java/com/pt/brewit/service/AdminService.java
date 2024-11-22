@@ -9,8 +9,10 @@ public interface AdminService {
 
     //전체 회원 목록 조회
     public List<MemberDTO> getMemberList();
-    // 전체 회원 목록 조회 + paging
-//    public List<MemberDTO> getMemberListWithPaging(PagerDTO pager);
+    // 판매자 승인전 목록
+    public List<MemberDTO> getSellerConfrimList();
+    // 판매자 승인 처리
+    public void confirmSeller(int id);
     //회원 찾기
     public MemberDTO getMemberById(int id);
     //회원 삭제

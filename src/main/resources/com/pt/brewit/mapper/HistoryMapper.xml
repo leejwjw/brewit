@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pt.brewit.mapper.HistoryMapper">
+
+    <select id="selectAllOrders">
+        SELECT o.*,
+        p.name AS product_name,
+        p.attach_name,
+        m_seller.name AS seller_name,
+        m_buyer.name AS buyer_name
+        FROM TB_ORDER o
+        JOIN TB_PRODUCT p ON o.order_num = p.order_num
+        JOIN TB_MEMBER m_seller ON o.seller_id = m_seller.member_id
+        JOIN TB_MEMBER m_buyer ON o.member_id = m_buyer.member_id;
+    </select>
+    <select id="selectAllPayments">
+
+    </select>
+
+    <delete id="deleteOrderOne">
+<!--        논의필요-->
+    </delete>
+</mapper>

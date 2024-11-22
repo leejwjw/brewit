@@ -215,7 +215,7 @@
                             <div class="flex_box">
                                 <div class="image-placeholder" id="imagePlaceholder">
                                     상품 이미지를 클릭하여 등록하세요
-                                    <img th:src="@{${product.filePath}}" />
+                                    <img th:src="@{/admin/img/product/{filename}(filename=${product.attach_name})}" />
                                     <input type="file" id="productImage"  name="file" accept="image/*" style="display: none;">
                                 </div>
 

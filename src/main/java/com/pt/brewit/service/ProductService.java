@@ -26,4 +26,6 @@ public interface ProductService {
     public ProductDTO getProductById(int id);
     // 상품 수정
     public void updateProduct(int id, ProductDTO productDTO);
+    //상품 삭제
+    public void deleteProduct(int id, ProductDTO productDTO);
 }

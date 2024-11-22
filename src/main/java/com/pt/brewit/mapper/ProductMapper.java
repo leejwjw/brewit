@@ -33,4 +33,6 @@ public interface ProductMapper {
     public  ProductDTO selectProductById(int id);
     // 상품 수정
     public void updateProductValue(@Param("id") int id, @Param("product") ProductDTO product);
+    //상품 삭제
+    public void deleteProductOne(@Param("id") int id, @Param("product") ProductDTO product);
 }

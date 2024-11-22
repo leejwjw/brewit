@@ -27,6 +27,8 @@ public class ProductDTO {
     private Integer discount_percent;
     private Integer sale_price;
     private int mainsubcategory_id;
+    private String status; //삭제여부 active, inactive
+
 
     // 메인에서 subcategory_id 를 사용하는데 다른곳의 subcategory_id를 바라봐서 
     // 별도의 변수 선언하고 subcategory_id 주입받아서 사용

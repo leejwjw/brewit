@@ -99,14 +99,14 @@ public class AdminProductController {
     //수정 요청
     @PostMapping("products/editProduct/{id}")
     public String updateProduct(@PathVariable("id") int id, @ModelAttribute ProductDTO product) {
-        //product 객체에 수정된 값 저장
-
-        if(product.getIs_caffeine() == null) {
-            product.setIs_caffeine("false");
-        }
-        log.info("Updating member  !!!!!!!!!!!!!!!!!!!!!with member: {}", product);
         productService.updateProduct(id, product); // 서비스 레이어에서  정보 업데이트
         return "redirect:/admin/products"; // 수정 후 회원 목록 페이지로 리다이렉트
+    }
+    //삭제 요청 처리
+    @PostMapping("products/delete/{id}")
+    public String deleteProduct(@PathVariable("id") int id, @ModelAttribute ProductDTO product) {
+        productService.deleteProduct(id, product);
+        return "redirect:/admin/products";
     }
 
 

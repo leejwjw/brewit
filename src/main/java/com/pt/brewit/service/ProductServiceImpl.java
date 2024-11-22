@@ -75,7 +75,15 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public  void updateProduct(int id, ProductDTO productDTO) {
+        if(productDTO.getIs_caffeine() == null) {
+            productDTO.setIs_caffeine("false");
+        }
         productMapper .updateProductValue(id, productDTO);
+    }
+    @Override
+    public  void deleteProduct(int id, ProductDTO productDTO) {
+
+        productMapper .deleteProductOne(id, productDTO);
     }
     @Override
     public List<ProductDTO> selectAllProducts() {

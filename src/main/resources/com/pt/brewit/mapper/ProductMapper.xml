@@ -26,13 +26,13 @@
 
     <!-- 서브카테고리 가져오기-->
     <select id="selectProductsBySub" resultType="ProductDTO">
-        select * from tb_product where subcategory_id = #{subcategory_id}
+        select * from tb_product where subcategory_id = #{subcategory_id} and status='active'
         order by liked desc
         limit #{pager.offset}, #{pager.size}
     </select>
     <!--정렬-->
     <select id="selectProductsBySubSort" resultType="ProductDTO">
-        select * from tb_product where subcategory_id = #{subcategory_id}
+        select * from tb_product where subcategory_id = #{subcategory_id} and status='active'
         <if test="sortType == 'low-price'.toString()">
             order by sale_price asc
         </if>
@@ -44,12 +44,12 @@
 
     <!--카테고리별 상품 전체 개수 조회 -->
     <select id="countAllProducts" resultType="long">
-        select count(*) from tb_product where category_id = #{category_id}
+        select count(*) from tb_product where category_id = #{category_id} and status='active'
     </select>
 
     <!--서브카테고리별 상품 전체 개수 조회 -->
     <select id="countProductsBySub" resultType="long">
-        select count(*) from tb_product where subcategory_id = #{subcategory_id}
+        select count(*) from tb_product where subcategory_id = #{subcategory_id} and status='active'
     </select>
 
     <select id="selectAllProducts" resultType="ProductDTO">

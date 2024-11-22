@@ -21,10 +21,10 @@
         </div>
         <!--subcategory-->
         <div class="product_tab container">
-            <h2><a href="/tea/0">BEST</a></h2>
-            <h2><a href="/tea/1">티백</a></h2>
-            <h2><a href="/tea/2">잎차</a></h2>
-            <h2><a href="/tea/3">디 카페인</a></h2>
+            <h2><a href="/tea/0" class="sort-item" onclick="selectCategory(this)">BEST</a></h2>
+            <h2><a href="/tea/1" class="sort-item" onclick="selectCategory(this)">티백</a></h2>
+            <h2><a href="/tea/2" class="sort-item" onclick="selectCategory(this)">잎차</a></h2>
+            <h2><a href="/tea/3" class="sort-item" onclick="selectCategory(this)">디 카페인</a></h2>
         </div>
 
         <div class="container">
@@ -48,18 +48,15 @@
 
         </div>
         <!-- Pagination : 페이지 번호  -->
-        <div>
+        <div style="margin-top: 30px;">
             <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
+                <ul class="pagination justify-content-center">
                     <li th:if="${pageDTO.prev}" class="page-item">
                         <a th:href="@{/tea/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${pageDTO.startPage - 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link">Previous</a>
                     </li>
-
                     <li th:each="page : ${pageDTO.getPageNumbers()}" class="page-item" th:classappend="${pageDTO.pager.page == page} ? 'active'">
                         <a th:text="${page}" class="page-link" th:href="@{/tea/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>
                     </li>
-
-
                     <li th:if="${pageDTO.next}" class="page-item">
                         <a th:href="@{/tea/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#">Next</a>
                     </li>
@@ -99,11 +96,20 @@
             element.classList.add('selected');
             // 페이지 요청 (기존 코드)
             window.location.href = "http://" + host + path + "?sortType=" + sortType + queryStr;
+
         }
     </script>
 
-
-
+    <script>
+        function selectCategory(element) {
+            // 모든 .category-item에서 'selected' 클래스 제거
+            var items = document.querySelectorAll('.sort-item');
+            items.forEach(function(item) {
+                item.classList.remove('selected');
+            });
+            // 클릭된 항목에 'selected' 클래스 추가
+            element.classList.add('selected');
+        }
 
     </script>
 

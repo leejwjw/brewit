@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="fragment-header">
     <head>
         <meta charset="utf-8">
@@ -44,7 +45,7 @@
         <!--   GNB 메뉴  -->
         <div class="branding d-flex align-items-center">
             <div class="container position-relative d-flex align-items-center justify-content-between">
-                <a href="/" class="logo d-flex align-items-center">
+                 <a href="/" class="logo d-flex align-items-center">
                     <!-- Uncomment the line below if you also wish to use an image logo -->
                     <!-- <img src="/main/assets/img/logo.png" alt=""> -->
                     <h1 class="sitename">Brewit</h1>
@@ -60,7 +61,7 @@
                         </li>
                         <li><a href="#">정기구독</a></li>
                         <li>
-                        <li class="dropdown"><a href="/tea/0"><span>차(Tea)</span><i
+                        <li class="dropdown"><a href="/tea"><span>차(Tea)</span><i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
                                 <li><a href="/tea/1">티백</a></li>
@@ -101,9 +102,18 @@
                         <li><a href="#">공지사항</a></li>
                         <li><a href="#">고객지원</a></li>
                         <li><a href="/main/new" th:href="@{/main/new}">회원가입</a></li>
-                        <li><a href="#"><img src="../static/img/cart.png"/> 장바구니</a></li>
-                        <li th:if="${session.semail == null}"><a href="/login" th:href="@{/login}"><img src="../static/img/login.png"/> 로그인</a></li>
-                        <li th:if="${session.semail != null}"><a href="/logout" th:href="@{/logout}"><img src="../static/img/logout.png"/> 로그아웃</a></li>
+                        <li><a href="#"><img src="/img/cart.png"/> 장바구니</a></li>
+<!--                            <ul class="gnb">-->
+                            <li sec:authorize="isAuthenticated()">
+                                <form action="" th:action="@{/logout}" method="post">
+                                    <button type="submit">로그아웃</button>
+                                </form>
+                            </li>
+
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/main/{email}(email=${#authentication.name})}">My Page</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="/login" th:href="@{/login}">로그인</a></li>
+                        </ul>
+
                         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
             </div>

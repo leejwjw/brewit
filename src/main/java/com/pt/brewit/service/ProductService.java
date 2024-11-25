@@ -10,10 +10,8 @@ import java.util.List;
 public interface ProductService {
     // 차, 커피, 나머지 베스트순으로 가져오기
     public List<ProductDTO> selectBestProducts(int category_id, Pager pager);
-    public List<ProductDTO> selectBestProductsSort(int category_id, Pager pager, String sortType);
     //서브카테고리 가져오기
     public List<ProductDTO> selectProductsBySub(int subcategory_id, Pager pager);
-    public List<ProductDTO> selectProductsBySubSort(int subcategory_id, Pager pager, String sortType);
     //카테고리별 상품 전체 개수 조회
     public int getProductCount(int category_id);
     //서브카테고리별 데이터 전체 개수 조회

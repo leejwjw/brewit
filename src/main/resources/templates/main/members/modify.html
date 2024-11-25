@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <!-- header fragments -->
+    <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
+    <!-- header fragments close -->
+
+    <th:block th:fragment="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-6">
+                    <form action="" th:action th:object="${member}" method="post" id="form" name="inputForm">
+                        <table>
+                            <div class="card-body">
+                                <h6 class="card-title" th:align="center" th:border="4">myPage</h6>
+                                <br/>
+                                <div class="form-group row">
+                                    <label for="email" class="col-sm-3 text-end control-label col-form-label">Email*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="${member.email}" name="email" id="email" placeholder="Email Here">
+                                    </div>
+                                </div>
+                                <br/>
+
+                                <div class="form-group row">
+                                    <label for="lllname" class="col-sm-3 text-end control-label col-form-label">비밀번호*</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" th:field="${member.password}" id="lllname" name="password" placeholder="Last Name Here">
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">비밀번호 확인*</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="lname" name="pwch" placeholder="비밀번호 Here">
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="form-group row">
+                                    <label for="tname" class="col-sm-3 text-end control-label col-form-label">이름*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="${member.name}" id="tname" name="name" placeholder="이름 Here">
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="form-group row">
+                                    <label for="cono1" class="col-sm-3 text-end control-label col-form-label">휴대폰*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="*{cellphone}" id="cono1" name="cellphone" placeholder="휴대폰 번호 Here">
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="form-group row">
+                                    <label for="cono11" class="col-sm-3 text-end control-label col-form-label">전화번호</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="*{telephone}" id="cono11" name="telephone" placeholder="전화번호 Here">
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="form-group row">
+                                    <label for="cono2" class="col-sm-3 text-end control-label col-form-label">주소*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="*{address1}" id="cono2" name="address1" placeholder="주소 Here">
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="form-group row">
+                                    <label for="cono3" class="col-sm-3 text-end control-label col-form-label">상세주소</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="*{address2}" id="cono3" name="address2" placeholder="상세주소 Here">
+                                    </div>
+                                </div>
+                                <br/>
+                                Auth : <input type="radio" name="au" value="member" checked/> 일반회원
+                                <input type="radio" name="au" value="admin"/> 관리자
+                                <input type="radio" name="au" value="seller"/> 판매자 <br />
+                                <button type="submit" class="btn btn-success text-white">수정완료</button>
+                                <button type="button" class="btn btn-primary" onclick="history.go(-1)">취소</button>
+                                <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/}'|">홈으로</button>
+                            </div>
+                        </table>
+                    </form>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            // jquery 작성
+                            // email 값이 "email" 인 input 태그의 변경사항이 있으면 이벤트 발생!
+                            $("#email").change(function () {
+                                let email = $("#email").val(); // email input 태그에 작성한 값 꺼내기
+                                $.ajax({
+                                    url: "/main/emailAvailAjax",
+                                    type: "post",
+                                    data: {email: email},
+                                    success: function (result) {
+                                        console.log("ajax 요청 성공!!!");
+                                        console.log(result); // 응답데이터 출력
+                                        // 결과 화면에 붙히기
+                                        $("#emailCheck").val(result).css("color", "red");
+                                    },
+                                    error: function (e) {
+                                        console.log("ajax 요청 실패.....");
+                                        console.log(e); // error정보 출력
+                                    }
+                                });
+
+                            });
+                        });
+                    </script>
+                    <script th:inline="javascript">
+                        // email 중복확인 함수
+                        function openEmailAvail(inputForm) {
+                            // email 입력란에 값 있는지부터 체크
+                            if (inputForm.email.value == "" || !inputForm.email.value) {
+                                alert("이메일을 입력하세요.");
+                                return;  // 함수 종료!
+                            }
+                            // 중복확인 팝업창 띄우기 : open(url, name, options)
+                            let url = "/main/emailAvail?email=" + inputForm.email.value; // 팝업창으로 요청할 주소 준비
+                            open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, width=500, height=500");
+                        }
+
+                        // 유효성 검사 함수
+                        function fieldCheck() {
+                            let form = document.getElementById("form");
+                            if (!form.password.value) {
+                                alert("비밀번호를 입력하세요");
+                                return false;
+                            }
+                            if (!form.pwch.value) {
+                                alert("비밀번호 확인란을 입력하세요");
+                                return false;
+                            }
+                            if (!form.name.value) {
+                                alert("이름을 입력하세요");
+                                return false;
+                            }
+                            if (form.password.value != form.pwch.value) {
+                                alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+                                return false;
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </th:block>
+
+<!-- Footer Fragments -->
+<th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
+<!-- /Footer Fragments Close -->

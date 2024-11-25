@@ -2,6 +2,7 @@ package com.pt.brewit.dto;
 
 import lombok.Data;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class MemberDTO {
@@ -20,4 +21,5 @@ public class MemberDTO {
     private String is_kakao;         // 소셜로그인 구분 컬럼
     private Date reg_date;           // 회원가입일
     private String status;          // 상태 (active, inactive)
+
 }

@@ -23,30 +23,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> selectBestProductsSort(int category_id, Pager pager, String sortType) {
-        List<ProductDTO> list = null;
-        if (sortType.equals("many-review")){
-            // 리뷰 많은 순 따로
-        }else {
-            list = productMapper.selectBestProductsSortByPrice(category_id, pager, sortType);
-        }
-        return list;
-    }
-
-    @Override
     public List<ProductDTO> selectProductsBySub(int subcategory_id, Pager pager) {
         return productMapper.selectProductsBySub(subcategory_id, pager);
-    }
-
-    @Override   //정렬
-    public List<ProductDTO> selectProductsBySubSort(int subcategory_id, Pager pager, String sortType) {
-        List<ProductDTO> list = null;
-        if(sortType.equals("many-review")){
-            //  리뷰 많은 순 따로
-        }else{
-            list = productMapper.selectProductsBySubSort(subcategory_id, pager, sortType);
-        }
-        return list;
     }
 
     @Override

@@ -10,6 +10,8 @@ spring:
       enabled: true
       max-request-size: 30MB
       max-file-size: 10MB
+  security:
+    debug: true
 
 file.dir: c:/junwoo/brewit/src/main/resources/static/img/product
 mybatis:

@@ -2,10 +2,12 @@ package com.pt.brewit.controller.main;
 
 import com.pt.brewit.dto.MemberDTO;
 import com.pt.brewit.mapper.MemberMapper;
+import com.pt.brewit.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/main/")
+@RequestMapping("/main")
 @Slf4j  // log 사용위해 추가 (lombok 어노테이션)
 @RequiredArgsConstructor // final, @NonNull 어노테이션붙은 변수를 매개변수로 갖는 생성자 자동생성
 public class MemberController {
@@ -25,6 +27,7 @@ public class MemberController {
     // #3. 생성자를 이용한 주입 (*)
     private final MemberMapper memberMapper;
     private final MybatisProperties mybatisProperties;
+    private final MemberService memberService;
     /* Lombok의 어노테이션으로 대체
     public MemberController(MemberMapper memberMapper) {
         this.memberMapper = memberMapper;
@@ -43,66 +46,67 @@ public class MemberController {
 
     // 회원 가입 폼 요청
     @GetMapping("/new")
-    public String newMember() {
+    public String newForm(@ModelAttribute("member") MemberDTO member) {
         return "/main/members/newForm";
     }
 
+
     // 회원가입 처리 요청
     @PostMapping("/new")
-    public String newMemberPro(MemberDTO memberDTO) {
-        log.info("memberDTO: {}", memberDTO);
-        // DB 저장
-        memberMapper.insertMember(memberDTO);
+    public String newPro(MemberDTO member, String au) {
+        log.info("newPro - member : {}", member);
+        log.info("newPro - au : {}", au);
+        // 회원 가입 처리
+        int result = memberService.register(member, au);
+        log.info("newPro - result : {}", result);
 
         return "redirect:/"; // 페이지 이동 = "/" 경로 코드로 요청 -> @..Mapping("/") 메소드호출
     }
 
     // 마이페이지 요청
-    @GetMapping("/{id}") // ...8080/members/사용자id
-    public String editMember(@PathVariable("id") String id) {
-        log.info("mypage id: {}", id);
-        return "members/mypage";
+    @GetMapping("/{email}")
+    public String mypage(@PathVariable("email") String username, Model model){
+        log.info("mypage username: {}", username);
+        MemberDTO member = memberService.getMember(username);
+        model.addAttribute("member", member);
+        return "/main/members/mypage";
     }
 
-    // 회원 정보 수정폼 요청
-    @GetMapping("/{id}/modify")
-    public String modifyMember(@PathVariable("id") String id, Model model) {
-        log.info("modifyForm id: {}", id);
-        // 해당 유저의 정보를 DB에서 가져와 화면에 전달
-        MemberDTO memberDTO = memberMapper.selectOne(id);
-        model.addAttribute("member", memberDTO);
-        return "members/modify";
+    // 회원 정보 수정 폼 요청
+    @GetMapping("/modify/{email}")
+    public String modifyPage(@PathVariable("email") String username, Model model){
+        log.info("modifyPage username: {}", username);
+        MemberDTO member = memberService.getMember(username);
+        model.addAttribute("member", member);
+        return "/main/members/modify";
     }
 
+    @PostMapping("/modify/{email}")
+    public String modify(@PathVariable("email") String username, MemberDTO member){
+        log.info("modifyPage username: {}", username);
+        log.info("modifyPage member: {}", member);
+        member.setEmail(member.getEmail());
+        member.setCellphone(member.getCellphone());
+        member.setTelephone(member.getTelephone());
+        member.setAddress1(member.getAddress1());
+        member.setAddress2(member.getAddress2());
+        memberService.updateMember(member);
 
-
-    // 회원 탈퇴 폼 요청
-    @GetMapping("/{id}/delete")
-    public String deleteMember(@PathVariable("id") String id) {
-        log.info("delete form - id: {}", id);
-        return "members/delete";
+        return "redirect:/main/{email}";
     }
 
-    // 회원 탈퇴 처리 요청
-    @PostMapping("/{id}/delete")
-    public String deleteMemberPro(@PathVariable("email") String email, String pw, Model model, HttpSession session) {
-        log.info("deletePro id: {}", email);
-        log.info("deletePro pw: {}", pw);
-        // 탈퇴처리
-        // email와 비번 맞는지 확인
-        MemberDTO memberDTO = memberMapper.emailPwCheck(email, pw);
-        boolean result = false;
-        if (memberDTO != null) {
-            // 맞으면 -> 탈퇴 처리 후 -> 결과 화면에 전달
-            result = true;
-            memberMapper.deleteMember(email); // 탈퇴
-            session.invalidate();  // 로그아웃 처리
-        }
-        // 틀리면 -> 결과만 화면에 전달
-        model.addAttribute("result", result);
-        return "members/deletePro";
-    }
+     // 회원 삭제 요청
+    @PostMapping("/delete/{email}")
+    public String delete(@PathVariable("email") String username, HttpSession session) {
+        log.info("delete username: {}", username);
+        memberService.deleteMember(username);
+        // 로그아웃 처리 -> 방법#1. /logout GET 이면 redirect:/logout (스프링시큐리티 로그아웃은 default POST)
+        // -> 방법#2. SecurityContextHolder 이용
+        SecurityContextHolder.clearContext(); // SecurityContext(인증관련저장소) 초기화 -> 로그아웃
 
+
+        return "redirect:/";
+    }
     // email 중복확인 팝업 요청
     @GetMapping("/emailAvail")
     public String emailAvail(String email, Model model) {

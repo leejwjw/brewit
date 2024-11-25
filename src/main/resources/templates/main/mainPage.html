@@ -44,7 +44,7 @@
                 fetch(`/products?tab_id=${tab_id}`)
                     .then(response => response.text())
                     .then(html => {
-                        console.log("Response HTML:", html); // 응답 확인
+                        // console.log("Response HTML:", html); // 응답 확인
                         const container = document.getElementById("product-container");
                         container.innerHTML = html;
                     })
@@ -72,7 +72,7 @@
     <!-- /Subscribe Section Close -->
 
     <!-- Review Section -->
-    <th:block th:replace="~{/main/fragments/review :: fragment-review}"></th:block>
+<!--    <th:block th:replace="~{/main/fragments/review :: fragment-review}"></th:block>-->
     <!-- /Review Section Close -->
 
     <!-- Clients Section -->

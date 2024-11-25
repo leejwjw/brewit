@@ -24,4 +24,13 @@
         delete from tb_member
         where email=#{username}
     </delete>
+
+    <select id="selectAll" resultType="MemberDTO">
+        select * from tb_member
+    </select>
+
+    <select id="selectOne" resultType="MemberDTO">
+        select * from tb_member where email=#{email}
+    </select>
+
 </mapper>

@@ -11,15 +11,12 @@
         m_seller.name AS seller_name,
         m_buyer.name AS buyer_name
         FROM TB_ORDER o
-        JOIN TB_PRODUCT p ON o.order_num = p.order_num
+        JOIN TB_PRODUCT p ON o.product_id = p.product_id
         JOIN TB_MEMBER m_seller ON o.seller_id = m_seller.member_id
         JOIN TB_MEMBER m_buyer ON o.member_id = m_buyer.member_id;
     </select>
     <select id="selectAllPayments">
-
+        SELECT * FROM TB_PAYMENT
     </select>
 
-    <delete id="deleteOrderOne">
-<!--        논의필요-->
-    </delete>
 </mapper>

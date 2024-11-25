@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface MainProductService {
 
-    List<ProductDTO> getProductsForAll();
-    List<ProductDTO> getProductsForTea();
-    List<ProductDTO> getProductsForCoffee();
-    List<ProductDTO> getProductsForAccessories();
+    List<ProductDTO> getBestProducts();
+    List<ProductDTO> getProductsByCategory(int category_id);
+    List<ProductDTO> getProductsByTool();
 }

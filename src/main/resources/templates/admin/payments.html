@@ -372,17 +372,6 @@
                     <td th:text="${payment.order_num}"></td>
                     <td th:text="${payment.order_num}"></td>
                     <td th:text="${#dates.format(payment.reg_date, 'yyyy-MM-dd HH:mm')}"></td>
-
-
-                    <td>
-                      <!-- 수정 버튼 -->
-                      <a th:href="@{/admin/allMember/edit/{id}(id=${payment.member_id})}" class="btn btn-primary">수정</a>
-
-                      <form th:action="@{/admin/allMember/delete/{id}(id=${payment.member_id})}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
-                      </form>
-                    </td>
-
                   </tr>
                   </tbody>
 

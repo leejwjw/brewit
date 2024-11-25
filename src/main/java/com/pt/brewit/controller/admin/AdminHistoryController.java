@@ -34,14 +34,7 @@ public class AdminHistoryController {
 
         return "admin/orders";
     }
-    // 주문 삭제 처리
-    @PostMapping("orders/delete/{id}")
-    public String deleteOrder(@PathVariable("id") int id) {
-        log.info("Deleting order with id: {}", id);
-        historyService.deleteOrder(id);
 
-        return "redirect:/admin/orders"; // 삭제 후 목록으로 리다이렉트
-    }
     @GetMapping("/payments")
     public String Payments(Model model) {
         log.info("Payments Site Open !!");

@@ -15,25 +15,17 @@ public class MainProductServiceImpl implements MainProductService{
     private final MainpageMapper mainpageMapper;
 
     @Override
-    public List<ProductDTO> getProductsForAll() {
-//        List<ProductDTO> products = mainpageMapper.findBestProductsForAll();
-//        products.forEach(product -> System.out.println("ProductDTO: " + product.getProduct_id()));
-//        return products;
-        return mainpageMapper.findBestProductsForAll();
+    public List<ProductDTO> getBestProducts() {
+        return mainpageMapper.findBestProducts();
     }
 
     @Override
-    public List<ProductDTO> getProductsForTea() {
-        return mainpageMapper.findBestProductsForTea();
+    public List<ProductDTO> getProductsByCategory(int category_id) {
+        return mainpageMapper.findProductsByCategory(category_id);
     }
 
     @Override
-    public List<ProductDTO> getProductsForCoffee() {
-        return mainpageMapper.findBestProductsForCoffee();
-    }
-
-    @Override
-    public List<ProductDTO> getProductsForAccessories() {
-        return mainpageMapper.findBestProductsForCoffee();
+    public List<ProductDTO> getProductsByTool() {
+        return mainpageMapper.findProductsByTool();
     }
 }

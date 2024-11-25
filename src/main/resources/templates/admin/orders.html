@@ -369,7 +369,7 @@
                   <tbody>
                   <tr th:each="order, iterStat : ${orders}">
                     <td th:text="${iterStat.index + 1}"> </td>
-                    <td style="padding: 0">
+                    <td style="padding: 0; text-align:center;">
                       <img th:src="@{/admin/img/product/{filename}(filename=${order.attach_name})}" style="width: 50%;" />
                     </td>
                     <td th:text="${order.product_name}"></td>
@@ -382,16 +382,6 @@
                                    order.status == 'indelivery' ? '배송중' :
                                    order.status == 'delevery_complete' ? '배송완료' :
                                    ''}"></td>
-
-
-                    <td>
-                      <!-- 수정 버튼 -->
-                      <a th:href="@{/admin/allMember/edit/{id}(id=${order.member_id})}" class="btn btn-primary">수정</a>
-
-                      <form th:action="@{/admin/allMember/delete/{id}(id=${order.member_id})}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
-                      </form>
-                    </td>
 
                   </tr>
                   </tbody>

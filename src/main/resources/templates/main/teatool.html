@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="styles.css">
+
+<th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
+
+
+<body class="index-page">
+
+
+<main class="main">
+  </br>
+  <h2 class="team" style="text-align: center">차(Tea)용품</h2>
+
+  <section id="team" class="team section light-background">
+    <!-- 정렬 -->
+    <div class="sort_bar container">
+      <p class="right_line sort-item" onclick="requestSort('low-price', this)">낮은가격순</p>
+      <p class="right_line sort-item" onclick="requestSort('high-price', this)">높은가격순</p>
+      <p class="sort-item" onclick="requestSort('many-review', this)">리뷰많은순</p>
+    </div>
+    <!--subcategory-->
+    <div class="product_tab container">
+      <h2><a href="/teatool/0" class="sort-item" onclick="selectCategory(this)">BEST</a></h2>
+      <h2><a href="/teatool/7" class="sort-item" onclick="selectCategory(this)">드립주전자</a></h2>
+      <h2><a href="/teatool/8" class="sort-item" onclick="selectCategory(this)">전기포트</a></h2>
+      <h2><a href="/teatool/9" class="sort-item" onclick="selectCategory(this)">핸드드립 세트</a></h2>
+      <h2><a href="/teatool/10" class="sort-item" onclick="selectCategory(this)">다기세트</a></h2>
+    </div>
+
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div th:each="product:${products}" class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="team-member">
+            <div class="member-img">
+              <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="" th:onclick="|location.href='@{/}'|">
+            </div>
+            <div class="member-info" style="text-align: right">
+              <h4><a th:text="${product.name}"> </a></h4>
+              <h3><a th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')}"></a>원</h3>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+    <!-- Pagination : 페이지 번호  -->
+    <div style="margin-top: 30px;">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li th:if="${pageDTO.prev}" class="page-item">
+            <a th:href="@{/teatool/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${pageDTO.startPage - 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link">Previous</a>
+          </li>
+          <li th:each="page : ${pageDTO.getPageNumbers()}" class="page-item" th:classappend="${pageDTO.pager.page == page} ? 'active'">
+            <a th:text="${page}" class="page-link" th:href="@{/teatool/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${page},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}">1</a>
+          </li>
+          <li th:if="${pageDTO.next}" class="page-item">
+            <a th:href="@{/teatool/{subcategory_id}(subcategory_id=${subcategory_id},sortType=${param.sortType},page=${pageDTO.endPage + 1},size=${pageDTO.pager.size},searchType=${pageDTO.pager.searchType},keyword=${pageDTO.pager.keyword})}" class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+  </section>
+
+
+  <!-- Footer Fragments -->
+  <th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
+  <!-- /Footer Fragments Close -->
+
+
+
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script th:inline="javascript">
+    function requestSort(sortType, element) {
+      // pageDTO 객체 접근 (기존 코드)
+      let pageDTO = [[${pageDTO}]];
+      console.log(pageDTO.pager);
+      let host = window.location.host;
+      let path = window.location.pathname;
+      console.log(host + path);
+      // 쿼리 스트링 생성 (기존 코드)
+      let queryStr = "&page=" + pageDTO.pager.page + "&size=" + pageDTO.pager.size + "&keyword=" + pageDTO.pager.keyword + "&searchType=" + pageDTO.pager.searchType;
+      // 모든 .sort-item에서 'selected' 클래스 제거 (클릭된 항목을 제외한 나머지 항목에서 볼드체 제거)
+      var items = document.querySelectorAll('.sort-item');
+      items.forEach(function(item) {
+        item.classList.remove('selected');
+      });
+      // 클릭된 항목에 'selected' 클래스 추가하여 볼드체 유지
+      element.classList.add('selected');
+      // 페이지 요청 (기존 코드)
+      window.location.href = "http://" + host + path + "?sortType=" + sortType + queryStr;
+
+    }
+  </script>
+
+  <script>
+    function selectCategory(element) {
+      // 모든 .category-item에서 'selected' 클래스 제거
+      var items = document.querySelectorAll('.sort-item');
+      items.forEach(function(item) {
+        item.classList.remove('selected');
+      });
+      // 클릭된 항목에 'selected' 클래스 추가
+      element.classList.add('selected');
+    }
+
+  </script>
+
+
+  <!-- Vendor JS Files -->
+  <script src="/main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/main/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/main/assets/vendor/aos/aos.js"></script>
+  <script src="/main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="/main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/main/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="/main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="/main/assets/js/main.js"></script>
+</main>
+</body>
+</html>

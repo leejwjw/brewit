@@ -357,21 +357,26 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>이름</th>
-                    <th>휴대전화번호</th>
-                    <th>E-mail</th>
-                    <th>회원가입일</th>
-                    <th>구분</th>
-                    <th></th>
+                    <th>주문번호</th>
+                    <th>상품이름</th>
+                    <th>결제자</th>
+                    <th>결제금액</th>
+                    <th>상태</th>
+                    <th>환불일자</th>
+                    <th>결제일자</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr th:each="payment, iterStat : ${payments}">
                     <td th:text="${iterStat.index + 1}"> </td>
                     <td th:text="${payment.order_num}"></td>
-                    <td th:text="${payment.order_num}"></td>
-                    <td th:text="${payment.order_num}"></td>
-                    <td th:text="${#dates.format(payment.reg_date, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${payment.product_name}"></td>
+                    <td th:text="${payment.pay_member_name}"></td>
+                    <td th:text="${payment.price}"></td>
+                    <td th:text="${payment.status == 'complete' ? '결제완료' : '환불완료'}"></td>
+
+                    <td th:text="${#dates.format(payment.cancel_date, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${#dates.format(payment.payment_date, 'yyyy-MM-dd HH:mm')}"></td>
                   </tr>
                   </tbody>
 

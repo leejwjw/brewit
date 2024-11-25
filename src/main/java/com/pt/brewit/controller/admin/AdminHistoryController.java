@@ -40,7 +40,7 @@ public class AdminHistoryController {
         log.info("Payments Site Open !!");
         // 회원 목록
         List<PaymentDTO> payments = historyService.getAllPayments();
-        model.addAttribute("orders", payments);
+        model.addAttribute("payments", payments);
         log.info("payments!!!!!!!!!!!!!!!!! : {}", payments);
 
         return "admin/payments";

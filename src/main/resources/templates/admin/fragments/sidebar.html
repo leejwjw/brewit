@@ -88,24 +88,21 @@
           </ul>
         </li>
         <li class="sidebar-item">
-          <a
-                  class="sidebar-link has-arrow waves-effect waves-dark"
-                  href="javascript:void(0)"
-                  aria-expanded="false"
+          <a th:href="@{/admin/termItems}" class="sidebar-link" method="get"
           ><i class="mdi mdi-receipt"></i
           ><span class="hide-menu">구독상품관리</span></a
           >
           <ul aria-expanded="false" class="collapse first-level">
             <li class="sidebar-item">
-              <a href="form-basic.html" class="sidebar-link"
+              <a th:href="@{/admin/termRegist}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-outline"></i
-              ><span class="hide-menu"> Form Basic </span></a
+              ><span class="hide-menu"> 구독상품 등록 </span></a
               >
             </li>
             <li class="sidebar-item">
               <a href="form-wizard.html" class="sidebar-link"
               ><i class="mdi mdi-note-plus"></i
-              ><span class="hide-menu"> Form Wizard </span></a
+              ><span class="hide-menu"> 구독상품 조회 </span></a
               >
             </li>
           </ul>
@@ -120,15 +117,6 @@
           <a th:href="@{/admin/payments}" class="sidebar-link" method="get"><i class="mdi mdi-chart-bubble"></i>
             <span class="hide-menu">결제내역</span>
           </a>
-        </li>
-        <li class="sidebar-item">
-          <a
-                  class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="widgets.html"
-                  aria-expanded="false"
-          ><i class="mdi mdi-chart-bubble"></i
-          ><span class="hide-menu">디자인 관리</span></a
-          >
         </li>
         <li class="sidebar-item">
           <a

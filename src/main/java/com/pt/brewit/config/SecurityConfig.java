@@ -31,7 +31,7 @@ public class SecurityConfig {
             .authorizeHttpRequests((requests) -> requests
                     //.requestMatchers(new AntPathRequestMatcher("/members/**")).hasAnyRole("ROLE_MEMBER", "ROLE_ADMIN")
                     //.anyRequest().permitAll())
-                    .requestMatchers("/", "/new", "/login", "/test", "/aop", "/products/**","/tea/**", "/coffee/**", "/teatool/**", "/coffeetool/**").permitAll()
+                    .requestMatchers("/", "/new", "/login", "/test", "/aop", "/products/**","/tea/**", "/coffee/**", "/teatool/**", "/coffeetool/**", "/admin/**").permitAll()
                     .anyRequest().authenticated())
             .csrf((csrf) -> csrf.disable()) // crsf 기능 끄기
             .formLogin((formLogin) -> formLogin

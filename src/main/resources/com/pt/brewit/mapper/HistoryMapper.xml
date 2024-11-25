@@ -16,7 +16,22 @@
         JOIN TB_MEMBER m_buyer ON o.member_id = m_buyer.member_id;
     </select>
     <select id="selectAllPayments">
-        SELECT * FROM TB_PAYMENT
+        SELECT
+        pay.order_num,
+        p.name AS product_name,
+        m.name AS pay_member_name,
+        o.price AS price,
+
+        pay.status AS status,
+        pay.cancel_date AS cancel_date,
+        pay.payment_date AS payment_date,
+        pay.payment_method AS method
+
+        FROM tb_payment pay
+        JOIN tb_order o ON pay.order_num = o.order_num
+        JOIN tb_product p ON o.product_id = p.product_id
+        JOIN tb_member m ON pay.member_id = m.member_id
+
     </select>
 
 </mapper>

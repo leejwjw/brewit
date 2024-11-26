@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration // 스프링 환결설정과 관련된 스프링빈으로 등록 어노테이션
 @EnableWebSecurity // 모든 요청 URL이 스프링 시큐리티의 제어를 받도록 만드는 어노테이션
@@ -29,10 +30,9 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                    //.requestMatchers(new AntPathRequestMatcher("/members/**")).hasAnyRole("ROLE_MEMBER", "ROLE_ADMIN")
-                    //.anyRequest().permitAll())
-                    .requestMatchers("/", "/new", "/login", "/test", "/aop", "/products/**","/tea/**", "/coffee/**", "/teatool/**", "/coffeetool/**", "/admin/**").permitAll()
-                    .anyRequest().authenticated())
+                    .requestMatchers(new AntPathRequestMatcher("/mypage/**")).hasAnyRole("member", "admin", "seller")
+                    .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyRole("admin","seller")
+                    .anyRequest().permitAll())
             .csrf((csrf) -> csrf.disable()) // crsf 기능 끄기
             .formLogin((formLogin) -> formLogin
                     .loginPage("/login")
@@ -58,7 +58,7 @@ public class SecurityConfig {
     @Bean
     WebSecurityCustomizer webSecurityCustomizer() {
         return webSecurity -> webSecurity.ignoring()
-                .requestMatchers("/admin/**", "/img/**", "/main/**");
+                .requestMatchers("/admin_static/**", "/img/**", "/main/**");
     }
 
     @Bean // 비밀번호 암호화시 사용할 클래스 스프링빈으로 등록
@@ -77,7 +77,4 @@ public class SecurityConfig {
     AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
-
-
-
 }

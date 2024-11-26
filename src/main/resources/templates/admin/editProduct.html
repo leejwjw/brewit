@@ -22,31 +22,31 @@
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/admin/assets/images/favicon.png"
+            href="/admin_static/assets/images/favicon.png"
     />
     <!-- Custom CSS -->
     <link
             rel="stylesheet"
             type="text/css"
-            href="/admin/assets/libs/select2/dist/css/select2.min.css"
+            href="/admin_static/assets/libs/select2/dist/css/select2.min.css"
     />
     <link
             rel="stylesheet"
             type="text/css"
-            href="/admin/assets/libs/jquery-minicolors/jquery.minicolors.css"
+            href="/admin_static/assets/libs/jquery-minicolors/jquery.minicolors.css"
     />
     <link
             rel="stylesheet"
             type="text/css"
-            href="/admin/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+            href="/admin_static/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
     />
     <link
             rel="stylesheet"
             type="text/css"
-            href="/admin/assets/libs/quill/dist/quill.snow.css"
+            href="/admin_static/assets/libs/quill/dist/quill.snow.css"
     />
-    <link href="/admin/dist/css/style.min.css" rel="stylesheet" />
-    <link href="/admin/dist/css/productStyle.css" rel="stylesheet" />
+    <link href="/admin_static/dist/css/style.min.css" rel="stylesheet" />
+    <link href="/admin_static/dist/css/productStyle.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -150,10 +150,10 @@
     <header class="topbar" data-navbarbg="skin5">
         <nav class="navbar top-navbar navbar-expand-md navbar-dark">
             <div class="navbar-header" data-logobg="skin5">
-                <a class="navbar-brand" href="/admin/../../templates/admin/index.html">
+                <a class="navbar-brand" href="/admin_static/../../templates/admin/index.html">
                     <b class="logo-icon ps-2">
                         <img
-                                src="/admin/assets/images/logo-icon.png"
+                                src="/admin_static/assets/images/logo-icon.png"
                                 alt="homepage"
                                 class="light-logo"
                                 width="25"
@@ -161,7 +161,7 @@
                     </b>
                     <span class="logo-text ms-2">
                 <img
-                        src="/admin/assets/images/logo-text.png"
+                        src="/admin_static/assets/images/logo-text.png"
                         alt="homepage"
                         class="light-logo"
                 />
@@ -208,14 +208,14 @@
                 <div class="col-md-6">
                     <div class="card">
                         <h2>상품 등록</h2>
-                        <form id="productForm" th:action="@{/admin/products/editProduct/{id}(id=${product.product_id})}" method="post" enctype="multipart/form-data">
+                        <form id="productForm" th:action="@{/admin_static/products/editProduct/{id}(id=${product.product_id})}" method="post" enctype="multipart/form-data">
                             <input type="hidden" id="attachOriginName" name="attach_origin_name"  th:value="${product.attach_origin_name}">
                             <input type="hidden" id="attachName" name="attach_name" th:value="${product.attach_name}">
                             <input type="hidden" name="info" id="info">
                             <div class="flex_box">
                                 <div class="image-placeholder" id="imagePlaceholder">
                                     상품 이미지를 클릭하여 등록하세요
-                                    <img th:src="@{/admin/img/product/{filename}(filename=${product.attach_name})}" />
+                                    <img th:src="@{/admin_static/img/product/{filename}(filename=${product.attach_name})}" />
                                     <input type="file" id="productImage"  name="file" accept="image/*" style="display: none;">
                                 </div>
 
@@ -301,23 +301,23 @@
     </div>
 </div>
 
-<script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-<script src="/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-<script src="/admin/dist/js/waves.js"></script>
-<script src="/admin/dist/js/sidebarmenu.js"></script>
-<script src="/admin/dist/js/custom.min.js"></script>
-<script src="/admin/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
-<script src="/admin/dist/js/pages/mask/mask.init.js"></script>
-<script src="/admin/assets/libs/select2/dist/js/select2.full.min.js"></script>
-<script src="/admin/assets/libs/select2/dist/js/select2.min.js"></script>
-<script src="/admin/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
-<script src="/admin/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
-<script src="/admin/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
-<script src="/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
-<script src="/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="/admin/assets/libs/quill/dist/quill.min.js"></script>
+<script src="/admin_static/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/admin_static/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/admin_static/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="/admin_static/assets/extra-libs/sparkline/sparkline.js"></script>
+<script src="/admin_static/dist/js/waves.js"></script>
+<script src="/admin_static/dist/js/sidebarmenu.js"></script>
+<script src="/admin_static/dist/js/custom.min.js"></script>
+<script src="/admin_static/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+<script src="/admin_static/dist/js/pages/mask/mask.init.js"></script>
+<script src="/admin_static/assets/libs/select2/dist/js/select2.full.min.js"></script>
+<script src="/admin_static/assets/libs/select2/dist/js/select2.min.js"></script>
+<script src="/admin_static/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+<script src="/admin_static/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+<script src="/admin_static/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+<script src="/admin_static/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+<script src="/admin_static/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/admin_static/assets/libs/quill/dist/quill.min.js"></script>
 <script>
     $(".select2").select2();
     $(".demo").each(function () {

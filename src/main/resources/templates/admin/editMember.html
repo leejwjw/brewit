@@ -20,30 +20,30 @@
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/admin/assets/images/favicon.png"
+          href="/admin_static/assets/images/favicon.png"
   />
   <!-- Custom CSS -->
   <link
           rel="stylesheet"
           type="text/css"
-          href="/admin/assets/libs/select2/dist/css/select2.min.css"
+          href="/admin_static/assets/libs/select2/dist/css/select2.min.css"
   />
   <link
           rel="stylesheet"
           type="text/css"
-          href="/admin/assets/libs/jquery-minicolors/jquery.minicolors.css"
+          href="/admin_static/assets/libs/jquery-minicolors/jquery.minicolors.css"
   />
   <link
           rel="stylesheet"
           type="text/css"
-          href="/admin/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+          href="/admin_static/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
   />
   <link
           rel="stylesheet"
           type="text/css"
-          href="/admin/assets/libs/quill/dist/quill.snow.css"
+          href="/admin_static/assets/libs/quill/dist/quill.snow.css"
   />
-  <link href="/admin/dist/css/style.min.css" rel="stylesheet" />
+  <link href="/admin_static/dist/css/style.min.css" rel="stylesheet" />
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -83,13 +83,13 @@
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
-        <a class="navbar-brand" href="/admin/../../templates/admin/index.html">
+        <a class="navbar-brand" href="/admin_static/../../templates/admin/index.html">
           <!-- Logo icon -->
           <b class="logo-icon ps-2">
             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
             <!-- Dark Logo icon -->
             <img
-                    src="/admin/assets/images/logo-icon.png"
+                    src="/admin_static/assets/images/logo-icon.png"
                     alt="homepage"
                     class="light-logo"
                     width="25"
@@ -100,7 +100,7 @@
           <span class="logo-text ms-2">
                 <!-- dark Logo text -->
                 <img
-                        src="/admin/assets/images/logo-text.png"
+                        src="/admin_static/assets/images/logo-text.png"
                         alt="homepage"
                         class="light-logo"
                 />
@@ -357,7 +357,7 @@
                     aria-expanded="false"
             >
               <img
-                      src="/admin/assets/images/users/1.jpg"
+                      src="/admin_static/assets/images/users/1.jpg"
                       alt="user"
                       class="rounded-circle"
                       width="31"
@@ -427,7 +427,7 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card">
-            <form class="form-horizontal" th:action="@{/admin/allMember/editMember/{id}(id=${member.member_id})}" method="post">
+            <form class="form-horizontal" th:action="@{/admin_static/allMember/editMember/{id}(id=${member.member_id})}" method="post">
               <div class="card-body text-center">
                 <h4 class="card-title">회원정보</h4>
 
@@ -530,29 +530,29 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/admin_static/assets/libs/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap tether Core JavaScript -->
-<script src="/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/admin_static/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
-<script src="/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-<script src="/admin/assets/extra-libs/sparkline/sparkline.js"></script>
+<script src="/admin_static/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="/admin_static/assets/extra-libs/sparkline/sparkline.js"></script>
 <!--Wave Effects -->
-<script src="/admin/dist/js/waves.js"></script>
+<script src="/admin_static/dist/js/waves.js"></script>
 <!--Menu sidebar -->
-<script src="/admin/dist/js/sidebarmenu.js"></script>
+<script src="/admin_static/dist/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
-<script src="/admin/dist/js/custom.min.js"></script>
+<script src="/admin_static/dist/js/custom.min.js"></script>
 <!-- This Page JS -->
-<script src="/admin/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
-<script src="/admin/dist/js/pages/mask/mask.init.js"></script>
-<script src="/admin/assets/libs/select2/dist/js/select2.full.min.js"></script>
-<script src="/admin/assets/libs/select2/dist/js/select2.min.js"></script>
-<script src="/admin/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
-<script src="/admin/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
-<script src="/admin/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
-<script src="/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
-<script src="/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="/admin/assets/libs/quill/dist/quill.min.js"></script>
+<script src="/admin_static/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+<script src="/admin_static/dist/js/pages/mask/mask.init.js"></script>
+<script src="/admin_static/assets/libs/select2/dist/js/select2.full.min.js"></script>
+<script src="/admin_static/assets/libs/select2/dist/js/select2.min.js"></script>
+<script src="/admin_static/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+<script src="/admin_static/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+<script src="/admin_static/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+<script src="/admin_static/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+<script src="/admin_static/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/admin_static/assets/libs/quill/dist/quill.min.js"></script>
 <script>
   //***********************************//
   // For select 2

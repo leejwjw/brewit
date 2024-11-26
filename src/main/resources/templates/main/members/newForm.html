@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-6">
-                    <form action="" th:action th:object="${member}" method="post" id="form" name="inputForm">
+                    <form action="" th:action th:object="${member}" method="post" id="form" name="inputForm" onsubmit="return fieldCheck()">
                     <table>
                     <div class="card-body">
                         <h6 class="card-title" th:align="center" th:border="4">회원가입</h6>
@@ -23,13 +23,6 @@
                             <label for="emailCheck" class="col-sm-3 text-end control-label col-form-label">Email사용여부</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="emailCheck" disabled/>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="form-group row">
-                            <label for="fname" class="col-sm-3 text-end control-label col-form-label">email 중복확인</label>
-                            <div class="col-sm-9">
-                                <input type="button" class="form-control" id="fname" value="이메일 중복확인" onclick="openEmailAvail(this.form)" placeholder="이메일 중복확인">
                             </div>
                         </div>
                         <br/>
@@ -82,10 +75,6 @@
                             </div>
                         </div>
                         <br/>
-                        Auth : <input type="radio" name="au" value="member" checked/> 일반회원
-                               <input type="radio" name="au" value="admin"/> 관리자
-                               <input type="radio" name="au" value="seller"/> 판매자 <br />
-
                         <button type="submit" class="btn btn-success text-white">
                             가입
                         </button>
@@ -104,7 +93,7 @@
                         // email 값이 "email" 인 input 태그의 변경사항이 있으면 이벤트 발생!
                         $("#email").change(function () {
                             let email = $("#email").val(); // email input 태그에 작성한 값 꺼내기
-                            $.ajax({
+                                $.ajax({
                                 url: "/main/emailAvailAjax",
                                 type: "post",
                                 data: {email: email},
@@ -112,6 +101,9 @@
                                     console.log("ajax 요청 성공!!!");
                                     console.log(result); // 응답데이터 출력
                                     // 결과 화면에 붙히기
+                                    $("#email").click(function (){
+                                        $("#emailCheck").css("color","red");
+                                    });
                                     $("#emailCheck").val(result).css("color", "red");
                                 },
                                 error: function (e) {
@@ -124,18 +116,6 @@
                     });
                 </script>
                 <script th:inline="javascript">
-                    // email 중복확인 함수
-                    function openEmailAvail(inputForm) {
-                        // email 입력란에 값 있는지부터 체크
-                        if (inputForm.email.value == "" || !inputForm.email.value) {
-                            alert("이메일을 입력하세요.");
-                            return;  // 함수 종료!
-                        }
-                        // 중복확인 팝업창 띄우기 : open(url, name, options)
-                        let url = "/main/emailAvail?email=" + inputForm.email.value; // 팝업창으로 요청할 주소 준비
-                        open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, width=500, height=500");
-                    }
-
                     // 유효성 검사 함수
                     function fieldCheck() {
                         let form = document.getElementById("form");

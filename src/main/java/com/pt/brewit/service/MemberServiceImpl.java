@@ -1,6 +1,5 @@
 package com.pt.brewit.service;
 
-import com.pt.brewit.dto.AuthDTO;
 import com.pt.brewit.dto.MemberDTO;
 import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.repository.MemberRepository;
@@ -40,13 +39,15 @@ public class MemberServiceImpl implements MemberService{
         //    authRes = memberRepository.addAuth(authDTO);
         //}
         //return (memberRes == 1 && authRes == 1) ? 1 : 0;
-        if(au.equals("admin")){
-            member.setAuth("admin");
-        }else if(au.equals("member")){
-            member.setAuth("member");
-        }else{
-            member.setAuth("seller");
-        }
+//        if(au.equals("admin")){
+//            member.setAuth("admin");
+//        }else if(au.equals("member")){
+//            member.setAuth("member");
+//        }else{
+//            member.setAuth("seller");
+//        }
+
+        member.setAuth("member");
 
         //회원정보 저장
         int memberRes = memberRepository.save(member);

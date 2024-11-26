@@ -112,5 +112,10 @@ public class ProductServiceImpl implements ProductService {
 //        }
 //
 //    }
+    @Override
+    public List<ProductDTO> selectProductsByUserId(int member_id) {
+        List<ProductDTO> products = productMapper.selectAllProductsByUserId(member_id);
+        return products;
+    }
 
 }

@@ -1,9 +1,12 @@
 package com.pt.brewit.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class EventProductDTO {
+    private MultipartFile file; // 파일 업로드를 위한 필드
+    private String filePath;
 
     private int term_item_id;
     private String product_id;
@@ -14,6 +17,8 @@ public class EventProductDTO {
     private String attach_name;
     private String attach_origin_name;
     private int discount;
-    private int price;
+    private int sale_price;
+    private int regular_price;
     private String status;
+    private int stock;
 }

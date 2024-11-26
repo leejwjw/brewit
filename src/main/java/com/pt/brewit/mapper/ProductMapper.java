@@ -35,4 +35,6 @@ public interface ProductMapper {
     public void updateProductValue(@Param("id") int id, @Param("product") ProductDTO product);
     //상품 삭제
     public void deleteProductOne(@Param("id") int id, @Param("product") ProductDTO product);
+    // 판매자로 상품 조회
+    public List<ProductDTO> selectAllProductsByUserId(int member_id);
 }

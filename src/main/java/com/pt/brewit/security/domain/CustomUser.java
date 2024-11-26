@@ -24,7 +24,7 @@ public class CustomUser extends User { // == Principal
     public CustomUser(MemberDTO member) {
         super(member.getEmail(),
                 member.getPassword(),
-                List.of(new SimpleGrantedAuthority(member.getAuth()))
+                List.of(new SimpleGrantedAuthority("ROLE_"+member.getAuth()))
         );
         // AS IS : Auth 1,2,3 -> TO BE : Auth 를 문자열로 변경 ex. ROLE_MEMBER, ROLE_SELLER, ROLE_ADMIN -> DB 컬럼 varchar
         this.member = member;

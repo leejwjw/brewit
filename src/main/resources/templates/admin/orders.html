@@ -370,7 +370,7 @@
                   <tr th:each="order, iterStat : ${orders}">
                     <td th:text="${iterStat.index + 1}"> </td>
                     <td style="padding: 0; text-align:center;">
-                      <img th:src="@{/admin_static/img/product/{filename}(filename=${order.attach_name})}" style="width: 50%;" />
+                      <img th:src="@{/img/product/{filename}(filename=${order.attach_name})}" style="width: 50%;" />
                     </td>
                     <td th:text="${order.product_name}"></td>
                     <td th:text="${order.buyer_name}"></td>

@@ -8,7 +8,7 @@
         <li class="sidebar-item">
           <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
-                  th:href="@{/admin_static}"
+                  th:href="@{/admin}"
                   aria-expanded="false"
           ><i class="mdi mdi-view-dashboard"></i
           ><span class="hide-menu">Dashboard</span></a
@@ -24,18 +24,18 @@
           >
           <ul aria-expanded="false" class="collapse first-level">
             <li class="sidebar-item">
-              <a th:href="@{/admin_static/allMember}" class="sidebar-link" method="get"
+              <a th:href="@{/admin/allMember}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-outline"></i
               ><span class="hide-menu" > 전체회원목록 </span></a
               >
             </li>
             <li class="sidebar-item">
-              <a th:href="@{/admin_static/confirmSeller}" class="sidebar-link" method="get"
+              <a th:href="@{/admin/confirmSeller}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-plus"></i
               ><span class="hide-menu"> 판매자목록</span></a
               >
             </li><li class="sidebar-item">
-            <a th:href="@{/admin_static/confirmSeller}" class="sidebar-link" method="get"
+            <a th:href="@{/admin/confirmSeller}" class="sidebar-link" method="get"
             ><i class="mdi mdi-note-plus"></i
             ><span class="hide-menu"> 판매자 승인관리</span></a
             >
@@ -52,13 +52,13 @@
           >
           <ul aria-expanded="false" class="collapse first-level">
             <li class="sidebar-item">
-              <a th:href="@{/admin_static/products}" class="sidebar-link" method="get"
+              <a th:href="@{/admin/products}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-outline"></i
               ><span class="hide-menu"> 상품 조회 </span></a
               >
             </li>
             <li class="sidebar-item">
-              <a th:href="@{/admin_static/registProduct}" class="sidebar-link" method="get"
+              <a th:href="@{/admin/registProduct}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-plus"></i
               ><span class="hide-menu">상품 등록</span></a
               >
@@ -98,9 +98,14 @@
           >
           <ul aria-expanded="false" class="collapse first-level">
             <li class="sidebar-item">
-              <a th:href="@{/admin_static/termRegist}" class="sidebar-link" method="get"
+              <a th:href="@{/admin/termRegistThree}" class="sidebar-link" method="get"
               ><i class="mdi mdi-note-outline"></i
-              ><span class="hide-menu"> 구독상품 등록 </span></a
+              ><span class="hide-menu">3개월 구독상품 등록 </span></a
+              >
+            </li><li class="sidebar-item">
+              <a th:href="@{/admin/termRegistYear}" class="sidebar-link" method="get"
+              ><i class="mdi mdi-note-outline"></i
+              ><span class="hide-menu">1년 구독상품 등록 </span></a
               >
             </li>
             <li class="sidebar-item">
@@ -112,13 +117,13 @@
           </ul>
         </li>
         <li class="sidebar-item">
-          <a th:href="@{/admin_static/orders}" class="sidebar-link" method="get"><i class="mdi mdi-chart-bubble"></i>
+          <a th:href="@{/admin/orders}" class="sidebar-link" method="get"><i class="mdi mdi-chart-bubble"></i>
           <span class="hide-menu">주문내역</span>
           </a>
 
         </li>
         <li class="sidebar-item">
-          <a th:href="@{/admin_static/payments}" class="sidebar-link" method="get"><i class="mdi mdi-chart-bubble"></i>
+          <a th:href="@{/admin/payments}" class="sidebar-link" method="get"><i class="mdi mdi-chart-bubble"></i>
             <span class="hide-menu">결제내역</span>
           </a>
         </li>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -208,78 +210,63 @@
                 <div class="col-md-6">
                     <div class="card">
                         <h2>상품 등록</h2>
-                        <form id="productForm" th:action="@{/admin/products/editProduct/{id}(id=${product.product_id})}" method="post" enctype="multipart/form-data">
-                            <input type="hidden" id="attachOriginName" name="attach_origin_name"  th:value="${product.attach_origin_name}">
-                            <input type="hidden" id="attachName" name="attach_name" th:value="${product.attach_name}">
-                            <input type="hidden" name="info" id="info">
+                        <form id="productForm" th:action="@{/admin/termRegistThree}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" id="attachOriginName" name="attach_origin_name">
+                            <input type="hidden" id="attachName" name="attach_name">
+                            <input type="hidden" name="event_info" id="event_info">
+                            <input type="hidden" name="product_id" id="product_id">
+                            <input type="hidden" name="term" id="term" data-term="3">
                             <div class="flex_box">
                                 <div class="image-placeholder" id="imagePlaceholder">
                                     상품 이미지를 클릭하여 등록하세요
-                                    <img th:src="@{/img/product/{filename}(filename=${product.attach_name})}" />
                                     <input type="file" id="productImage"  name="file" accept="image/*" style="display: none;">
                                 </div>
 
                                 <div class="info_box">
-                                    <label for="name" class="form-label">상품명</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                           th:value="${product.name}"
-                                           required>
-                                    <label for="category" class="form-label">대분류</label>
-                                    <select class="form-select" id="category" name="category_id" required>
+                                    <label  class="form-label">상품명</label>
+                                    <input type="text" class="form-control" id="event_name" name="event_name" required>
+                                    <label  class="form-label">상품 1</label>
+                                    <select class="form-select" id="product_1" name="product_select" required>
                                         <option value="" disabled selected>선택</option>
-                                        <option th:each="category : ${categories}"
-                                                th:value="${category.category_id}"
-                                                th:text="${category.name}"></option>
+                                        <th:block th:each="product : ${products}">
+                                            <option th:value="${product.product_id}" th:text="${product.name}" th:data-price="${product.regular_price}"></option>
+                                        </th:block>
                                     </select>
-                                    <label for="subCategory" class="form-label">중분류</label>
-                                    <select class="form-select" id="subCategory" name="subcategory_id" required>
-                                        <option value="" disabled selected></option>
+                                    <label  class="form-label">상품 2</label>
+                                    <select class="form-select" id="product_2" name="product_select" required>
+                                        <option value="" disabled selected>선택</option>
+                                        <th:block th:each="product : ${products}">
+                                            <option th:value="${product.product_id}" th:text="${product.name}" th:data-price="${product.regular_price}"></option>
+                                        </th:block>
                                     </select>
-                                    <label for="nation" class="form-label">원산지</label>
-                                    <input type="text" class="form-control" id="nation" name="nation"
-                                           th:value="${product.nation}"
-                                           required>
-                                    <label for="weight" class="form-label">무게</label>
-                                    <input type="number" class="form-control" id="weight" name="weight"
-                                           th:value="${product.weight}"
-                                           required>
-                                    <label for="nation" class="form-label">재고</label>
-                                    <input type="number" class="form-control" id="stock" name="stock"
-                                           th:value="${product.stock}"
-                                           required>
-                                    <label class="form-label">카페인 유무 <span>(미체크시 없음)</span></label>
-                                    <div>
-                                        <div class="form-check" >
-                                            <input class="form-check-input" type="checkbox" name="is_caffeine" id="caffeineYes" value="true">
-                                            <label class="form-check-label" for="caffeineYes">
-                                                있음
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <label  class="form-label">상품 3</label>
+                                    <select class="form-select" id="product_3" name="product_select" required>
+                                        <option value="" disabled selected>선택</option>
+                                        <th:block th:each="product : ${products}">
+                                            <option th:value="${product.product_id}" th:text="${product.name}" th:data-price="${product.regular_price}"></option>
+                                        </th:block>
+                                    </select>
+                                    <label for="stock" class="form-label">재고</label>
+                                    <input type="number" class="form-control" id="stock" name="stock" required>
                                 </div>
                             </div>
-                            <div id="editor" style="height: 300px" name="info" th:utext="${product.info}">
+                            <div id="editor" style="height: 300px" name="event_info">
+
                             </div>
                             <div class="price_box">
-                                <label for="name" class="form-label">정상가</label>
+                                <label  class="form-label">정상가</label>
                                 <div class="input_box">
-                                    <input type="text" class="form-control" id="regularPrice" name="regular_price"
-                                           th:value="${product.regular_price}"
-                                           required>
+                                    <input type="number" class="form-control" id="regularPrice" name="regular_price" required>
                                     <span>(단위 : 원)</span>
                                 </div>
-                                <label for="name" class="form-label">할인율</label>
+                                <label  class="form-label">할인율</label>
                                 <div class="input_box">
-                                    <input type="text" class="form-control" id="discountPercent" name="discount_percent"
-                                           th:value="${product.discount_percent}"
-                                           required>
-                                    <span>(단위 : 원)</span>
+                                    <input type="number" class="form-control" id="discount" name="discount" required>
+                                    <span>(단위 : %)</span>
                                 </div>
-                                <label for="name" class="form-label">판매가</label>
+                                <label  class="form-label">총 가격</label>
                                 <div class="input_box">
-                                    <input type="text" class="form-control" id="salePrice" name="sale_price"
-                                           th:value="${product.sale_price}"
-                                           required>
+                                    <input type="number" class="form-control" id="salePrice" name="sale_price" required>
                                     <span>(단위 : 원)</span>
                                 </div>
                             </div>
@@ -318,6 +305,7 @@
 <script src="/admin_static/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 <script src="/admin_static/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="/admin_static/assets/libs/quill/dist/quill.min.js"></script>
+
 <script>
     $(".select2").select2();
     $(".demo").each(function () {
@@ -342,55 +330,11 @@
         todayHighlight: true,
     });
 
-    // 대분류와 중분류 동적 변경
-    const categorySelect = document.getElementById('category');
-    const subCategorySelect = document.getElementById('subCategory');
-
-    const subCategories = {
-        1: [
-            { name: '티백', value: 1 },
-            { name: '잎차', value: 2 },
-            { name: '디카페인', value: 3 }
-        ],
-        2: [
-            { name: '싱글오리진', value: 4 },
-            { name: '블렌드', value: 5 },
-            { name: '디카페인', value: 6 }
-        ],
-        3: [
-            { name: '드립주전자', value: 7 },
-            { name: '전기포트', value: 8 },
-            { name: '핸드드립세트', value: 9 },
-            { name: '다기세트', value: 10 }
-        ],
-        4: [
-            { name: '커피머신', value: 11 },
-            { name: '그라인더', value: 12 },
-            { name: '커피메이커', value: 13 },
-            { name: '핸드드립 세트', value: 14 }
-        ]
-    };
-
-    categorySelect.addEventListener('change', function() {
-        const selectedValue = this.value;
-        // 중분류 선택 초기화
-        subCategorySelect.innerHTML = '<option value="" disabled selected>중분류를 선택하세요</option>';
-
-        if (selectedValue in subCategories) {
-            subCategories[selectedValue].forEach(function(subCategory) {
-                const option = document.createElement('option');
-                option.value = subCategory.value; // 중분류의 value 설정
-                option.textContent = subCategory.name; // 중분류의 텍스트 설정
-                subCategorySelect.appendChild(option); // 중분류 select에 추가
-            });
-        }
-    });
     var quill = new Quill("#editor", {
         theme: "snow",
     });
 
     // 박스클릭하면 이미지 노출시키는 트리거
-    // 네모 박스를 클릭하면 파일 입력을 트리거
     document.getElementById('imagePlaceholder').addEventListener('click', function() {
         document.getElementById('productImage').click();
     });
@@ -411,34 +355,12 @@
             document.getElementById('attachOriginName').value = file.name;
             console.log(file);
             reader.readAsDataURL(file);
+
         }
     });
-    document.addEventListener('DOMContentLoaded', function() {
-        const regularPriceInput = document.getElementById('regularPrice');
-        const discountPercentInput = document.getElementById('discountPercent');
-        const salePriceInput = document.getElementById('salePrice');
-        function calculateSalePrice() {
-            const regularPrice = parseFloat(regularPriceInput.value);
-            const discountPercent = parseFloat(discountPercentInput.value);
-            if (!isNaN(regularPrice) && !isNaN(discountPercent)) {
-                const discountAmount = (regularPrice * discountPercent) / 100;
-                const salePrice = regularPrice - discountAmount;
-                salePriceInput.value = Math.floor(salePrice);
-            } else {
-                salePriceInput.value = '';
-            }
-        }
-
-        regularPriceInput.addEventListener('input', calculateSalePrice);
-        discountPercentInput.addEventListener('input', calculateSalePrice);
-    });
-    document.getElementById("productForm").onsubmit = function(event) {
-        var infoInput = document.getElementById("info");
-        infoInput.value = quill.root.innerHTML;
-    };
-
 
 
 </script>
+<script src="/admin_static/js/eventProduct.js"></script>
 </body>
 </html>

@@ -76,4 +76,8 @@
         WHERE product_id = #{id}
     </update>
 
+    <select id="selectAllProductsByUserId">
+        SELECT * FROM TB_PRODUCT WHERE seller_id = #{member_id}
+    </select>
+
 </mapper>

@@ -8,6 +8,13 @@
         from tb_term_event
         where status = 'active'
         order by discount desc
-        limit 6;
+        limit 6
+    </select>
+    <select id="insertEventProductOne">
+        INSERT INTO
+        tb_term_event
+        (product_id, term, seller_id, event_name, event_info, attach_name, attach_origin_name, discount, sale_price, regular_price, stock)
+        VALUES
+        (#{product_id}, #{term}, #{seller_id}, #{event_name}, #{event_info}, #{attach_name}, #{attach_origin_name}, #{discount}, #{sale_price}, #{regular_price}, #{stock} )
     </select>
 </mapper>

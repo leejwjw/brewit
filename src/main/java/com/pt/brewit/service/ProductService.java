@@ -23,6 +23,8 @@ public interface ProductService {
     public int countProductsBySub(int subcategory_id);
     //상품정보 전체 조회
     public List<ProductDTO> selectAllProducts();
+    //상품 조회
+    public List<ProductDTO> selectProductsByUserId(int id);
     //상품 등록
     void registProduct(ProductDTO productDTO);
     //상품 조회

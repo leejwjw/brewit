@@ -18,4 +18,9 @@ public class EventProductServiceImpl implements EventProductService {
     public List<EventProductDTO> getEventProducts() {
         return eventProductMapper.getEventProductForId();
     }
+
+    @Override
+    public void insertEventProduct(EventProductDTO eventProductDTO) {
+        eventProductMapper.insertEventProductOne(eventProductDTO);
+    }
 }

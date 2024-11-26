@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface EventProductService {
     List<EventProductDTO> getEventProducts();
-
     void insertEventProduct(EventProductDTO eventProduct);
-
+    EventProductDTO getFindProductId(int term_item_id);
 }

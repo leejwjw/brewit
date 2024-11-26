@@ -17,4 +17,9 @@
         VALUES
         (#{product_id}, #{term}, #{seller_id}, #{event_name}, #{event_info}, #{attach_name}, #{attach_origin_name}, #{discount}, #{sale_price}, #{regular_price}, #{stock} )
     </select>
+    <select id="getFindProduct" resultType="EventProductDTO">
+        select *
+        from tb_term_event
+        where term_item_id = #{term_item_id};
+    </select>
 </mapper>

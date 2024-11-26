@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
                 const container = $("#event-product-container");
@@ -28,22 +28,21 @@
                         container.empty();
                         data.forEach(product => {
                             const productHtml = `
-                    <div class="rolling-item">
-                        <a href="/product/${product.product_id}" class="product-link">
-                            <div class="team-member">
-                                <div class="member-img">
-                                    <img src="/img/product/${product.attach_name}" class="img-fluid" alt="${product.event_name}">
-                                </div>
-                                <div class="member-info">
-                                    <h4>${product.event_name}</h4>
-                                    <span>${product.event_info}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>`;
+                                <div class="rolling-item">
+                                    <a href="/product/${product.term_item_id}" class="product-link">
+                                        <div class="team-member">
+                                            <div class="member-img">
+                                                <img src="/img/product/${product.attach_name}" class="img-fluid" alt="${product.event_name}">
+                                            </div>
+                                            <div class="member-info">
+                                                <h4>${product.event_name}</h4>
+                                                <span>${product.event_info}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>`;
                             container.append(productHtml);
                         });
-
                         initializeSlider();
                     },
                     error: function (error) {

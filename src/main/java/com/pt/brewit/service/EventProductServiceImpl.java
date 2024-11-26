@@ -23,4 +23,9 @@ public class EventProductServiceImpl implements EventProductService {
     public void insertEventProduct(EventProductDTO eventProductDTO) {
         eventProductMapper.insertEventProductOne(eventProductDTO);
     }
+
+    public EventProductDTO getFindProductId(int term_item_id) {
+        return eventProductMapper.getFindProduct(term_item_id);
+
+    }
 }

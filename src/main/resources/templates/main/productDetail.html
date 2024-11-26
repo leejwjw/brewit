@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Header Fragments -->
+<th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
+<!-- Header Fragments Close -->
+
+<body>
+<link href="/main/assets/css/productDetail.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <div class="row gy-4">
+        <!-- 상품 상세 정보 -->
+        <div class="col-lg-6 d-flex align-items-stretch">
+            <form action="" th:action method="post" enctype="multipart/form-data">
+                <div class="team-member">
+                    <!-- 상품 이미지 -->
+                    <div class="member-img">
+                        <img th:src="@{/img/product/{attach_name}(attach_name=${product.attach_name})}"
+                             class="img-fluid"
+                             th:alt="${product.event_name}">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 상품 정보 영역 -->
+        <div class="col-lg-6 d-flex align-items-stretch">
+            <div class="member-info mb-3">
+                <!-- 상품명 -->
+                <h2><strong th:text="${product.event_name}"></strong></h2>
+
+                <!-- 추가 정보 -->
+                <div>
+                    <h5 class="mt-3" th:text="${product.event_info}"></h5>
+                </div>
+
+                <!-- 적립 혜택 -->
+                <p class="mt-3 benefit">
+                    구매 혜택: 적립 포인트 5%<br>
+                    배송비: 무료 배송
+                </p>
+                <!-- 상품 가격 -->
+                <div>
+                    <del class="regular_price">정상가:
+                        <span th:text="${product.regular_price}"></span><span>원</span>
+                    </del>
+                    <h4>
+                        <p>할인율:&nbsp;<strong class="num_color_red mt-3" th:text="${product.discount}"></strong>%</p>
+                        <p id="total-price">할인 적용가:&nbsp; <strong th:text="${product.sale_price}"></strong> 원 </p>
+                    </h4>
+                </div>
+
+                <!-- 수량 조절 -->
+                <div class="quantity-container">
+                    <button id="decrease-btn" class="btn btn-dark">-</button>
+                    <input type="number" id="quantity" value="1" th:max="${product.stock}" min="1">
+                    <button id="increase-btn" class="btn btn-dark">+</button>
+                </div>
+
+                <!-- 버튼 -->
+                <div class="mb-3">
+                    <button type="button" id="cart" class="btn btn-outline-warning mr-3">장바구니</button>
+                    <button type="button" id="buy" class="btn btn-outline-success">구매하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom Script -->
+<script>
+    $(document).ready(function () {
+        const pricePerItem = parseInt($("#total-price").text().replace(/\D/g, '')); // 상품 단가 추출
+
+        // 수량 변경에 따른 총 가격 업데이트
+        function updateTotalPrice() {
+            const quantity = parseInt($("#quantity").val());
+            const totalPrice = pricePerItem * quantity;
+            $("#total-price").text(`할인 적용가: ${totalPrice.toLocaleString()} 원`);
+        }
+
+        // 수량 증가 버튼
+        $("#increase-btn").on("click", function () {
+            const currentQuantity = parseInt($("#quantity").val());
+            const maxQuantity = parseInt($("#quantity").attr("th:max"));
+            if (currentQuantity < maxQuantity) {
+                $("#quantity").val(currentQuantity + 1);
+                updateTotalPrice();
+            }
+        });
+
+        // 수량 감소 버튼
+        $("#decrease-btn").on("click", function () {
+            const currentQuantity = parseInt($("#quantity").val());
+            if (currentQuantity > 1) {
+                $("#quantity").val(currentQuantity - 1);
+                updateTotalPrice();
+            }
+        });
+
+        // 수량 필드 직접 수정 시
+        $("#quantity").on("input", function () {
+            const quantity = parseInt($(this).val());
+            if (isNaN(quantity) || quantity < 1) {
+                $(this).val(1);
+            }
+            updateTotalPrice();
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,12 +1,15 @@
 package com.pt.brewit.controller;
 
+import com.pt.brewit.dto.EventProductDTO;
 import com.pt.brewit.dto.ProductDTO;
+import com.pt.brewit.service.EventProductService;
 import com.pt.brewit.service.MainProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class HomeProductController {
     private final MainProductService mainProductService;
+    private final EventProductService eventProductService;
 
     @GetMapping("/products")
     public String getProducts(@RequestParam String tab_id, Model model) {
@@ -52,6 +56,14 @@ public class HomeProductController {
         model.addAttribute("products", products);
         model.addAttribute("tab_id", tab_id);
         return "main/fragments/productList";
+    }
+
+    @GetMapping("/product/{term_item_id}")
+    public String getProduct(@PathVariable("term_item_id") int term_item_id, Model model) {
+        EventProductDTO product = eventProductService.getFindProductId(term_item_id);
+        log.info("findProductId: {}", product);
+        model.addAttribute("product", product);
+        return "main/productDetail";
     }
 
 }

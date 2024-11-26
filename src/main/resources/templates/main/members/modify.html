@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-6">
-                    <form action="" th:action th:object="${member}" method="post" id="form" name="inputForm">
+                    <form action="" th:action th:object="${member}" method="post" id="form" name="inputForm" onsubmit="return fieldCheck()">
                         <table>
                             <div class="card-body">
                                 <h6 class="card-title" th:align="center" th:border="4">myPage</h6>
@@ -71,9 +71,6 @@
                                     </div>
                                 </div>
                                 <br/>
-                                Auth : <input type="radio" name="au" value="member" checked/> 일반회원
-                                <input type="radio" name="au" value="admin"/> 관리자
-                                <input type="radio" name="au" value="seller"/> 판매자 <br />
                                 <button type="submit" class="btn btn-success text-white">수정완료</button>
                                 <button type="button" class="btn btn-primary" onclick="history.go(-1)">취소</button>
                                 <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/}'|">홈으로</button>

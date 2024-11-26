@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,8 +104,6 @@ public class MemberController {
         // 로그아웃 처리 -> 방법#1. /logout GET 이면 redirect:/logout (스프링시큐리티 로그아웃은 default POST)
         // -> 방법#2. SecurityContextHolder 이용
         SecurityContextHolder.clearContext(); // SecurityContext(인증관련저장소) 초기화 -> 로그아웃
-
-
         return "redirect:/";
     }
     // email 중복확인 팝업 요청

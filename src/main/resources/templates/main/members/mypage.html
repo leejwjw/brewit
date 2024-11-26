@@ -71,9 +71,6 @@
                                     </div>
                                 </div>
                                 <br/>
-                                Auth : <input type="radio" name="au" value="member" checked/> 일반회원
-                                <input type="radio" name="au" value="admin"/> 관리자
-                                <input type="radio" name="au" value="seller"/> 판매자 <br />
                                 <div style="display: flex;  justify-content: center; ">
                                     <button type="button" class="btn btn-success text-white" th:onclick="|location.href='@{/main/modify/{email}(email=${member.email})}'|">정보수정</button>
                                     <form th:action="@{/main/delete/{email}(email=${member.email})}" method="post">

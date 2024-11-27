@@ -44,8 +44,6 @@ $(document).ready(function() {
     });
 
     $("#productForm").on('submit', function(event) {
-        var infoInput = $("#event_info");
-        infoInput.val(quill.root.innerHTML);
 
         var term = $('#term').data('term');
         console.log("term =====" + term);

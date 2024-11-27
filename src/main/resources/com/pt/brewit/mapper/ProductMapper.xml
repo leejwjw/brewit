@@ -56,7 +56,7 @@
         select * from tb_product where status='active';
     </select>
     <select id="selectProductById">
-        select * from tb_product where product_id = #{id} and status='active'
+        select * from tb_product where product_id = #{id} and status='active' and stock > 0;
     </select>
     <insert id="insertProduct" useGeneratedKeys="true" keyProperty="product_id">
         INSERT INTO

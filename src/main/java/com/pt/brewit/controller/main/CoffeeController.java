@@ -23,7 +23,6 @@ import java.util.List;
 public class CoffeeController {
 
     private final ProductService productService;
-    private final EventProductService eventProductService;
 
     // 커피 통합 요청
     @GetMapping("/{subcategory_id}")
@@ -60,9 +59,9 @@ public class CoffeeController {
     // 커피 상세 페이지 호출
     @GetMapping("/{subcategory_id}/{product_id}")
     public String productDetail(@PathVariable("subcategory_id") int subcategory_id, @PathVariable("product_id") int product_id, Model model) {
-        EventProductDTO products = eventProductService.getFindProductId(product_id);
-        log.info("product:{}", products);
-        model.addAttribute("product", products);
+        ProductDTO productDetail = productService.getProductById(product_id);
+        log.info("product:{}", productDetail);
+        model.addAttribute("productDetail", productDetail);
         return "main/productDetail";
     }
 }

@@ -63,7 +63,8 @@ public class HomeProductController {
         EventProductDTO product = eventProductService.getFindProductId(term_item_id);
         log.info("findProductId: {}", product);
         model.addAttribute("product", product);
-        return "main/productDetail";
+        return "main/productSubsDetail";
     }
+
 
 }

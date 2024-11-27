@@ -5,7 +5,7 @@
             <img th:src="@{/img/product/{attach_name}(attach_name=${product.attach_name})}" class="img-fluid" th:alt="${product.name}">
             <div class="portfolio-info">
                 <h4 th:text="${product.name}"></h4>
-                <p>liked: <span th:text="${product.liked}"></span> / 가격: <span th:text="${product.sale_price} + '원'"></span></p>
+                <p>liked: <span th:text="${product.liked}"></span> / 가격: <span th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')} + '원'"></span></p>
 
                 <a th:if="${product.category_id == 1}"
                    th:href="@{/tea/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"

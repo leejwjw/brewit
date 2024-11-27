@@ -100,3 +100,15 @@
 .benefit{
     font-size: 15px;
 }
+
+.btn_info{
+    color: #262220;
+}
+
+.img-set{
+    width: 450px;
+    height: 470px;
+    display: flex;
+    justify-content: center;
+    object-fit: contain;
+}

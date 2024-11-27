@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO product = productMapper.selectProductById(id);
         String filePath = getFullPath(product.getAttach_name());
         product.setFilePath(filePath); // 파일 경로를 DTO에 추가
-       return product;
+        return product;
     }
 
     @Override

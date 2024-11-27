@@ -1,6 +1,7 @@
 package com.pt.brewit.controller.admin;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.SellerDTO;
 import com.pt.brewit.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class AdminMemberController {
     public String getConfirmSeller(Model model) {
         log.info("confirmSeller Site Open !!");
         // 회원 목록
-        List<MemberDTO> members = adminService.getSellerConfrimList();
+        List<SellerDTO> members = adminService.getSellerConfrimList();
         model.addAttribute("members", members);
         log.info("GET /admin/allMember - members : {}", members);
 
@@ -44,7 +45,7 @@ public class AdminMemberController {
         log.info("confrim member with id: {}", id);
         log.info("confrim!!!");
         adminService.confirmSeller(id);
-
+        adminService.updateSeller(id);
         return "redirect:/admin/confirmSeller"; // 삭제 후 목록으로 리다이렉트
     }
 

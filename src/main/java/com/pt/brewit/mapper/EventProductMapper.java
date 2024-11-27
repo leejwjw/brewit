@@ -1,6 +1,8 @@
 package com.pt.brewit.mapper;
 
 import com.pt.brewit.dto.EventProductDTO;
+import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,4 +12,6 @@ public interface EventProductMapper {
     List<EventProductDTO> getEventProductForId();
     void insertEventProductOne(EventProductDTO eventProduct);
     EventProductDTO getFindProduct(int term_item_id);
+
+    List<EventProductDTO> getEventProduct(MemberDTO logged_member);
 }

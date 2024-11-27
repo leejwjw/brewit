@@ -1,6 +1,7 @@
 package com.pt.brewit.service;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.SellerDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +11,10 @@ public interface AdminService {
     //전체 회원 목록 조회
     public List<MemberDTO> getMemberList();
     // 판매자 승인전 목록
-    public List<MemberDTO> getSellerConfrimList();
+    public List<SellerDTO> getSellerConfrimList();
     // 판매자 승인 처리
     public void confirmSeller(int id);
+    public void updateSeller(int id);
     //회원 찾기
     public MemberDTO getMemberById(int id);
     //회원 삭제

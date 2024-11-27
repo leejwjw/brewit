@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+
+    $('.summernote').summernote({
+        height: 450,
+        lang: "ko-KR",
+    });
+
     const productSelects = $('select[name="product_select"]');
     const salePriceInput = $('#salePrice');
     const regularPriceInput = $('#regularPrice');

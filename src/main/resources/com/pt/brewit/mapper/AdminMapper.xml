@@ -14,12 +14,15 @@
 
 <!--    판매자 승인 목록-->
     <select id="selectSellerConfrimList">
-        SELECT * FROM TB_MEMBER WHERE status='before_confirm'
+        SELECT * FROM TB_SELLER WHERE status='inactive'
     </select>
 <!--    판매자 승인처리-->
-    <select id="confirmSellerMember">
-        UPDATE TB_MEMBER SET auth='seller', status='active' WHERE member_id = ${id}
-    </select>
+    <update id="confirmSellerMember">
+        UPDATE TB_MEMBER SET auth='seller' WHERE member_id = ${id}
+    </update>
+    <update id="updateSellerMember">
+        UPDATE TB_SELLER SET status='active' WHERE member_id = ${id}
+    </update>
     <!-- 회원 삭제 -->
     <update id="deleteMemberById">
         UPDATE TB_MEMBER SET status="inactive" WHERE member_id = #{id}

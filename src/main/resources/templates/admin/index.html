@@ -371,6 +371,7 @@
             <div class="col-md-6 col-lg-4 col-xlg-3">
               <div class="card card-hover">
                 <div class="box bg-success text-center">
+                  <a th:href="@{/admin/allMember}" class="sidebar-link" method="get">
                   <h1 class="font-light text-white">
                     <i class="mdi mdi-chart-areaspline"></i>
                       </h1>
@@ -385,10 +386,12 @@
             <div class="col-md-6 col-lg-2 col-xlg-3">
               <div class="card card-hover">
                 <div class="box bg-warning text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-collage"></i>
-                  </h1>
-                  <h6 class="text-white">Widgets</h6>
+                  <a th:href="@{/admin/allSeller}" class="sidebar-link" method="get">
+                    <h1 class="font-light text-white">
+                      <i class="mdi mdi-collage"></i>
+                    </h1>
+                    <h6 class="text-white">판매자 목록</h6>
+                  </a>
                 </div>
               </div>
             </div>
@@ -396,21 +399,26 @@
             <div class="col-md-6 col-lg-2 col-xlg-3">
               <div class="card card-hover">
                 <div class="box bg-danger text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-border-outside"></i>
-                  </h1>
-                  <h6 class="text-white">Tables</h6>
+                  <a th:href="@{/admin/confirmSeller}" class="sidebar-link" method="get">
+                    <h1 class="font-light text-white">
+                      <i class="mdi mdi-border-outside"></i>
+                    </h1>
+                    <h6 class="text-white">판매자 승인관리</h6>
+                  </a>
                 </div>
+
               </div>
             </div>
             <!-- Column -->
             <div class="col-md-6 col-lg-2 col-xlg-3">
               <div class="card card-hover">
                 <div class="box bg-info text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-arrow-all"></i>
-                  </h1>
-                  <h6 class="text-white">Full Width</h6>
+                  <a th:href="@{/admin/products}" class="sidebar-link" method="get">
+                    <h1 class="font-light text-white">
+                      <i class="mdi mdi-arrow-all"></i>
+                    </h1>
+                    <h6 class="text-white">상품조회</h6>
+                  </a>
                 </div>
               </div>
             </div>
@@ -419,10 +427,12 @@
             <div class="col-md-6 col-lg-4 col-xlg-3">
               <div class="card card-hover">
                 <div class="box bg-danger text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-receipt"></i>
-                  </h1>
-                  <h6 class="text-white">Forms</h6>
+                  <a th:href="@{/admin/registProduct}" class="sidebar-link" method="get">
+                    <h1 class="font-light text-white">
+                      <i class="mdi mdi-receipt"></i>
+                    </h1>
+                    <h6 class="text-white">상품등록</h6>
+                  </a>
                 </div>
               </div>
             </div>

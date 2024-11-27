@@ -4,6 +4,7 @@ package com.pt.brewit.controller.admin;
 import com.pt.brewit.dto.EventProductDTO;
 import com.pt.brewit.dto.MemberDTO;
 import com.pt.brewit.dto.ProductDTO;
+import com.pt.brewit.dto.UserDTO;
 import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.EventProductService;
@@ -11,17 +12,17 @@ import com.pt.brewit.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -78,9 +79,9 @@ public class AdminTermController {
         }
         eventProductDTO.setTerm(3);
         eventProductDTO.setSeller_id(logged_member.getMember_id());
-
+        log.info("eventProductDTOeventProductDTOeventProductDTOeventProductDTOeventProductDTOeventProductDTO : {}", eventProductDTO);
         eventProductService.insertEventProduct(eventProductDTO);
-        return "redirect:/admin/termRegistThree";
+        return "redirect:/admin/termProducts";
     }
 
     @GetMapping("/termRegistYear")
@@ -127,5 +128,28 @@ public class AdminTermController {
         return "redirect:/admin/termRegistYear";
     }
 
+
+    @GetMapping("/termProducts")
+    public String termProducts(Model model, @AuthenticationPrincipal CustomUser user) {
+        // CustomUser에서 필요한 정보를 추출
+        String username = user.getUsername();
+        // MemberDTO를 가져오기 위해 MyBatis 매퍼 호출
+
+        MemberDTO logged_member = memberMapper.selectMemberByUsername(username);
+        log.info("User useruseruseruseruseruseruseruseruseruseruser: " + logged_member);
+        // 서비스 메서드 호출
+        List<EventProductDTO> products = eventProductService.getEventProductList(logged_member);
+
+
+        model.addAttribute("products", products);
+        return "admin/termProducts";
+    }
+    // 이미지 요청
+    @ResponseBody // 데이터 리턴
+    @GetMapping("/term/img/product/{filename}")
+    public Resource getTermImages(@PathVariable("filename") String filename) throws MalformedURLException {
+        log.info("GET /product/images - filename : {}", filename);
+        return new UrlResource("file:" + eventProductService.getFullPath(filename));
+    }
 
 }

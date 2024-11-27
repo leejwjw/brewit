@@ -22,4 +22,16 @@
         from tb_term_event
         where term_item_id = #{term_item_id};
     </select>
+
+    <select id="getEventProduct" resultType="EventProductDTO">
+        SELECT e.*, s.company_name, s.b_number
+        FROM TB_TERM_EVENT e
+        JOIN TB_SELLER s ON e.seller_id = s.seller_id
+        WHERE 1=1
+        <if test="auth == 'seller'">
+            AND e.seller_id = #{member_id}
+        </if>
+    </select>
+
+
 </mapper>

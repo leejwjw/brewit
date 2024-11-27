@@ -16,10 +16,11 @@
             content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
     />
     <meta name="robots" content="noindex,nofollow" />
-    <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
-    <!-- Favicon icon -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>BREWIT ADMIN</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/admin_static/js/summernote-lite.js"></script>
+    <script src="/admin_static/js/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="/admin_static/js/summernote-lite.css">
     <link
             rel="icon"
             type="image/png"
@@ -214,7 +215,7 @@
                             <input type="hidden" id="attachName" name="attach_name">
                             <input type="hidden" name="event_info" id="event_info">
                             <input type="hidden" name="product_id" id="product_id">
-                            <input type="hidden" name="term" id="term" data-term="3">
+                            <input type="hidden" name="term" id="term" data-term="3" value="3">
                             <div class="flex_box">
                                 <div class="image-placeholder" id="imagePlaceholder">
                                     상품 이미지를 클릭하여 등록하세요
@@ -249,8 +250,8 @@
                                     <input type="number" class="form-control" id="stock" name="stock" required>
                                 </div>
                             </div>
-                            <div id="editor" style="height: 300px" name="event_info">
-
+                            <div class="container">
+                                <textarea class="summernote" name="event_info"></textarea>
                             </div>
                             <div class="price_box">
                                 <label  class="form-label">정상가</label>
@@ -287,7 +288,7 @@
     </div>
 </div>
 
-<script src="/admin_static/assets/libs/jquery/dist/jquery.min.js"></script>
+
 <script src="/admin_static/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/admin_static/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
 <script src="/admin_static/assets/extra-libs/sparkline/sparkline.js"></script>
@@ -303,9 +304,10 @@
 <script src="/admin_static/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
 <script src="/admin_static/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 <script src="/admin_static/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="/admin_static/assets/libs/quill/dist/quill.min.js"></script>
 
 <script>
+
+
     $(".select2").select2();
     $(".demo").each(function () {
         $(this).minicolors({
@@ -329,9 +331,6 @@
         todayHighlight: true,
     });
 
-    var quill = new Quill("#editor", {
-        theme: "snow",
-    });
 
     // 박스클릭하면 이미지 노출시키는 트리거
     document.getElementById('imagePlaceholder').addEventListener('click', function() {

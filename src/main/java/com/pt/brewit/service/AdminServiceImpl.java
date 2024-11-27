@@ -1,6 +1,7 @@
 package com.pt.brewit.service;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.SellerDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,16 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<MemberDTO> getSellerConfrimList() {
-        List<MemberDTO> list = adminMapper.selectSellerConfrimList();
+    public List<SellerDTO> getSellerConfrimList() {
+        List<SellerDTO> list = adminMapper.selectSellerConfrimList();
         return list;
     }
     @Override
     public void confirmSeller(int id) {
         adminMapper.confirmSellerMember(id);
     }
+    @Override
+    public void updateSeller(int id) { adminMapper.updateSellerMember(id);}
 
     // 특정 회원 정보 가져오기
     @Override

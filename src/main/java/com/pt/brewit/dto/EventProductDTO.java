@@ -3,6 +3,8 @@ package com.pt.brewit.dto;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
+
 @Data
 public class EventProductDTO {
     private MultipartFile file; // 파일 업로드를 위한 필드
@@ -24,4 +26,5 @@ public class EventProductDTO {
     private int regular_price;
     private String status;
     private int stock;
+    private Date reg_date;
 }

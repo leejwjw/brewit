@@ -38,9 +38,9 @@ public class SecurityConfig {
                     .loginPage("/login")
                     .usernameParameter("email")
                     //.passwordParameter("password")
-                    //.successHandler(new CustomLoginSuccessHandler())
+                    .successHandler(new CustomLoginSuccessHandler()))
                     //.failureHandler(new CustomLoginFailureHandler()))
-                    .defaultSuccessUrl("/", true))
+//                    .defaultSuccessUrl("/", true))
             .logout(logout -> logout
                     .logoutSuccessUrl("/")
                     .invalidateHttpSession(true))

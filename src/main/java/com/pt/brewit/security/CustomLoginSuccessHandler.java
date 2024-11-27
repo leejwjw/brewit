@@ -1,5 +1,7 @@
 package com.pt.brewit.security;
 
+import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.security.domain.CustomUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -24,22 +28,22 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         //request.setAttribute("msg", "success"); // request에 속성 추가 model.addAttribute()와 비슷한 효과
 
         // authentication
-        //CustomUser user = (CustomUser)authentication.getPrincipal(); // 사용자 정보 조회
-        //MemberDTO member = user.getMember();
+        CustomUser user = (CustomUser)authentication.getPrincipal(); // 사용자 정보 조회
+        MemberDTO member = user.getMember();
 
-        /* 권한에 따른 이동페이지 달라지게 처리
+
         List<String> roleNames = new ArrayList<>();
         authentication.getAuthorities().forEach(auth -> {
             roleNames.add(auth.getAuthority());
         });
-        if(roleNames.contains("ROLE_ADMIN")) {
+        if(roleNames.contains("ROLE_admin")) {
             response.sendRedirect("/admin");
             return;
         }
-        if(roleNames.contains("ROLE_MEMBER")) {
+        if(roleNames.contains("ROLE_member")) {
             response.sendRedirect("/");
             return;
-        }*/
+        }
 
         // response 객체
         //response.addCookie(new Cookie("cid", member.getUsername())); // 쿠키 추가

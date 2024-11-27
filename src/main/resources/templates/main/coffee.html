@@ -35,7 +35,7 @@
                     <div class="team-member">
                         <div class="member-img">
                             <a th:href="@{/coffee/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}">
-                                <img src="/main/assets/img/team/2.jpg" class="img-fluid" th:alt="${product.name}">
+                                <img th:src="@{'/img/product/' + ${product.attach_name} }" class="img-fluid" th:alt="${product.name}" >
                             </a>
                         </div>
                         <div class="member-info" style="text-align: right">

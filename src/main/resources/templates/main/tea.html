@@ -34,7 +34,7 @@
                 <div th:each="product:${products}" class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img src="/main/assets/img/team/2.jpg" class="img-fluid" alt="" th:onclick="|location.href='@{/}'|">
+                            <img th:src="@{'/img/product/' + ${product.attach_name} }" class="img-fluid" th:alt="${product.name}" >
                         </div>
                         <div class="member-info" style="text-align: right">
                             <h4><a th:text="${product.name}"> </a></h4>

@@ -99,10 +99,9 @@
                                     </ul>
                                 </li>
                             </ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">고객지원</a></li>
-                        <li><a href="/main/new" th:href="@{/main/new}">회원가입</a></li>
+                        <li><a href="/notice">공지사항</a></li>
                         <li><a href="#"><img src="/img/cart.png"/> 장바구니</a></li>
+                        <li><a href="/main/new" th:href="@{/main/new}">회원가입</a></li>
 <!--                            <ul class="gnb">-->
                             <li sec:authorize="isAuthenticated()">
                                 <form action="" th:action="@{/logout}" method="post">

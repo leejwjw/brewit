@@ -34,5 +34,9 @@ public class HomeController {
         return "admin/index";
     }
 
+    // FAQ 페이지
+    @GetMapping("/notice")
+    public String notice() { return "main/notice"; }
+
 
 }

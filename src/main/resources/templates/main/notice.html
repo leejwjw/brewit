@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--header-->
+<th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
+
+<body class="index-page">
+
+<main class="main">
+
+  <!-- Faq Section -->
+<!--  <section id="faq" class="faq section light-background">-->
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>F.A.Q</h2>
+      <p><span>자주하는 질문</span> <span class="description-title">Questions</span></p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row justify-content-center">
+
+        <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="faq-container">
+
+            <div class="faq-item faq-active">
+              <h3>1. 정기구독은 어떻게 신청하나요?</h3>
+              <div class="faq-content">
+                <p>정기구독을 원하는 상품을 선택한 후, 구독 주기(3개월 /1년)를 설정하고 결제를 완료하면 신청이 완료됩니다.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>2. 정기구독을 취소할 수 있나요?</h3>
+              <div class="faq-content">
+                <p>네, 마이페이지에서 언제든지 취소가 가능합니다. 다만, 다음 배송 전에 취소 요청을 해주셔야 환불이 가능합니다.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>3. 키트는 언제 발송되나요? 배송료는요?</h3>
+              <div class="faq-content">
+                <p>구독 키트는 매달 1번씩 보내드립니다. 배송은 정기결제 완료 후 다음날 발송되며, 정기구독상품의의 배송료는 무료입니다.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>4. 결제 방법은 무엇이 있나요?</h3>
+              <div class="faq-content">
+                <p>무통장입금, 신용카드, 카카오페이를 통해 결제하실 수 있습니다.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>5. 일반배송은 주문하면 언제 배송되나요?</h3>
+              <div class="faq-content">
+                <p>일반 상품은 평일 매일 오후 12시까지 주문완료시, 당일 출고 및 배송 출발합니다. </p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+            <div class="faq-item">
+              <h3>6. 정기구독 상품을 선물할 수 있나요?</h3>
+              <div class="faq-content">
+                <p>네, 정기구독 상품은 선물용으로도 제공 가능합니다. 선물 받으실 분의 배송 정보를 입력하시면, 해당 분에게 구독 상품이 전달됩니다.</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+
+          </div>
+
+        </div><!-- End Faq Column-->
+
+      </div>
+
+    </div>
+
+<!--  </section>&lt;!&ndash; /Faq Section &ndash;&gt;-->
+
+
+</main>
+
+  <!-- Footer Fragments -->
+  <th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
+  <!-- /Footer Fragments Close -->
+
+</body>
+</html>

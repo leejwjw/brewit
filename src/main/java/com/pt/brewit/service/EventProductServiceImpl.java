@@ -3,7 +3,7 @@ package com.pt.brewit.service;
 import com.pt.brewit.dto.EventProductDTO;
 import com.pt.brewit.dto.MemberDTO;
 import com.pt.brewit.dto.ProductDTO;
-import com.pt.brewit.dto.UserDTO;
+
 import com.pt.brewit.mapper.EventProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

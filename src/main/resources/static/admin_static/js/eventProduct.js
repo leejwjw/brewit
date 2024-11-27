@@ -48,6 +48,7 @@ $(document).ready(function() {
         infoInput.val(quill.root.innerHTML);
 
         var term = $('#term').data('term');
+        console.log("term =====" + term);
         var selectedProducts = [];
         for (var i = 1; i <= term; i++) {
             var productId = $('#product_' + i).val();

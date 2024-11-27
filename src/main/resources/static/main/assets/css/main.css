@@ -1698,7 +1698,7 @@ section,
 }
 
 .faq .faq-container .faq-active {
-  background-color: var(--accent-color);
+  background-color: #b37972;
   border-color: var(--accent-color);
   color: var(--contrast-color);
 }
@@ -1991,6 +1991,17 @@ div.product_tab > h2 {
 /* right_line에 기본 스타일 추가 */
 .right_line {
   cursor: pointer;
+}
+/* 가격과 할인율 스타일 */
+.price-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.discount {
+  font-size: 20pt;
+  color: #f03f14;
+  margin-right: 8px;
 }
 
 

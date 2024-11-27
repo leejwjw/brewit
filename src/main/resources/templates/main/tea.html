@@ -38,7 +38,11 @@
                         </div>
                         <div class="member-info" style="text-align: right">
                             <h4><a th:text="${product.name}"> </a></h4>
-                            <h3><a th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')}"></a>원</h3>
+                            <h3 class="price-container">
+                                <strong class="discount" th:text="${product.discount_percent} + '%'"></strong>
+                                <a th:text="${#numbers.formatInteger(product.sale_price, 3, 'COMMA')}"></a>원
+                            </h3>
+
                         </div>
                     </div>
                 </div>

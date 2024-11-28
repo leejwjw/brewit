@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- header fragments -->
+<th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
+<!-- header fragments close -->
+<th:block th:fragment="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">구매목록</span>
+                    <span class="badge bg-primary rounded-pill">4</span>
+                </h4>
+                <ul class="list-group mb-3" th:each="payment : ${lists}">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Product name</h6>
+                            <small class="text-body-secondary" th:text="${payment.product_name}">product_name</small>
+                        </div>
+                          <span class="text-body-secondary" th:text="${payment.amount}">amount</span>
+                        <div>
+                            <span class="text-body-secondary"><a href="#" class="btn btn-primary">구매취소</a></span>
+                            <span class="text-body-secondary"><a href="#" class="btn btn-primary">반품신청</a></span>
+                            <span class="text-body-secondary"><a href="#" class="btn btn-primary">환불신청</a></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</th:block>
+<!-- Footer Fragments -->
+<th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
+<!-- /Footer Fragments Close -->

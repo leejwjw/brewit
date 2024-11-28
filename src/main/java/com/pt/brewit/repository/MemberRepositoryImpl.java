@@ -2,6 +2,7 @@ package com.pt.brewit.repository;
 
 import com.pt.brewit.dto.AuthDTO;
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.PaymentDTO;
 import com.pt.brewit.dto.SellerDTO;
 import com.pt.brewit.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
@@ -60,8 +61,8 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public List<MemberDTO> findAll() {
-        return memberMapper.selectAllMembers();
+    public List<PaymentDTO> findAll() {
+        return memberMapper.selectAllPayments();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.pt.brewit.service;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.PaymentDTO;
 import com.pt.brewit.dto.SellerDTO;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public interface MemberService {
     public SellerDTO getSeller(String username);
     // 회원 1명 member_id 조회 getSellerId
     public SellerDTO getSellerId(int memberId);
-    // 회원 목록 조회
-    public List<MemberDTO> getMembers();
+    // 구매 목록 조회
+    public List<PaymentDTO> getPayments();
     // 회원 정보 수정
     public int updateMember(MemberDTO member);
     // 회원 정보 상태수정

@@ -2,6 +2,7 @@ package com.pt.brewit.repository;
 
 import com.pt.brewit.dto.AuthDTO;
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.PaymentDTO;
 import com.pt.brewit.dto.SellerDTO;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public interface MemberRepository {
     public SellerDTO findBySellerUsername(String username);
     // 회원 1명 member_id 조회 findBySellerId
     public SellerDTO findBySellerId(int memberId);
-    // 회원 목록 조회
-    public List<MemberDTO> findAll();
+    // 구매 목록 조회
+    public List<PaymentDTO> findAll();
     // 회원 정보 수정
     public int updateMember(MemberDTO member);
     // 회원 정보 수정

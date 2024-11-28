@@ -56,4 +56,14 @@
         select * from tb_member where email=#{email}
     </select>
 
+    <select id="selectAllPayments" resultType="PaymentDTO">
+        select a.product_id,a.member_id,a.seller_id,a.amount,a.price,c.name as product_name
+        from tb_order a
+            ,tb_payment b
+            ,tb_product c
+        where a.member_id = 22
+        and   a.order_num = b.order_num
+        and   a.product_id = c.product_id
+    </select>
+
 </mapper>

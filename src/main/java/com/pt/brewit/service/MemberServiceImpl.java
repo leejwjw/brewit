@@ -1,6 +1,7 @@
 package com.pt.brewit.service;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.PaymentDTO;
 import com.pt.brewit.dto.SellerDTO;
 import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.repository.MemberRepository;
@@ -58,7 +59,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public List<MemberDTO> getMembers() {
+    public List<PaymentDTO> getPayments() {
         return memberRepository.findAll();
     }
 

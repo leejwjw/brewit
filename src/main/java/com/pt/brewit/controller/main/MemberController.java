@@ -1,6 +1,8 @@
 package com.pt.brewit.controller.main;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.PaymentDTO;
+import com.pt.brewit.dto.ProductDTO;
 import com.pt.brewit.dto.SellerDTO;
 import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.security.domain.CustomUser;
@@ -37,15 +39,18 @@ public class MemberController {
         this.memberMapper = memberMapper;
     }*/
 
-    // 회원 목록 페이지 요청
-    @GetMapping  // http://localhost:8080/members
-    public String members(Model model) {
-        log.info("GET /members 회원 목록 요청!");
-        // DB에서 회원전체목록가져와 화면에 전달
-        List<MemberDTO> list = memberMapper.selectAll();
-        model.addAttribute("list", list);
+    // 구매 목록 페이지 요청
+    @GetMapping ("/payments")
+    public String payments(ProductDTO products, PaymentDTO payments, Model model) {
+        log.info("GET /payments 구매 목록 요청!");
+        log.info("products: {}", products);
+        log.info("payments: {}", payments);
+        // DB에서 구매전체목록가져와 화면에 전달
+        List<PaymentDTO> lists = memberService.getPayments();
+        //List<ProductDTO> prolists = memberService.getPayments();
+        model.addAttribute("lists", lists);
 
-        return "members/list";
+        return "/main/members/paylists";
     }
 
     // 회원 가입 폼 요청

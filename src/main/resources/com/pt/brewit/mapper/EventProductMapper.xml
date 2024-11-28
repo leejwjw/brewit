@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pt.brewit.mapper.EventProductMapper">
-    <select id="getEventProductForId" resultType="EventProductDTO">
+    <select id="getEventProductInfo" resultType="EventProductDTO">
         select *
         from tb_term_event
-        where status = 'active'
+        where status = 'active' and stock > 0
         order by discount desc
         limit 6
     </select>
@@ -17,7 +17,7 @@
         VALUES
         (#{product_id}, #{term}, #{seller_id}, #{event_name}, #{event_info}, #{attach_name}, #{attach_origin_name}, #{discount}, #{sale_price}, #{regular_price}, #{stock} )
     </select>
-    <select id="getFindProduct" resultType="EventProductDTO">
+    <select id="getFindProductForId" resultType="EventProductDTO">
         select *
         from tb_term_event
         where term_item_id = #{term_item_id};

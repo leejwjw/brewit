@@ -2,27 +2,43 @@
     <div class="row gy-4 isotope-container">
         <!-- 동적으로 데이터가 들어갈 영역 -->
         <div th:each="product : ${products}" class="col-lg-4 col-md-6 portfolio-item isotope-item">
-            <img th:src="@{/img/product/{attach_name}(attach_name=${product.attach_name})}" class="img-fluid" th:alt="${product.name}">
+            <a th:if="${product.category_id == 1}" th:href="@{/tea/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"
+               title="상품 상세보기" data-gallery="portfolio-gallery" class="glightbox preview-link">
+            <img th:src="@{/img/product/{attach_name}(attach_name=${product.attach_name})}" class="img-fluid" th:alt="${product.name}"></a>
             <div class="portfolio-info">
                 <h4 th:text="${product.name}"></h4>
                 <p>liked: <span th:text="${product.liked}"></span> / 가격: <span th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')} + '원'"></span></p>
-
-                <a th:if="${product.category_id == 1}"
-                   th:href="@{/tea/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"
-                   title="상품 상세보기" data-gallery="portfolio-gallery" class="glightbox preview-link">
-                    <i class="bi bi-zoom-in"></i>
-                </a>
-                <a th:if="${product.category_id == 2}"
-                   th:href="@{/coffee/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"
-                   title="상품 상세보기" data-gallery="portfolio-gallery" class="glightbox preview-link">
-                    <i class="bi bi-zoom-in"></i>
-                </a>
-                <a th:if="${product.category_id == 3 or product.category_id == 4}"
-                   th:href="@{/tool/{category_id}/{subcategory_id}/{product_id}(category_id=${product.category_id},subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"
-                   title="상품 상세보기" data-gallery="portfolio-gallery-tool" class="glightbox preview-link">
-                    <i class="bi bi-zoom-in"></i>
-                </a>
             </div>
+
+
+            <a th:if="${product.category_id == 2}"
+               th:href="@{/coffee/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"
+               title="상품 상세보기" data-gallery="portfolio-gallery" class="glightbox preview-link">
+                <img th:src="@{/img/product/{attach_name}(attach_name=${product.attach_name})}" class="img-fluid" th:alt="${product.name}"></a>
+                <div class="portfolio-info">
+                    <h4 th:text="${product.name}"></h4>
+                    <p>liked: <span th:text="${product.liked}"></span> / 가격: <span th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')} + '원'"></span></p>
+                </div>
+
+
+            <a th:if="${product.category_id == 3}"
+               th:href="@{/coffeetool/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"
+               title="상품 상세보기" data-gallery="portfolio-gallery" class="glightbox preview-link">
+                <img th:src="@{/img/product/{attach_name}(attach_name=${product.attach_name})}" class="img-fluid" th:alt="${product.name}"></a>
+                <div class="portfolio-info">
+                    <h4 th:text="${product.name}"></h4>
+                    <p>liked: <span th:text="${product.liked}"></span> / 가격: <span th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')} + '원'"></span></p>
+                </div>
+
+
+            <a th:if="${product.category_id == 4}"
+               th:href="@{/coffeetool/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}"
+               title="상품 상세보기" data-gallery="portfolio-gallery" class="glightbox preview-link">
+                <img th:src="@{/img/product/{attach_name}(attach_name=${product.attach_name})}" class="img-fluid" th:alt="${product.name}"></a>
+                <div class="portfolio-info">
+                    <h4 th:text="${product.name}"></h4>
+                    <p>liked: <span th:text="${product.liked}"></span> / 가격: <span th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA')} + '원'"></span></p>
+                </div>
         </div>
     </div>
 </th:block>

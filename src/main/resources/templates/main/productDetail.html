@@ -16,7 +16,7 @@
                 <div class="team-member">
                     <!-- 상품 이미지 -->
                     <div class="member-img">
-                        <img th:src="@{/img/product/{attach_name}(attach_name=${productDetail.attach_name})}" class="img-fluid img-set" th:alt="${productDetail.event_name}">
+                        <img th:src="@{/img/product/{attach_name}(attach_name=${productDetail.attach_name})}" class="img-fluid img-set" th:alt="${productDetail.attach_name}">
                     </div>
                 </div>
             </form>
@@ -26,7 +26,7 @@
         <div class="col-lg-6 d-flex align-items-stretch">
             <div class="member-info mb-5">
                 <!-- 상품명 -->
-                <h2><strong th:text="${productDetail.event_name}"></strong></h2>
+                <h2><strong th:text="${productDetail.name}"></strong></h2>
                 <!-- 적립 혜택 -->
                 <p class="mt-3 benefit">
                     구매 혜택: 적립 포인트 5%<br>
@@ -38,7 +38,7 @@
                         <span th:text="${productDetail.regular_price}"></span><span>원</span>
                     </del>
                     <h4>
-                        <p>할인율:&nbsp;<strong class="num_color_red mt-3" th:text="${productDetail.discount}"></strong>%</p>
+                        <p>할인율:&nbsp;<strong class="num_color_red mt-3" th:text="${productDetail.discount_percent}"></strong>%</p>
                         <p id="total-price">할인 적용가:&nbsp; <strong th:text="${productDetail.sale_price}"></strong> 원 </p>
                     </h4>
                 </div>
@@ -67,8 +67,8 @@
                     <h2> <strong class="sort-item">제품 상세 정보</strong></h2>
                 </div>
                 <div style="text-align: center;">
-                    <h5 class="mt-3" th:text="${productDetail.event_info}"></h5>
-                    <img th:src="@{/img/product/{attach_info}(attach_info=${productDetail.attach_info})}" th:alt="${productDetail.attach_info}">
+                    <h5 class="mt-3" th:text="${productDetail.info}"></h5>
+<!--                    <img th:src="@{/img/product/{attach_info}(attach_info=${productDetail.attach_info})}" th:alt="${productDetail.attach_info}">-->
                 </div>
             </div>
             <div>
@@ -76,6 +76,10 @@
             </div>
     </div>
 </div>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

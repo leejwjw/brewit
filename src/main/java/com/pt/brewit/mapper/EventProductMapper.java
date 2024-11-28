@@ -8,9 +8,9 @@ import java.util.List;
 
 @Mapper
 public interface EventProductMapper {
-    List<EventProductDTO> getEventProductForId();
+    List<EventProductDTO> getEventProductInfo();
     void insertEventProductOne(EventProductDTO eventProduct);
-    EventProductDTO getFindProduct(int term_item_id);
+    EventProductDTO getFindProductForId(int term_item_id);
 
     List<EventProductDTO> getEventProduct(MemberDTO logged_member);
 }

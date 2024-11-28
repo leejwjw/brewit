@@ -34,7 +34,9 @@
                 <div th:each="product:${products}" class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="team-member">
                         <div class="member-img">
-                            <img th:src="@{'/img/product/' + ${product.attach_name} }" class="img-fluid" th:alt="${product.name}" >
+                            <a th:href="@{/tea/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}">
+                                <img th:src="@{'/img/product/' + ${product.attach_name} }" class="img-fluid" th:alt="${product.name}" >
+                            </a>
                         </div>
                         <div class="member-info" style="text-align: right">
                             <h4><a th:text="${product.name}"> </a></h4>

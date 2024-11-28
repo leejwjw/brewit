@@ -58,6 +58,7 @@ public class HomeProductController {
         return "main/fragments/productList";
     }
 
+    // 구독 상품 상세페이지 연결
     @GetMapping("/product/{term_item_id}")
     public String getProduct(@PathVariable("term_item_id") int term_item_id, Model model) {
         EventProductDTO product = eventProductService.getFindProductId(term_item_id);

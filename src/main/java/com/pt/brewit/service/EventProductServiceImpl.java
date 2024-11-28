@@ -2,10 +2,6 @@ package com.pt.brewit.service;
 
 import com.pt.brewit.dto.EventProductDTO;
 import com.pt.brewit.dto.MemberDTO;
-
-import com.pt.brewit.dto.ProductDTO;
-
-
 import com.pt.brewit.mapper.EventProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +19,7 @@ public class EventProductServiceImpl implements EventProductService {
 
     @Override
     public List<EventProductDTO> getEventProducts() {
-        return eventProductMapper.getEventProductForId();
+        return eventProductMapper.getEventProductInfo();
     }
 
     @Override
@@ -32,7 +28,7 @@ public class EventProductServiceImpl implements EventProductService {
     }
 
     public EventProductDTO getFindProductId(int term_item_id) {
-        return eventProductMapper.getFindProduct(term_item_id);
+        return eventProductMapper.getFindProductForId(term_item_id);
     }
     @Override
     public  List<EventProductDTO> getEventProductList(MemberDTO logged_member) {

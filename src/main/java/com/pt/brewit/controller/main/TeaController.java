@@ -64,5 +64,14 @@ public class TeaController {
         return "main/tea";
     }
 
+    // 차(Tea) 상세 페이지 호출
+    @GetMapping("/{subcategory_id}/{product_id}")
+    public String productDetail(@PathVariable("subcategory_id") int subcategory_id, @PathVariable("product_id") int product_id, Model model) {
+        ProductDTO productDetail = productService.getProductById(product_id);
+        log.info("product:{}", productDetail);
+        model.addAttribute("productDetail", productDetail);
+        return "main/productDetail";
+    }
+
 
 }

@@ -1636,6 +1636,10 @@ section,
 /*--------------------------------------------------------------
 # Faq Section
 --------------------------------------------------------------*/
+.faq {
+  height: 700px; /* 섹션의 고정 높이 설정 */
+  overflow-y: auto; /* 스크롤을 추가하여 내용이 넘칠 경우 스크롤 가능 */
+}
 .faq .faq-container .faq-item {
   background-color: var(--surface-color);
   position: relative;
@@ -1718,6 +1722,12 @@ section,
   transform: rotate(90deg);
   color: var(--accent-color);
 }
+
+.faq-item h3, .faq-item .faq-toggle {
+  pointer-events: auto;
+  z-index: 1;
+}
+
 
 /*--------------------------------------------------------------
 # Contact Section

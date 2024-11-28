@@ -6,22 +6,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Slf4j
 public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                                        AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response
+                                       , AuthenticationException exception) throws IOException, ServletException {
 
         log.info("Login Failed!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         // request 객체
         //String username = request.getParameter("username"); // 파라미터 조회
         //String password = request.getParameter("password");
 
-        /* exception 객체
+         //exception 객체
         //String exceptionMessage = exception.getMessage();
         String cause = "로그인 실패";
         if(exception instanceof UsernameNotFoundException) {
@@ -38,11 +40,8 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
             cause = "locked"; // 계정 잠심
         }else {
             cause = "unknown"; // 알수없는 에러...
-        }*/
-
+        }
         // response 객체
-        //response.sendRedirect("/login?fail=" + cause);
-
-
+        response.sendRedirect("/login?fail=" + cause);
     }
 }

@@ -38,8 +38,8 @@ public class SecurityConfig {
                     .loginPage("/login")
                     .usernameParameter("email")
                     //.passwordParameter("password")
-                    .successHandler(new CustomLoginSuccessHandler()))
-                    //.failureHandler(new CustomLoginFailureHandler()))
+                    .successHandler(new CustomLoginSuccessHandler())
+                    .failureHandler(new CustomLoginFailureHandler()))
 //                    .defaultSuccessUrl("/", true))
             .logout(logout -> logout
                     .logoutSuccessUrl("/")

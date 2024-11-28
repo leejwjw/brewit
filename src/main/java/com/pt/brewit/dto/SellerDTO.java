@@ -1,5 +1,6 @@
 package com.pt.brewit.dto;
 import lombok.Data;
+import lombok.Data;
 import java.util.Date;
 
 @Data

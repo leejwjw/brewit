@@ -9,15 +9,38 @@
                    values(#{name},#{password},#{cellphone},#{telephone},#{address1},#{address2},#{email},#{auth},#{is_subscribe},#{bank_id},#{bank_account},#{is_kakao})
     </insert>
 
+    <insert id="insertSeller">
+        insert into tb_seller(member_id, company_name, b_number)
+        values(#{member_id},#{company_name},#{b_number})
+    </insert>
+
     <select id="selectMemberByUsername" resultType="MemberDTO">
         select *
         from tb_member
         where email = #{username}
     </select>
 
+    <select id="selectSellerByUsername" resultType="SellerDTO">
+        select *
+        from tb_member
+        where email = #{username}
+    </select>
+
+    <select id="selectSellerByMemberId" resultType="SellerDTO">
+        select max(seller_id) as seller_id
+        from tb_seller
+        where member_id = #{member_id}
+        group by member_id;
+    </select>
+
     <update id="updateMember">
         update tb_member set cellphone=#{cellphone},telephone=#{telephone},address1=#{address1},address2=#{address2}
         where email = #{email}
+    </update>
+
+    <update id="updateSeller">
+        update tb_member set status=#{status}
+        where member_id = #{member_id}
     </update>
 
     <delete id="deleteMember">

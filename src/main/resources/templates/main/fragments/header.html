@@ -108,7 +108,7 @@
                                     <button type="submit">로그아웃</button>
                                 </form>
                             </li>
-
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/main/trans/{email}(email=${#authentication.name})}">판매자전환신청</a></li>
                             <li sec:authorize="isAuthenticated()"><a th:href="@{/main/{email}(email=${#authentication.name})}">My Page</a></li>
                             <li sec:authorize="isAnonymous()"><a href="/login" th:href="@{/login}">로그인</a></li>
                         </ul>

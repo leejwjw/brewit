@@ -14,6 +14,11 @@
     <th:block th:replace="~{/main/fragments/value :: fragment-mainValue}"></th:block>
     <!-- /History Section Close -->
 
+    <th:block th:if="${param.sellerID}">
+        <script>
+            alert("판매자 전환 신청을 이미 하셨습니다.");
+        </script>
+    </th:block>
     <!-- ProductList Section -->
     <section id="portfolio" class="portfolio section">
         <div class="container section-title" data-aos="fade-up">

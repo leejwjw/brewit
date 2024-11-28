@@ -1,6 +1,7 @@
 package com.pt.brewit.service;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.SellerDTO;
 import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,27 +27,6 @@ public class MemberServiceImpl implements MemberService{
         //비밀번호 암호화*
         String encodedPw = passwordEncoder.encode(member.getPassword());
         member.setPassword(encodedPw);//암호화된 비밀번호로 변경
-
-        //int authRes = 0;
-        //권한부여 (MEMBER)
-        //AuthDTO authDTO = new AuthDTO();
-        //member.setEmail(member.getEmail());
-        //member.setAuth("ROLE_MEMBER");
-        //authRes = memberRepository.addAuth(authDTO);
-        //권한 추가 부여 (ADMIN)
-        //if(au.equals("ADMIN")){
-        //    authDTO.setAuth("ROLE_ADMIN");
-        //    authRes = memberRepository.addAuth(authDTO);
-        //}
-        //return (memberRes == 1 && authRes == 1) ? 1 : 0;
-//        if(au.equals("admin")){
-//            member.setAuth("admin");
-//        }else if(au.equals("member")){
-//            member.setAuth("member");
-//        }else{
-//            member.setAuth("seller");
-//        }
-
         member.setAuth("member");
 
         //회원정보 저장
@@ -56,8 +36,25 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public int transRegister(SellerDTO seller) {
+        seller.setMember_id(seller.getMember_id());
+        seller.setCompany_name(seller.getCompany_name());
+        seller.setB_number(seller.getB_number());
+        seller.setStatus(seller.getStatus());
+        int transMemberRes = memberRepository.transSave(seller);
+        return (transMemberRes == 1 ) ? 1 : 0;
+    }
+
+    @Override
     public MemberDTO getMember(String username) {
         return memberRepository.findByUsername(username);
+    }
+
+    @Override
+    public SellerDTO getSeller(String username) {return memberRepository.findBySellerUsername(username);
+    }
+    @Override
+    public SellerDTO getSellerId(int memberId) {return memberRepository.findBySellerId(memberId);
     }
 
     @Override
@@ -68,6 +65,10 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public int updateMember(MemberDTO member) {
         return memberRepository.updateMember(member);
+    }
+    @Override
+    public int updateSeller(MemberDTO member) {
+        return memberRepository.updateSeller(member);
     }
 
     // TODO : 삭제 처리

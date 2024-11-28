@@ -1,17 +1,20 @@
 package com.pt.brewit.controller.main;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.SellerDTO;
 import com.pt.brewit.mapper.MemberMapper;
+import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -51,7 +54,6 @@ public class MemberController {
         return "/main/members/newForm";
     }
 
-
     // 회원가입 처리 요청
     @PostMapping("/new")
     public String newPro(MemberDTO member, String au) {
@@ -62,6 +64,50 @@ public class MemberController {
         log.info("newPro - result : {}", result);
 
         return "redirect:/"; // 페이지 이동 = "/" 경로 코드로 요청 -> @..Mapping("/") 메소드호출
+    }
+
+    // 회원 판매자전환 폼 요청
+    @GetMapping("/trans/{email}")
+    public String transForm(@PathVariable("email") String username, Model model , RedirectAttributes rttr) {
+        log.info("trans username: {}", username);
+
+        SellerDTO seller = memberService.getSeller(username);
+        log.info("trans seller: {}", seller);
+
+        int sellerMemberId = seller.getMember_id();
+        log.info("trans sellerMemberId: {}", sellerMemberId);
+
+        SellerDTO sellerId = memberService.getSellerId(sellerMemberId);
+        log.info("trans sellerId: {}", sellerId);
+
+        if (sellerId != null) {
+            rttr.addAttribute("sellerID",true);
+            return "redirect:/";
+        }
+
+        model.addAttribute("seller", seller);
+
+        log.info("trans model: {}", model);
+
+        return "/main/members/transForm";
+    }
+
+    // 판매자전환 처리 요청
+    @PostMapping("/trans/{member_id}")
+    public String newTrans(@PathVariable("member_id") String member_id, MemberDTO member,SellerDTO seller) {
+        log.info("newTrans - member_id : {}", member_id);
+        log.info("newTrans - member : {}", member);
+        log.info("newTrans - seller : {}", seller);
+
+
+
+         // 판매자전환 처리
+        //seller.setStatus("inactive");
+        //memberService.updateSeller(member);
+        int result = memberService.transRegister(seller);
+        log.info("newTrans - result : {}", result);
+
+       return "redirect:/";
     }
 
     // 마이페이지 요청

@@ -3,6 +3,27 @@
 <!-- header fragments -->
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 <!-- header fragments close -->
+<th:block th:if="${param.fail}">
+    <script th:inline="javascript">
+        let cause = [[${param.fail}]];
+        console.log(cause);
+        if(cause == 'no-username'){
+            alert("계정 없음.");
+        }else if(cause == 'bad-credentials'){
+            alert("이메일 또는 비밀번호 불일치 합니다.");
+        }else if(cause == 'credentials-expired'){
+            alert("비밀번호 만료.");
+        }else if(cause == 'account-expired'){
+            alert("계정 만료.");
+        }else if(cause == 'disabled'){
+            alert("계정 비활성화.");
+        }else if(cause == 'locked'){
+            alert("계정 잠김.");
+        }else if(cause == 'unknown'){
+            alert("알수없는 에러...");
+        }
+    </script>
+</th:block>
 <body class="index-page">
 <main class="main">
     <section>

@@ -531,7 +531,7 @@
                                     <tr th:each="product, iterStat : ${products}" class="product_tr">
                                         <td th:text="${iterStat.index + 1}"> </td>
                                         <td style="padding: 0">
-                                            <img th:src="@{/img/product/term{filename}(filename=${product.attach_name})}" style="width: 50%;" />
+                                            <img th:src="@{/admin/img/product/{filename}(filename=${product.attach_name})}" style="width: 50%;" />
                                         </td>
                                         <td th:text="${product.event_name}"></td>
                                         <td th:text="${product.seller_id}"></td>

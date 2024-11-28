@@ -27,4 +27,5 @@ public class ProductDTO {
     private Integer discount_percent;
     private Integer sale_price;
     private String status; //삭제여부 active, inactive
+    private String seller_name;
 }

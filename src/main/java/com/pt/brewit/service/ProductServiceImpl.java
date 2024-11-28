@@ -93,6 +93,7 @@ public class ProductServiceImpl implements ProductService {
             String file = getFullPath(product.getAttach_name());
             product.setFilePath(file); // 파일 경로를 DTO에 추가
         }
+
         return products;
     }
 

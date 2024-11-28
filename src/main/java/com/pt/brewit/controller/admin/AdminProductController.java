@@ -2,11 +2,14 @@ package com.pt.brewit.controller.admin;
 
 import com.pt.brewit.dto.ProductDTO;
 import com.pt.brewit.dto.SubCategoryDTO;
+import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.mapper.ProductMapper;
+import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.ProductService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import com.pt.brewit.dto.CategoryDTO;
 import com.pt.brewit.dto.MemberDTO;
@@ -34,6 +37,7 @@ public class AdminProductController {
     private final CategoryMapper categoryMapper;
     private final ProductMapper productMapper;
     private final ProductService productService;
+    private final MemberMapper memberMapper;
 
     @Value("${file.dir}")
     private String fileDir;
@@ -48,11 +52,15 @@ public class AdminProductController {
     }
 
     @PostMapping("/registProduct")
-    public String registProduct(@ModelAttribute ProductDTO productDTO, Model model) {
+    public String registProduct(@ModelAttribute ProductDTO productDTO, Model model, @AuthenticationPrincipal CustomUser user) {
         // 파일 저장 로직
 
         MultipartFile file = productDTO.getFile(); // ProductDTO에서 파일 가져오기
         log.info("file@@@@@: {}", file);
+        log.info("user@@@@@: {}", user);
+
+        String username = user.getUsername();
+        MemberDTO logged_member = memberMapper.selectMemberByUsername(username);
 
         if (file != null && !file.isEmpty()) {
             String orgFilename = file.getOriginalFilename();
@@ -76,7 +84,7 @@ public class AdminProductController {
             productDTO.setIs_caffeine("false");
         }
         log.info("product!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! :  {}",productDTO );
-
+        productDTO.setSeller_id(logged_member.getMember_id());
         productMapper.insertProduct(productDTO); // DB에 제품 정보 저장
         return "redirect:/admin/products";
     }
@@ -95,7 +103,7 @@ public class AdminProductController {
     @GetMapping("/img/product/{filename}")
     public Resource getImages(@PathVariable("filename") String filename) throws MalformedURLException {
         log.info("GET /product/images - filename : {}", filename);
-        log.info("testsetset");
+        log.info("이미지 요청@@@@@@@");
         return new UrlResource("file:" + productService.getFullPath(filename));
     }
 

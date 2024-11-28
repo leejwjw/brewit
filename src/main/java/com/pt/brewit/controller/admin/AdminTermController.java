@@ -146,12 +146,12 @@ public class AdminTermController {
         model.addAttribute("products", products);
         return "admin/termProducts";
     }
-    // 이미지 요청
-    @ResponseBody // 데이터 리턴
-    @GetMapping("/term/img/product/{filename}")
-    public Resource getTermImages(@PathVariable("filename") String filename) throws MalformedURLException {
-        log.info("GET /product/images - filename : {}", filename);
-        return new UrlResource("file:" + eventProductService.getFullPath(filename));
-    }
+//    // 이미지 요청
+//    @ResponseBody // 데이터 리턴
+//    @GetMapping("/term/img/product/{filename}")
+//    public Resource getTermImages(@PathVariable("filename") String filename) throws MalformedURLException {
+//        log.info("GET /product/images - filename : {}", filename);
+//        return new UrlResource("file:" + eventProductService.getFullPath(filename));
+//    }
 
 }

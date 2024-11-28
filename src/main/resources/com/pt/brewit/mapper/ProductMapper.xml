@@ -53,7 +53,10 @@
     </select>
 
     <select id="selectAllProducts" resultType="ProductDTO">
-        select * from tb_product where status='active';
+        SELECT p.*, m.name AS seller_name
+        FROM tb_product p
+        JOIN TB_MEMBER m ON p.seller_id = m.member_id
+        WHERE p.status='active';
     </select>
     <select id="selectProductById">
         select * from tb_product where product_id = #{id} and status='active' and stock > 0;

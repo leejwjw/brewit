@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pt.brewit.mapper.MainpageMapper">
+<mapper namespace="com.pt.brewit.mapper.MainMapper">
 
     <!-- Best 상품 가져오기 -->
     <select id="findBestProducts" resultType="ProductDTO">
         select *
         from tb_product
-        where STATUS = 'active' <!-- 활성 상태인 상품만 가져옴 -->
+        where stock > 0 and status = 'active' <!-- 재고가 있으면서, 활성 상태인 상품만 가져옴 -->
         order by liked desc
         limit 6;
     </select>
@@ -17,7 +17,7 @@
     <select id="findProductsByCategory" resultType="ProductDTO">
         select *
         from tb_product
-        where category_id = #{category_id} and stock > 0 and STATUS = 'active' <!-- 활성 상태인 상품만 가져옴 --><!-- 1 들어오면 차 / 2 들어오면 커피 -->
+        where category_id = #{category_id} and stock > 0 and status = 'active' <!-- 재고가 있으면서, 활성 상태인 상품만 가져옴 --><!-- 1 들어오면 차 / 2 들어오면 커피 -->
         order by reg_date desc
         limit 6
     </select>
@@ -29,7 +29,7 @@
         <!-- 카테고리 3번(차)에서 최신순 3개 가져오기 -->
         select *
         from tb_product
-        where category_id = 3 and stock > 0 and STATUS = 'active'
+        where category_id = 3 and stock > 0 and status = 'active'
         order by reg_date desc
         limit 3
         ) as category_3
@@ -41,10 +41,18 @@
         <!-- 카테고리 4번(커피)에서 최신순 3개 가져오기 -->
         select *
         from tb_product
-        where category_id = 4 and stock > 0 and STATUS = 'active'
+        where category_id = 4 and stock > 0 and status = 'active'
         order by reg_date desc
         limit 3
         ) as category_4
+        order by reg_date desc;
+    </select>
+
+    <!-- 메인 이미지 가져오기 -->
+    <select id="findMainImg" resultType="AttachmentDTO">
+        select *
+        from tb_attachment
+        where status = 'active'
         order by reg_date desc;
     </select>
 </mapper>

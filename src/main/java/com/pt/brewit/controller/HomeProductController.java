@@ -3,7 +3,7 @@ package com.pt.brewit.controller;
 import com.pt.brewit.dto.EventProductDTO;
 import com.pt.brewit.dto.ProductDTO;
 import com.pt.brewit.service.EventProductService;
-import com.pt.brewit.service.MainProductService;
+import com.pt.brewit.service.MainService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 public class HomeProductController {
-    private final MainProductService mainProductService;
+    private final MainService mainService;
     private final EventProductService eventProductService;
 
     @GetMapping("/products")
@@ -27,22 +27,22 @@ public class HomeProductController {
         try {
             switch (tab_id) {
                 case "best":
-                    products = mainProductService.getBestProducts();
+                    products = mainService.getBestProducts();
                     log.info("productBest: {}", products);
                     log.info("best_tab_id: {}", tab_id);
                     break;
                 case "tea":
-                    products = mainProductService.getProductsByCategory(1);
+                    products = mainService.getProductsByCategory(1);
                     log.info("productTea: {}", products);
                     log.info("tea_tab_id: {}", tab_id);
                     break;
                 case "coffee":
-                    products = mainProductService.getProductsByCategory(2);
+                    products = mainService.getProductsByCategory(2);
                     log.info("productCoffee: {}", products);
                     log.info("coffee_tab_id: {}", tab_id);
                     break;
                 case "tool":
-                    products = mainProductService.getProductsByTool();
+                    products = mainService.getProductsByTool();
                     log.info("productTool: {}", products);
                     log.info("tool_tab_id: {}", tab_id);
                     break;

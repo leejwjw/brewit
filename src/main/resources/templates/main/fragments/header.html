@@ -40,6 +40,13 @@
                 }
             }
         </style>
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Swiper JS 파일과 초기화 스크립트 추가 -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     </head>
     <header id="header" class="header sticky-top">
         <!--   GNB 메뉴  -->
@@ -112,9 +119,9 @@
                             <li sec:authorize="isAuthenticated()"><a th:href="@{/main/trans/{email}(email=${#authentication.name})}">판매자전환신청</a></li>
                             <li sec:authorize="isAuthenticated()"><a th:href="@{/main/{email}(email=${#authentication.name})}">My Page</a></li>
 
-                            <li sec:authorize="isAuthenticated()"><a th:href="@{/main/{email}(email=${#authentication.name})}"><img src="/img/home/login.png" style="width: 30px; height: 30px;"/></a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/main/{email}(email=${#authentication.name})}"><img src="/img/home/login.png" style="width: 25px; height: 25px;"/></a></li>
                             <li sec:authorize="isAnonymous()"><a href="/login" th:href="@{/login}">로그인</a></li>
-                            <li><a href="#"><img src="/img/home/cart.png" style="width: 20px; height: 20px;"/></a></li>
+                            <li><a href="#"><img src="/img/home/cart.png" style="width: 25px; height: 25px;"/></a></li>
                         </ul>
 
                         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

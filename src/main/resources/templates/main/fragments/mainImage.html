@@ -6,7 +6,7 @@
                     <h1>당신의 일상에 완벽한 <span>BREWIT.</span></h1>
                     <p>정기적으로 찾아오는 풍미의 즐거움.</p>
                     <div class="d-flex">
-                        <a href="#about" class="btn-get-started" style="font-color:black">구독하기</a>
+                        <a href="#about" class="btn-get-started" >구독하기</a>
                         <!-- 비디오 영상 재상 주석 처리
                             <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
                             -->
@@ -14,5 +14,40 @@
                 </div>
             </div>
         </div>
+
+        <!-- 이미지 슬라이드 추가 -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="main/assets/img/img_5.jpg" alt="Image 1">
+                </div>
+                <div class="swiper-slide">
+                    <img src="main/assets/img/tea_image2.jpg" alt="Image 2">
+                </div>
+                <div class="swiper-slide">
+                    <img src="main/assets/img/tea_image3.jpg" alt="Image 3">
+                </div>
+            </div>
+            <!-- 페이지네이션 -->
+            <div class="swiper-pagination"></div>
+        </div>
     </section>
+    <!-- Swiper JS 파일과 초기화 스크립트 추가 -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // DOMContentLoaded를 사용하여 페이지가 로드된 후 슬라이드 초기화
+        document.addEventListener('DOMContentLoaded', function () {
+            const swiper = new Swiper('.swiper-container', {
+                loop: true, // 무한 루프
+                autoplay: {
+                    delay: 3000, // 3초마다 이미지 변경
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true, // 페이지네이션 클릭 가능
+                },
+                effect: 'fade', // 페이드 효과
+            });
+        });
+    </script>
 </th:block>

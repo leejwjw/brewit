@@ -39,4 +39,23 @@
 
     </update>
 
+<!--    메인 count 모음-->
+    <select id="SelectCountMember">
+        SELECT COUNT(*) FROM TB_MEMBER WHERE status = 'active'
+    </select>
+    <select id="SelectCountProduct">
+        SELECT COUNT(*) FROM TB_PRODUCT WHERE status = 'active'
+    </select>
+    <select id="SelectCountOrder">
+        SELECT COUNT(*) FROM TB_ORDER
+    </select>
+    <select id="SelectCountPayment">
+        SELECT COUNT(*) FROM TB_PAYMENT
+    </select>
+    <select id="SelectCountTermEvent">
+        SELECT COUNT(*) FROM TB_TERM_EVENT
+    </select>
+    <select id="SelectCountToday">
+        SELECT 143;
+    </select>
 </mapper>

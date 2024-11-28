@@ -15,6 +15,7 @@ public interface AdminMapper {
     List<SellerDTO> selectSellerConfrimList();
     // 판매자 승인처리
     void confirmSellerMember(int id);
+    //
     void updateSellerMember(int id);
     // 특정 회원 정보 조회
     MemberDTO selectMemberById(int id);
@@ -22,4 +23,12 @@ public interface AdminMapper {
     void deleteMemberById(int id);
     // 특정 회원 수정
     void updateMemberById(MemberDTO memberDTO);
+    // 메인 count
+    int SelectCountMember();
+    int SelectCountProduct();
+    int SelectCountOrder();
+    int SelectCountPayment();
+    int SelectCountTermEvent();
+    int SelectCountToday();
+
 }

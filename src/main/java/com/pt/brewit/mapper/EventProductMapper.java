@@ -11,6 +11,8 @@ public interface EventProductMapper {
     List<EventProductDTO> getEventProductInfo();
     void insertEventProductOne(EventProductDTO eventProduct);
     EventProductDTO getFindProductForId(int term_item_id);
-
     List<EventProductDTO> getEventProduct(MemberDTO logged_member);
+
+    //삭제
+    void deleteProductById(int id);
 }

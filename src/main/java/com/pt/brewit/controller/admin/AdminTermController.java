@@ -99,7 +99,6 @@ public class AdminTermController {
     public String registYearEvent(@ModelAttribute EventProductDTO eventProductDTO, Model model, @AuthenticationPrincipal CustomUser user) {
 
         MemberDTO logged_member = memberMapper.selectMemberByUsername(user.getUsername());
-        log.info("포스트 시작");
         // 파일 저장 로직
         MultipartFile file = eventProductDTO.getFile(); // ProductDTO에서 파일 가져오기
         log.info("file@@dddd@@@: {}", file);
@@ -120,12 +119,8 @@ public class AdminTermController {
                 return "admin/termRegistYear"; // 오류 발생 시 다시 폼으로 돌아감
             }
         }
-
-        log.info("텀 설정");
         eventProductDTO.setTerm(12);
-
         eventProductDTO.setSeller_id(logged_member.getMember_id());
-        log.info("TERMTEST DTO: {} ",eventProductDTO);
         eventProductService.insertEventProduct(eventProductDTO);
         return "redirect:/admin/termRegistYear";
     }
@@ -135,23 +130,19 @@ public class AdminTermController {
     public String termProducts(Model model, @AuthenticationPrincipal CustomUser user) {
         // CustomUser에서 필요한 정보를 추출
         String username = user.getUsername();
-        // MemberDTO를 가져오기 위해 MyBatis 매퍼 호출
-
         MemberDTO logged_member = memberMapper.selectMemberByUsername(username);
-        log.info("User useruseruseruseruseruseruseruseruseruseruser: " + logged_member);
-        // 서비스 메서드 호출
         List<EventProductDTO> products = eventProductService.getEventProductList(logged_member);
-
-
+        log.info("%%%%%%%%%%%%%%productDTO : {}", products);
         model.addAttribute("products", products);
         return "admin/termProducts";
     }
-//    // 이미지 요청
-//    @ResponseBody // 데이터 리턴
-//    @GetMapping("/term/img/product/{filename}")
-//    public Resource getTermImages(@PathVariable("filename") String filename) throws MalformedURLException {
-//        log.info("GET /product/images - filename : {}", filename);
-//        return new UrlResource("file:" + eventProductService.getFullPath(filename));
-//    }
+
+    //삭제 요청 처리
+    @PostMapping("termProducts/delete/{id}")
+    public String deleteProduct(@PathVariable("id") int id, @ModelAttribute ProductDTO product) {
+        eventProductService.deleteProduct(id);
+        return "redirect:/admin/termProducts";
+    }
+
 
 }

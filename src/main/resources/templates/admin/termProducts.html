@@ -534,14 +534,14 @@
                                             <img th:src="@{/admin/img/product/{filename}(filename=${product.attach_name})}" style="width: 50%;" />
                                         </td>
                                         <td th:text="${product.event_name}"></td>
-                                        <td th:text="${product.seller_id}"></td>
+                                        <td th:text="${product.seller_name}"></td>
                                         <td th:text="${#dates.format(product.reg_date, 'yyyy-MM-dd HH:mm')}"></td>
                                         <td th:text="${product.stock}"></td>
                                         <td></td>
                                         <td>
                                             <!-- 수정 버튼 -->
-                                            <a th:href="@{/admin/products/edit/{id}(id=${product.product_id})}" class="btn btn-primary">수정</a>
-                                            <form th:action="@{/admin/products/delete/{id}(id=${product.product_id})}" method="post" style="display:inline;">
+<!--                                            <a th:href="@{/admin/products/edit/{id}(id=${product.product_id})}" class="btn btn-primary">수정</a>-->
+                                            <form th:action="@{/admin/termProducts/delete/{id}(id=${product.term_item_id})}" method="post" style="display:inline;">
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
                                             </form>
                                         </td>

@@ -56,4 +56,28 @@ public class AdminServiceImpl implements AdminService {
         log.info(member.toString());
         adminMapper.updateMemberById(member);
     }
+    @Override
+    public int getMemberCount() {
+        return adminMapper.SelectCountMember();
+    }
+    @Override
+    public int getProductCount() {
+        return adminMapper.SelectCountProduct();
+    }
+    @Override
+    public int getTermEventCount() {
+        return adminMapper.SelectCountTermEvent();
+    }
+    @Override
+    public int getOrderCount() {
+        return adminMapper.SelectCountOrder();
+    }
+    @Override
+    public int getPaymentCount() {
+        return adminMapper.SelectCountPayment();
+    }
+    @Override
+    public int getTodayCount() {
+        return adminMapper.SelectCountToday();
+    }
 }

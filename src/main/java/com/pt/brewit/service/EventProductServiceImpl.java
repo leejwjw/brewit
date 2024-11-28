@@ -40,6 +40,10 @@ public class EventProductServiceImpl implements EventProductService {
         return eventProductMapper.getEventProduct(logged_member);
     }
     @Override
+    public void deleteProduct(int id) {
+        eventProductMapper.deleteProductById(id);
+    }
+    @Override
     public String getFullPath(String filename) {
         return fileDir + '/' +filename;
     }

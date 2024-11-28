@@ -27,4 +27,5 @@ public class EventProductDTO {
     private String status;
     private int stock;
     private Date reg_date;
+    private String seller_name;
 }

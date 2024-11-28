@@ -67,7 +67,7 @@
                     <h2> <strong class="sort-item">제품 상세 정보</strong></h2>
                 </div>
                 <div style="text-align: center;">
-                    <h5 class="mt-3" th:text="${productDetail.info}"></h5>
+                    <h5 class="mt-3" th:utext="${productDetail.info}"></h5>
 <!--                    <img th:src="@{/img/product/{attach_info}(attach_info=${productDetail.attach_info})}" th:alt="${productDetail.attach_info}">-->
                 </div>
             </div>

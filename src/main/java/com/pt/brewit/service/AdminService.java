@@ -21,4 +21,12 @@ public interface AdminService {
     public void deleteMember(int id);
     //회원 수정
     public void updateMember(int id, MemberDTO memberDTO);
+
+    //admin 메인 카운트
+    public int getMemberCount();
+    public int getProductCount();
+    public int getTermEventCount();
+    public int getOrderCount();
+    public int getPaymentCount();
+    public int getTodayCount();
 }

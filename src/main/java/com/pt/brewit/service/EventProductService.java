@@ -15,4 +15,6 @@ public interface EventProductService {
     List<EventProductDTO> getEventProductList(MemberDTO logged_member);
     //파일조회
     public String getFullPath(String filename);
+    // 상품 삭제
+    public void deleteProduct(int id);
 }

@@ -20,18 +20,25 @@
     <select id="getFindProductForId" resultType="EventProductDTO">
         select *
         from tb_term_event
-        where term_item_id = #{term_item_id};
+        where term_item_id = #{term_item_id}
+        and status = 'active'
     </select>
 
     <select id="getEventProduct" resultType="EventProductDTO">
-        SELECT e.*, s.company_name, s.b_number
+        SELECT e.*, s.company_name, s.b_number, m.name AS seller_name
         FROM TB_TERM_EVENT e
         JOIN TB_SELLER s ON e.seller_id = s.seller_id
-        WHERE 1=1
+        JOIN TB_MEMBER m ON e.seller_id = m.member_id
+        WHERE e.status='active'
         <if test="auth == 'seller'">
             AND e.seller_id = #{member_id}
         </if>
     </select>
 
+    <update id="deleteProductById">
+        UPDATE TB_TERM_EVENT
+        SET status = 'inactive'
+        WHERE term_item_id=#{id}
+    </update>
 
 </mapper>

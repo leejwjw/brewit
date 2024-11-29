@@ -1,4 +1,11 @@
 $(document).ready(function () {
+
+
+    $('.summernote').summernote({
+        height: 450,
+        lang: "ko-KR",
+    });
+
     // 대분류와 중분류 동적 변경
     const subCategories = {
         1: [

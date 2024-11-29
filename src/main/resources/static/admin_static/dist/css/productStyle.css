@@ -1,0 +1,89 @@
+
+.preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+.image-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    display: none; /* 초기에는 숨김 */
+    cursor: pointer; /* 클릭 가능하게 커서 변경 */
+}
+.image-placeholder {
+    width: 30%;
+    border: 1px solid #a1a1a1;
+    color: #575757;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 50px;
+}
+#camera_img {
+    width: 60%;
+    top: 120px;
+    left: 70px;
+}
+.image-placeholder img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute; /* 이미지가 네모 안에 위치하도록 설정 */
+    top: 40px;
+    left: 0;
+    object-fit: cover; /* 이미지 비율 유지 */
+}
+div.col-md-6 {
+    width:70%;
+}
+div.card{
+    border-radius: 15px;
+}
+div.card > h2 {
+    margin: 0 auto;
+    padding: 50px 0;
+    font-size: 35px;
+}
+div.card div.flex_box {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    gap: 100px;
+}
+div.info_box{
+    width: 30%;
+}
+div.info_box > select{
+    width: 70%;
+}
+div.info_box > input.short{
+    width: 70%;
+}
+
+
+div.price_box {
+    margin: 0 auto;
+    width:65%
+}
+div.price_box input {
+    width: 200px;
+}
+div.price_box > div.input_box {
+    display: flex;
+}
+div.price_box > div.input_box > span {
+    padding: 15px 0 0 10px;
+    height: 0;
+    font-size: 14px;
+}
+div#summer_container {
+    max-width: 900px;
+    padding: 50px 30px;
+}
+
+div.button_box  {
+    text-align: center;
+    margin: 45px 0;
+}
+.small_text {
+    font-size: 10px;
+}

@@ -3,6 +3,9 @@ package com.pt.brewit.controller;
 
 import com.pt.brewit.dto.AttachmentDTO;
 import com.pt.brewit.dto.CountDTO;
+import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.ChartDTO;
+import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.AdminService;
 import com.pt.brewit.service.MainService;
@@ -43,7 +46,7 @@ public class HomeController {
     }
 
     @GetMapping("/admin")
-    public String admin(Model model) {
+    public String admin(Model model, @AuthenticationPrincipal CustomUser user) {
         int members = adminService.getMemberCount();
         int products = adminService.getProductCount();
         int term_events = adminService.getTermEventCount();
@@ -57,8 +60,24 @@ public class HomeController {
         countDTO.setOrder_count(orders);
         countDTO.setPayment_count(payments);
         countDTO.setToday_count(todays);
+
+        MemberDTO logged_member = memberService.getMember(user.getUsername());
+
+        // 해당 회원의 월별 가입 수 가져오기
+        List<Long> memberCounts = adminService.getMonthlyMemberCount(2024);
+        List<Long> orderCounts = adminService.getMonthlyOrderCount(2024, logged_member);
+        List<Long> termEventCounts = adminService.getMonthlyTermEventCount(2024, logged_member);
+
         model.addAttribute("count", countDTO);
 
+
+        model.addAttribute("memberCounts", memberCounts);
+        model.addAttribute("orderCounts", orderCounts);
+        model.addAttribute("termEventCounts", termEventCounts);
+        model.addAttribute("user", logged_member);
+        log.info("memberCounts: {}", memberCounts);
+        log.info("orderCounts: {}", orderCounts);
+        log.info("termEventCounts: {}", termEventCounts);
         return "admin/index";
     }
 

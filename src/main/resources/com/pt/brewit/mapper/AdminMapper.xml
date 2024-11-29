@@ -58,4 +58,39 @@
     <select id="SelectCountToday">
         SELECT 143;
     </select>
+
+<!--    메인 차트-->
+    <select id="selectMonthlyMemberCount" resultType="map" >
+        SELECT
+        MONTH(reg_date) AS month,
+        COUNT(*) AS count
+        FROM
+        TB_MEMBER WHERE YEAR(reg_date) = #{year}
+        GROUP BY MONTH(reg_date)
+        ORDER BY MONTH(reg_date);
+    </select>
+    <select id="selectMonthlyOrderCount" resultType="map" parameterType="MemberDTO">
+        SELECT
+        MONTH(reg_date) AS month,
+        COUNT(*) AS count
+        FROM
+        TB_ORDER WHERE YEAR(reg_date) = #{year}
+        <if test="logged_member.auth == 'seller'">
+            AND seller_id = #{logged_member.member_id}
+        </if>
+        GROUP BY MONTH(reg_date)
+        ORDER BY MONTH(reg_date);
+    </select>
+    <select id="selectMonthlyTermEventCount" resultType="map" parameterType="MemberDTO">
+        SELECT
+        MONTH(reg_date) AS month,
+        COUNT(*) AS count
+        FROM
+        TB_TERM_EVENT WHERE YEAR(reg_date) = #{year}
+        <if test="logged_member.auth == 'seller'">
+            AND seller_id = #{logged_member.member_id}
+        </if>
+        GROUP BY MONTH(reg_date)
+        ORDER BY MONTH(reg_date);
+    </select>
 </mapper>

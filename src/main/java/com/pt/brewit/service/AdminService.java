@@ -29,4 +29,10 @@ public interface AdminService {
     public int getOrderCount();
     public int getPaymentCount();
     public int getTodayCount();
+
+    // admin chart 통계
+    List<Long> getMonthlyMemberCount(int year);
+    List<Long> getMonthlyOrderCount(int year, MemberDTO logged_member);
+    List<Long> getMonthlyTermEventCount(int year, MemberDTO logged_member);
+
 }

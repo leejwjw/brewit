@@ -1,10 +1,13 @@
 package com.pt.brewit.mapper;
 
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.Pager;
 import com.pt.brewit.dto.SellerDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 // 관리자 매퍼
 @Mapper
@@ -30,5 +33,11 @@ public interface AdminMapper {
     int SelectCountPayment();
     int SelectCountTermEvent();
     int SelectCountToday();
+
+    //메인 차트
+
+    List<Map<String, Object>> selectMonthlyMemberCount(int year);
+    List<Map<String, Object>> selectMonthlyOrderCount(@Param("year") int year,@Param("logged_member") MemberDTO logged_member);
+    List<Map<String, Object>> selectMonthlyTermEventCount(@Param("year") int year,@Param("logged_member") MemberDTO logged_member);
 
 }

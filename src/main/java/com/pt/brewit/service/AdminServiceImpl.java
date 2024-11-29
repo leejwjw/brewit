@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.pt.brewit.mapper.AdminMapper;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service  // Service 기능을 하는 스프링빈이다~
 @RequiredArgsConstructor
@@ -80,4 +82,33 @@ public class AdminServiceImpl implements AdminService {
     public int getTodayCount() {
         return adminMapper.SelectCountToday();
     }
+
+    @Override
+    public List<Long> getMonthlyMemberCount(int year) {
+        List<Map<String, Object>> result = adminMapper.selectMonthlyMemberCount(year);
+        List<Long> memberCounts = new ArrayList<>();
+        for (Map<String, Object> row : result) {
+            memberCounts.add((Long) row.get("count"));
+        }
+        return memberCounts;
+    }
+    @Override
+    public List<Long> getMonthlyOrderCount(int year, MemberDTO logged_member) {
+        List<Map<String, Object>> result = adminMapper.selectMonthlyOrderCount(year, logged_member);
+        List<Long> orderCounts = new ArrayList<>();
+        for (Map<String, Object> row : result) {
+            orderCounts.add((Long) row.get("count"));
+        }
+        return orderCounts;
+    }
+    @Override
+    public List<Long> getMonthlyTermEventCount(int year, MemberDTO logged_member) {
+        List<Map<String, Object>> result = adminMapper.selectMonthlyTermEventCount(year, logged_member);
+        List<Long> termCounts = new ArrayList<>();
+        for (Map<String, Object> row : result) {
+            termCounts.add((Long) row.get("count"));
+        }
+        return termCounts;
+    }
+
 }

@@ -19,6 +19,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/admin_static/js/summernote-lite.js"></script>
     <script src="/admin_static/js/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="/admin_static/js/summernote-lite.css">
     <link
             rel="icon"
             type="image/png"
@@ -48,82 +49,6 @@
     />
     <link href="/admin_static/dist/css/style.min.css" rel="stylesheet" />
     <link href="/admin_static/dist/css/productStyle.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-
-    <![endif]-->
-    <style>
-        .preview-img {
-            max-width: 100%;
-            max-height: 200px;
-            object-fit: cover;
-        }
-        .image-container {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-top: 10px;
-            display: none; /* 초기에는 숨김 */
-            cursor: pointer; /* 클릭 가능하게 커서 변경 */
-        }
-        .image-placeholder {
-            width: 30%;
-            height: 500px;
-            border: 1px solid #5e5e5e;
-            color: #5e5e5e;
-            margin-bottom: 20px;
-            position: relative; /* 자식 요소를 절대 위치로 배치하기 위해 필요 */
-        }
-        .image-placeholder img {
-            max-width: 100%;
-            max-height: 100%;
-            position: absolute; /* 이미지가 네모 안에 위치하도록 설정 */
-            top: 0;
-            left: 0;
-            object-fit: cover; /* 이미지 비율 유지 */
-        }
-        div.col-md-6 {
-            width:90%;
-        }
-        div.card{
-            border-radius: 15px;
-        }
-        div.card > h2 {
-            margin: 0 auto;
-            padding: 30px 0;
-        }
-        div.card div.flex_box {
-            display: flex;
-            justify-content: center;
-            justify-items: center;
-            gap: 80px;
-        }
-        div.info_box{
-            width: 20%;
-        }
-        div.info_box > select{
-            width: 60%;
-        }
-
-        div.price_box {
-            margin: 0 auto;
-            width:55%
-        }
-        div.price_box input {
-            width: 200px;
-        }
-        div.price_box > div.input_box {
-            display: flex;
-        }
-        div.price_box > div.input_box > span {
-            padding: 15px 0 0 10px;
-            height: 0;
-            font-size: 14px;
-        }
-        div#summer_container {
-            max-width: 900px;
-        }
-    </style>
 </head>
 
 <body>
@@ -194,7 +119,6 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">상품 등록</h4>
                 </div>
             </div>
         </div>
@@ -202,17 +126,18 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card">
-                        <h2>상품 등록</h2>
+                        <h2 class="page_title">상품 등록</h2>
                             <form id="productForm" th:action="@{/admin/registProduct}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" id="attachOriginName" name="attach_origin_name">
                                 <input type="hidden" id="attachName" name="attach_name">
                                 <input type="hidden" name="info" id="info">
                                     <div class="flex_box">
                                     <div class="image-placeholder" id="imagePlaceholder">
-                                        상품 이미지를 클릭하여 등록하세요
-                                        <input type="file" id="productImage"  name="file" accept="image/*" style="display: none;">
+                                        <div class="camera_box">
+                                            <img th:src="@{/img/home/camera.png}" id="camera_img"/>
+                                            <input type="file" id="productImage"  name="file" accept="image/*" style="display: none;">
+                                        </div>
                                     </div>
-
                                     <div class="info_box">
                                         <label for="name" class="form-label">상품명</label>
                                         <input type="text" class="form-control" id="name" name="name" required>
@@ -228,12 +153,12 @@
                                             <option value="" disabled selected></option>
                                         </select>
                                         <label for="nation" class="form-label">원산지</label>
-                                        <input type="text" class="form-control" id="nation" name="nation" required>
-                                        <label for="weight" class="form-label">무게</label>
-                                        <input type="number" class="form-control" id="weight" name="weight" required>
+                                        <input type="text" class="form-control short" id="nation" name="nation" required >
+                                        <label for="weight" class="form-label">무게 <span class="small_text">(단위 : g)</span></label>
+                                        <input type="number" class="form-control short" id="weight" name="weight" required>
                                         <label for="nation" class="form-label">재고</label>
-                                        <input type="number" class="form-control" id="stock" name="stock" required>
-                                        <label class="form-label">카페인 유무 <span>(미체크시 없음)</span></label>
+                                        <input type="number" class="form-control short" id="stock" name="stock" required>
+                                        <label class="form-label">카페인 유무 <span class="small_text">(미체크시 없음)</span></label>
                                         <div>
                                             <div class="form-check" >
                                                 <input class="form-check-input" type="checkbox" name="is_caffeine" id="caffeineYes" value="true">
@@ -243,10 +168,10 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     </div>
                                     <div class="container" id="summer_container">
-                                        <textarea class="summernote" name="event_info"></textarea>
-                                    </div>
+                                        <textarea class="summernote" name="info"></textarea>
                                     </div>
                                     <div class="price_box">
                                         <label for="name" class="form-label">정상가</label>
@@ -265,12 +190,11 @@
                                             <span>(단위 : 원)</span>
                                         </div>
                                     </div>
-
                                     <div class="button_box">
                                             <button type="submit" class="btn btn-primary">등록하기</button>
-                                            <button class="btn btn-primary">목록으로</button>
+                                            <button class="btn btn-warning">목록으로</button>
                                     </div>
-                                </form>
+                            </form>
                     </div>
 
                 </div>

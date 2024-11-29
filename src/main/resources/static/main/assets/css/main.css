@@ -1686,6 +1686,13 @@ section,
 /*--------------------------------------------------------------
 # Faq Section
 --------------------------------------------------------------*/
+/* #faq 섹션의 상단 여백 없애기 */
+#faq {
+  margin-top: 0; /* 여백 제거 */
+  padding-top: 0; /* 상단 패딩 제거 */
+  height: 800px;
+  overflow-y:auto;
+}
 .faq .faq-container .faq-item {
   background-color: var(--surface-color);
   position: relative;
@@ -1726,6 +1733,7 @@ section,
   transition: 0.3s ease-in-out;
   visibility: hidden;
   opacity: 0;
+
 }
 
 .faq .faq-container .faq-item .faq-content p {

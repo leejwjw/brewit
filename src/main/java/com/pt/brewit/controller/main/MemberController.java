@@ -190,10 +190,10 @@ public class MemberController {
     @ResponseBody  // -> HTML 화면결과가 아닌, 데이터를 응답하겠다~~
     public String emailAvailAjax(String email) {
         log.info("Ajax email: {}", email);
-        String result = "사용가능합니다";
+        String result = "사용 가능한 이메일입니다.";
         MemberDTO memberDTO = memberMapper.selectOne(email);
         if (memberDTO != null) {
-            result = "이미사용중입니다..";
+            result = "이미 사용중인 이메일입니다.";
         }
         return result; // 문자열자체를 응답
     }

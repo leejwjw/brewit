@@ -3,11 +3,100 @@
 <!-- header fragments -->
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 <!-- header fragments close -->
+<!-- 약관 동의 화면 -->
+<div id="termsAgreement" class="container-fluid" >
+    <h2>약관 동의</h2>
+    <form action="" id="joinForm">
+
+        <!-- '모두 동의' 체크박스 -->
+        <div class="checkBox check01" style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="chkAll" style="margin-right: 10px;">이용약관, 개인정보 수집 및 이용(필수), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.</label>
+            <input type="checkbox" name="chkAll" id="chkAll" class="chkAll" onchange="chkAll(this.checked)">
+        </div>
+
+        <!-- '이용약관 동의(필수)' 체크박스 -->
+        <div class="checkBox check02" style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="chkTerms" style="margin-right: 10px;">이용약관 동의(필수)</label>
+            <input type="checkbox" name="chkTerms" id="chkTerms">
+        </div>
+        <textarea readonly style="width: 50%; height: 150px;">
+            제1조(목적) 이 약관은 BREWIT(전자상거래 사업자)가 운영하는 업체 BREWIT에서
+            제공하는 차 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어
+            BREWIT과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.
+            약관문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장
+            약관문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장문장
+        </textarea>
+
+        <!-- '개인정보 수집 및 이용' 체크박스 -->
+        <div class="checkBox check03" style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="chkPrivacy" style="margin-right: 10px;">개인정보 수집 및 이용에 대한 안내(필수)</label>
+            <input type="checkbox" name="chkPrivacy" id="chkPrivacy">
+        </div>
+        <textarea readonly style="width: 50%; height: 150px;">
+            개인정보보호법에 따라 BREWIT에 회원가입 신청하시는 분께 수집하는 개인정보의 항목,
+            개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에
+            관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다. 이용자는 회원가입을 하지 않아도
+            정보 검색, 뉴스 보기 등 대부분의 BREWIT 서비스를 회원과 동일하게 이용할 수 있습니다.
+        </textarea>
+
+        <!-- '이벤트 등 프로모션 알림 메일 수신' 체크박스 -->
+        <div class="checkBox check03" style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="chkPromotion" style="margin-right: 10px;">이벤트 등 프로모션 알림 메일 수신(선택)</label>
+            <input type="checkbox" name="chkPromotion" id="chkPromotion">
+        </div>
+
+        <!-- '취소'와 '다음으로' 버튼 -->
+        <div class="footBtwrap clearfix" style="display: flex; gap: 10px; margin-top: 20px;">
+            <button type="button" class="btn btn-danger text-white" onclick="disagreement()">취소</button>
+            <button type="button" class="btn btn-success text-white" onclick="agreement()">다음으로</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    // 모두 동의 체크박스 클릭 시 동작
+    function chkAll(isChecked) {
+        // 모든 체크박스를 선택 (chkAll을 제외한 모든 체크박스)
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#chkAll)');
+
+        // 모든 체크박스를 체크 또는 해제
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = isChecked;
+        });
+    }
+    // "다음으로" 버튼 클릭 시
+    function agreement() {
+        const chkTerms = document.querySelector('#chkTerms');
+        const chkPrivacy = document.querySelector('#chkPrivacy');
+
+        if (chkTerms.checked && chkPrivacy.checked) {
+            // 약관 동의 화면 숨기기
+            document.getElementById("termsAgreement").style.display = "none";
+            // 회원가입 폼 보이기
+            document.getElementById("form").style.display = "block";
+            agree = true;  // 동의한 상태로 설정
+        } else {
+            alert("필수 항목에 동의하지 않았습니다.");
+            agree = false;
+        }
+    }
+    // "취소" 버튼 클릭 시
+    function disagreement() {
+        alert("이용약관 필수사항에 동의하시지 않으셨습니다.");
+        agree = false;
+        // 1초 후 홈 페이지로 이동
+        setTimeout(function() {
+            window.location.href = '/'; // 홈 페이지로 리디렉션
+        }, 1000);
+    }
+</script>
+
     <th:block th:fragment="content">
         <div class="container-fluid">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-6">
-                    <form action="" th:action th:object="${member}" method="post" id="form" name="inputForm" onsubmit="return fieldCheck()">
+                    <form action="" th:action th:object="${member}" method="post" id="form" name="inputForm" onsubmit="return fieldCheck()" style="display: none;">
                     <table>
                     <div class="card-body">
                         <h6 class="card-title" th:align="center" th:border="4">회원가입</h6>
@@ -15,7 +104,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-sm-3 text-end control-label col-form-label">Email*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" th:field="*{email}" name="email" id="email" placeholder="Email Here">
+                                <input type="text" class="form-control" th:field="*{email}" name="email" id="email" placeholder="Email">
                             </div>
                         </div>
                         <br/>
@@ -29,49 +118,49 @@
                         <div class="form-group row">
                             <label for="lllname" class="col-sm-3 text-end control-label col-form-label">비밀번호*</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" th:field="*{password}" id="lllname" name="password" placeholder="Last Name Here">
+                                <input type="password" class="form-control" th:field="*{password}" id="lllname" name="password" placeholder="비밀번호">
                             </div>
                         </div>
                         <br/>
                         <div class="form-group row">
                             <label for="lname" class="col-sm-3 text-end control-label col-form-label">비밀번호 확인*</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" id="lname" name="pwch" placeholder="비밀번호 Here">
+                                <input type="password" class="form-control" id="lname" name="pwch" placeholder="비밀번호 확인">
                             </div>
                         </div>
                         <br/>
                         <div class="form-group row">
                             <label for="tname" class="col-sm-3 text-end control-label col-form-label">이름*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" th:field="*{name}" id="tname" name="name" placeholder="이름 Here">
+                                <input type="text" class="form-control" th:field="*{name}" id="tname" name="name" placeholder="이름">
                             </div>
                         </div>
                         <br/>
                         <div class="form-group row">
                             <label for="cono1" class="col-sm-3 text-end control-label col-form-label">휴대폰*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" th:field="*{cellphone}" id="cono1" name="cellphone" placeholder="휴대폰 번호 Here">
+                                <input type="text" class="form-control" th:field="*{cellphone}" id="cono1" name="cellphone" placeholder="휴대폰 번호">
                             </div>
                         </div>
                         <br/>
                         <div class="form-group row">
                             <label for="cono11" class="col-sm-3 text-end control-label col-form-label">전화번호</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" th:field="*{telephone}" id="cono11" name="telephone" placeholder="전화번호 Here">
+                                <input type="text" class="form-control" th:field="*{telephone}" id="cono11" name="telephone" placeholder="전화번호">
                             </div>
                         </div>
                         <br/>
                         <div class="form-group row">
                             <label for="cono2" class="col-sm-3 text-end control-label col-form-label">주소*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" th:field="*{address1}" id="cono2" name="address1" placeholder="주소 Here">
+                                <input type="text" class="form-control" th:field="*{address1}" id="cono2" name="address1" placeholder="주소">
                             </div>
                         </div>
                         <br/>
                         <div class="form-group row">
                             <label for="cono3" class="col-sm-3 text-end control-label col-form-label">상세주소</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" th:field="*{address2}" id="cono3" name="address2" placeholder="상세주소 Here">
+                                <input type="text" class="form-control" th:field="*{address2}" id="cono3" name="address2" placeholder="상세주소">
                             </div>
                         </div>
                         <br/>

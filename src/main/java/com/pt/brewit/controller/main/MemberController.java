@@ -52,7 +52,7 @@ public class MemberController {
 
         // DB에서 구매전체목록가져와 화면에 전달
         List<PaymentDTO> lists = memberService.getPayments(memberId);
-        //List<ProductDTO> prolists = memberService.getPayments();
+        log.info("payments lists: {}", lists);
         model.addAttribute("lists", lists);
 
         return "/main/members/paylists";

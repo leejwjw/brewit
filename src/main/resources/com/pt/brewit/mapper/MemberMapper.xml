@@ -57,7 +57,7 @@
     </select>
 
     <select id="selectAllPayments" resultType="PaymentDTO">
-        select a.product_id,a.member_id,a.seller_id,a.amount,a.price,c.name as product_name
+        select a.product_id,a.member_id,a.seller_id,b.amount as amount,a.price,b.status,c.name as product_name
         from tb_order a
             ,tb_payment b
             ,tb_product c

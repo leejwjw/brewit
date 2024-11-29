@@ -83,7 +83,7 @@ public class MemberController {
         int result = memberService.register(member, au);
         log.info("newPro - result : {}", result);
 
-        return "redirect:/"; // 페이지 이동 = "/" 경로 코드로 요청 -> @..Mapping("/") 메소드호출
+        return "/main/members/newCon"; // 페이지 이동 = "/" 경로 코드로 요청 -> @..Mapping("/") 메소드호출
     }
 
     // 회원 판매자전환 폼 요청

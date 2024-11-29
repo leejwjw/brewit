@@ -57,6 +57,16 @@ public class MemberController {
 
         return "/main/members/paylists";
     }
+    // 구매 목록 환불 요청
+    @PostMapping("/paymentRefund/{payment_id}")
+    @ResponseBody
+    public String paymentRefund(@PathVariable("payment_id") int payment_id){
+        log.info("paymentRefund payment_id: {}", payment_id);
+        // 환불 신청 처리
+        String status = "refunded";
+        int result = memberService.updatePayment(payment_id,status);
+        return "ok";
+    }
 
     // 회원 가입 폼 요청
     @GetMapping("/new")
@@ -108,8 +118,6 @@ public class MemberController {
         log.info("newTrans - member_id : {}", member_id);
         log.info("newTrans - member : {}", member);
         log.info("newTrans - seller : {}", seller);
-
-
 
          // 판매자전환 처리
         //seller.setStatus("inactive");

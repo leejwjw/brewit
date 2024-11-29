@@ -36,11 +36,8 @@ public interface MemberMapper {
     public int deleteMember(String username);
     // 권한 정보 수정 삭제
     public void deleteAuth(String username);
-
-
-
-
-
+    //환불처리
+    public int updatePayment(int payment_id, String status);
     // 회원 전체 조회
     List<MemberDTO> selectAll();
     // id로 회원 1명 조회

@@ -64,6 +64,10 @@ public class MemberRepositoryImpl implements MemberRepository {
     public List<PaymentDTO> findAll(int memberId) {
         return memberMapper.selectAllPayments(memberId);
     }
+    @Override
+    public int updatePayment(int payment_id ,String status) {
+        return memberMapper.updatePayment(payment_id,status);
+    }
 
     @Override
     public int updateMember(MemberDTO member) {

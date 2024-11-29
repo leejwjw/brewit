@@ -10,23 +10,59 @@
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">구매목록</span>
-                    <span class="badge bg-primary rounded-pill">4</span>
                 </h4>
                 <ul class="list-group mb-3" th:each="payment : ${lists}">
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">Product name</h6>
-                            <small class="text-body-secondary" th:text="${payment.product_name}">product_name</small>
+                            <h6 class="my-0">구매번호</h6>
+                            <small class="text-body-secondary" th:text="${payment.payment_id}">payment_id</small>
                         </div>
-                          <span class="text-body-secondary" th:text="${payment.amount}">amount</span>
                         <div>
-                            <span class="text-body-secondary"><a href="#" class="btn btn-primary">환불신청</a></span>
+                            <span class="text-body-secondary">
+                            <h6 class="my-0">상품명</h6>
+                            <small class="text-body-secondary" th:text="${payment.product_name}">product_name</small>
+                        </span>
+                        </div>
+                          <span class="text-body-secondary">
+                            <h6 class="my-0">구매가격(원)</h6>
+                            <small class="text-body-secondary" th:text="${payment.amount}">amount</small>
+                          </span>
+                        <div>
+                        </div>
+                        <span class="text-body-secondary">
+                            <h6 class="my-0">구매상태</h6>
+                            <small class="text-body-secondary" th:text="${payment.status}">status</small>
+                          </span>
+                        <div>
+                          <span class="text-body-secondary"><button type="button" th:data-payid="${payment.payment_id}" class="btn btn-primary refundBtn">환불신청</button></span>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('.refundBtn').click(function(){
+                let payment_id = $(this).data('payid');
+                $.ajax({
+                    url: '/main/paymentRefund/' + payment_id,
+                    type: 'POST',
+                    success: function(result){
+                        console.log("환불 신청 요청 성공!");
+                        console.log(result);
+                        // 성공시, 화면 변경 처리 -> 모달/alert 띄우고 -> 새로 현재 페이지 요청
+                        alert("환불 신청 처리 되었습니다"); // or 모달
+                        window.location.href="/"; // or reload
+                    },
+                    error: function(e){
+                        console.log("환불신청 처리 실패...");
+                        console.log(e);
+                    }
+                });
+            });
+        });
+    </script>
 </th:block>
 <!-- Footer Fragments -->
 <th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>

@@ -29,5 +29,6 @@ public interface MemberRepository {
     public int updateSeller(MemberDTO member);
     // 회원 정보 삭제
     public int deleteMember(String username);
-
+    //환불처리
+    public int updatePayment(int payment_id,String status);
 }

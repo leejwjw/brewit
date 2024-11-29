@@ -25,4 +25,6 @@ public interface MemberService {
     public int updateSeller(MemberDTO member);
     // 회원 삭제
     public int deleteMember(String username);
+    //구매환불처리
+    int updatePayment(int payment_id, String status);
 }

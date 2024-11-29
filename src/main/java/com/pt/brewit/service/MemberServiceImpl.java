@@ -77,4 +77,8 @@ public class MemberServiceImpl implements MemberService{
         int result = memberRepository.deleteMember(username);
         return result;
     }
+    @Override
+    public int updatePayment(int payment_id, String status) {
+        return memberRepository.updatePayment(payment_id,status);
+    }
 }

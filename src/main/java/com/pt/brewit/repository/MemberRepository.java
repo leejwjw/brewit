@@ -22,7 +22,7 @@ public interface MemberRepository {
     // 회원 1명 member_id 조회 findBySellerId
     public SellerDTO findBySellerId(int memberId);
     // 구매 목록 조회
-    public List<PaymentDTO> findAll();
+    public List<PaymentDTO> findAll(int memberId);
     // 회원 정보 수정
     public int updateMember(MemberDTO member);
     // 회원 정보 수정

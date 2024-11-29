@@ -61,7 +61,7 @@
         from tb_order a
             ,tb_payment b
             ,tb_product c
-        where a.member_id = 22
+        where a.member_id = #{member_id}
         and   a.order_num = b.order_num
         and   a.product_id = c.product_id
     </select>

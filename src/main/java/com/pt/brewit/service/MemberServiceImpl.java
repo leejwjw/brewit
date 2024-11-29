@@ -59,9 +59,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public List<PaymentDTO> getPayments() {
-        return memberRepository.findAll();
-    }
+    public List<PaymentDTO> getPayments(int memberId) { return memberRepository.findAll(memberId);}
 
     @Override
     public int updateMember(MemberDTO member) {

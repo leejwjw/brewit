@@ -27,7 +27,7 @@ public interface MemberMapper {
     public SellerDTO selectSellerByMemberId(int memberId);
 
     // 구매 목록 조회
-    public List<PaymentDTO> selectAllPayments();
+    public List<PaymentDTO> selectAllPayments(int memberId);
     // 회원 정보 수정
     public int updateMember(MemberDTO member);
     // 회원 정보 수정

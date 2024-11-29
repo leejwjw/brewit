@@ -40,13 +40,18 @@ public class MemberController {
     }*/
 
     // 구매 목록 페이지 요청
-    @GetMapping ("/payments")
-    public String payments(ProductDTO products, PaymentDTO payments, Model model) {
+    @GetMapping ("/payments/{email}")
+    public String payments(@PathVariable("email") String username, Model model) {
         log.info("GET /payments 구매 목록 요청!");
-        log.info("products: {}", products);
-        log.info("payments: {}", payments);
+        log.info("payments username: {}", username);
+
+        MemberDTO member = memberService.getMember(username);
+        log.info("payments member: {}", member);
+        int memberId = member.getMember_id();
+        model.addAttribute("member", member);
+
         // DB에서 구매전체목록가져와 화면에 전달
-        List<PaymentDTO> lists = memberService.getPayments();
+        List<PaymentDTO> lists = memberService.getPayments(memberId);
         //List<ProductDTO> prolists = memberService.getPayments();
         model.addAttribute("lists", lists);
 

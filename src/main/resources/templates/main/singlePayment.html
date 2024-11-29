@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Header Fragments -->
+<th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
+<!-- Header Fragments Close -->
+<main class="container mt-4">
+    <div class="mt-3 mb-3">
+        <h2 class="team" style="text-align: center; font-weight: bold;">상품 구매</h2>
+    </div>
+    <!-- 상품 정보 섹션 -->
+    <div class="col mt-4">
+        <div class="row-md-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">상품 정보</div>
+                <div class="card-body">
+                    <div>
+                        <p>
+                            <img th:src="@{/admin/img/product/{attach_name}(attach_name=${productData.attach_name})}"
+                                 alt="상품 이미지" class="img-thumbnail" style="width: 200px; height: auto;">
+                        </p>
+                        <p>상품명: <span th:text="${productData.name}">[상품명]</span></p>
+                        <hr/>
+                        <del>상품 금액: <span th:text="${productData.regular_price}">0</span></del>
+                        <p>할인율: <span th:text="${productData.discount}">0</span>%</p>
+                        <hr/>
+                        <p>결제 금액: <span th:text="${productData.sale_price}">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 결제 정보 섹션 -->
+    <div class="row mt-4 align-items-center">
+        <!-- 상품 금액 -->
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header bg-primary text-white">상품 금액</div>
+                <div class="card-body">
+                    <h4><strong id="regularPrice" th:text="${productData.regular_price}">0</strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- 할인 금액 -->
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header bg-warning text-white">할인 금액</div>
+                <div class="card-body">
+                    <h4><strong id="discountPrice" th:text="${#numbers.formatInteger(productData.discount_price,3,'COMMA') + '원'}">0</strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- 배송비 -->
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header bg-secondary text-white">배송비</div>
+                <div class="card-body">
+                    <h4><strong id="shippingFee">무료</strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결제 금액 -->
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header bg-success text-white">결제 금액</div>
+                <div class="card-body">
+                    <h4><strong id="finalPrice" th:text="${productData.sale_price}">0</strong></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 사용자 정보 섹션 -->
+<!--
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">배송지 정보</div>
+                <div class="card-body">
+                    <form id="orderForm">
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">수령인 이름</label>
+                            <input type="text" id="customerName" class="form-control" placeholder="수령인 이름을 입력하세요"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerPhone" class="form-label">전화번호</label>
+                            <input type="tel" id="customerPhone" class="form-control" placeholder="전화번호를 입력하세요"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerAddress" class="form-label">주소</label>
+                            <input type="text" id="customerAddress" class="form-control" placeholder="배송지 주소를 입력하세요"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deliveryNote" class="form-label">배송 요청사항</label>
+                            <textarea id="deliveryNote" class="form-control" placeholder="요청사항을 입력하세요"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>  -->
+
+    <!--  결제 방법 섹션 -->
+    <div class="row mt-4">
+        <h3 class="title-list">결제방법</h3>
+    </div><!--// list-head -->
+
+    <div>
+        <label>
+            <i class="bi bi-credit-card"></i>
+            <span>일반결제</span>
+        </label>
+    </div>
+    <div>
+
+        <ul class="radio-grid-span3">
+            <li>
+                <div class="custom-radio">
+                    <input type="radio" id="radio-grid-5" class="radio-box-grid" name="payType" value="VBANK">
+                    <label for="radio-grid-5"><em class="txt"><i class="ico-pay-vbank"></i><span
+                            class="pay-name">무통장입금</span></em></label>
+                </div>
+            </li>
+            <li>
+                <div class="custom-radio">
+                    <input type="radio" id="radio-grid-8" class="radio-box-grid" name="payType" value="KAKAOPAY">
+                    <label for="radio-grid-8"><em class="txt"><i class="ico-pay-kakao" title="카카오페이"></i><span
+                            class="pay-name blind">카카오페이</span></em></label>
+                </div>
+            </li>
+
+            <div class="payment-detail VBANK divide-line payment-detail-sub bottom-line ">
+                <div class="payment-box">
+                    <div class="inner">
+                        <div class="input-group">
+                            <label for="div_pay_vbank" class="input-group-txt">입금은행</label>
+                            <input type="hidden" name="payVbank">
+                            <div class="ui-select select-box" data-value="" id="div_pay_vbank">
+                                <a href="#none" class="select-value" onclick="return false;"><span>입금은행</span></a>
+                                <div class="select-list">
+                                    <ul>
+                                        <li class="first"><a href="#none"
+                                                             onclick="return false;"><span>입금은행을 선택하세요.</span></a></li>
+                                        <li data-name="003"><a href="#none" onclick="return false;"><span>기업</span></a>
+                                        </li>
+                                        <li data-name="004"><a href="#none" onclick="return false;"><span>국민</span></a>
+                                        </li>
+                                        <li data-name="011"><a href="#none" onclick="return false;"><span>농협</span></a>
+                                        </li>
+                                        <li data-name="023"><a href="#none"
+                                                               onclick="return false;"><span>SC제일</span></a></li>
+                                        <li data-name="020"><a href="#none" onclick="return false;"><span>우리</span></a>
+                                        </li>
+                                        <li data-name="081"><a href="#none" onclick="return false;"><span>하나</span></a>
+                                        </li>
+                                        <li data-name="031"><a href="#none" onclick="return false;"><span>대구</span></a>
+                                        </li>
+                                        <li data-name="032"><a href="#none" onclick="return false;"><span>부산</span></a>
+                                        </li>
+                                        <li data-name="071"><a href="#none" onclick="return false;"><span>우체국</span></a>
+                                        </li>
+                                        <li data-name="088"><a href="#none" onclick="return false;"><span>신한</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!--// input-group -->
+                        <div class="input-group">
+                            <label for="item-101" class="input-group-txt">입금자명</label>
+                            <input type="text" id="item-101" name="depositNm" class="input-text" placeholder="입금자명">
+                        </div><!--// input-group -->
+                        <div class="payment-added-guide cash-receipt-guide">
+                            <!-- 현금영수증 발행 이전소스 -->
+                            <!-- 현금영수증 발행 -->
+                            <div class="cash-re-con">
+                                <span class="cash-receipt-title">현금영수증</span>
+                                <ul>
+                                    <li class="custom-radio"><input type="radio" name="cash_re" value="Y"
+                                                                    id="cash-receipt1" class="radio cash-re-rd"><label
+                                            for="cash-receipt1">발급신청</label></li>
+                                    <li class="custom-radio"><input type="radio" name="cash_re" value="N"
+                                                                    id="cash-receipt2" class="radio cash-re-rd" checked><label
+                                            for="cash-receipt2">신청안함</label></li>
+                                </ul>
+                            </div>
+
+                            <!-- 현금영수증 체크시 -->
+                            <div class="ui-select-receipt-wrap hide">
+                                <div class="ui-select-receipt ">
+                                    <div class="input-group">
+                                        <div class="input-group-form">
+                                            <input type="hidden" name="cashType" value="1"/>
+                                            <div class="ui-select select-box w140" data-value="1" id="div_cash_type">
+                                                <a href="#none" class="select-value" onclick="return false;">
+                                                            <span>
+
+                                                                        휴대폰번호
+                                                                    </span>
+                                                </a>
+                                                <div class="select-list">
+                                                    <ul>
+                                                        <li data-name="1"><a href="#none" onclick="return false;"><span>휴대폰번호</span></a>
+                                                        </li>
+                                                        <li data-name="2"><a href="#none" onclick="return false;"><span>사업자번호</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="text" title="번호입력" maxlength="11" name="cashRegNum"
+                                               id="cash-reg-num" class="input-text" placeholder="숫자만 입력하세요"
+                                               onkeydown="return numberOnly(event)" onkeyup="removeChar(event)"
+                                               value="">
+                                    </div>
+                                    <input type="hidden" name="cashSaveYn" value="N"/>
+                                    <div class="custom-checkbox">
+                                        <input type="checkbox" id="cash-re-s" class="checkbox" name="cash_re_s"><label
+                                            for="cash-re-s">신청정보 저장</label>
+                                    </div>
+                                </div>
+                                <!--// 현금영수증 체크시 -->
+
+                                <!-- 현금영수증 저장노출 -->
+                                <!--// 현금영수증 저장노출 -->
+                            </div>
+                            <p class="text-guide-md">7일 이내 미 입금 시, 주문이 자동 취소됩니다.</p>
+                            <p class="text-guide-md">발급된 계좌에 입금자명과 금액을 정확하게 입금해주세요.</p>
+                        </div>
+                    </div><!--// inner -->
+                </div><!--// payment-box -->
+            </div>
+            <!--// 무통장입금 선택시 -->
+            <!-- 결제 안내 문구 -->
+            <div class="payment-detail bottom-line ">
+                <div class="inner-txt">
+                    <div class="admin-txt paymentDetailInfo">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 결제 버튼 섹션 -->
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-outline-secondary me-2" th:onclick="history.go(-1)">주문 취소하기
+                    </button>
+                    <button type="button" class="btn btn-success" id="confirmOrder">
+                        <strong th:text="${productData.sale_price}"></strong> 결제하기
+                    </button>
+                </div>
+            </div>
+</main>
+
+<!-- Footer Fragments -->
+<th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
+<!-- /Footer Fragments Close -->
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>
+
+<!-- Scripts -->
+<script>
+    $(document).ready(function () {
+        // 결제 버튼 이벤트 핸들러
+        $("#confirmOrder").on("click", function () {
+            alert("결제가 완료되었습니다.");
+            // 결제 로직 추가
+        });
+    });
+</script>
+</body>
+
+</html>

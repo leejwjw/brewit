@@ -12,21 +12,20 @@
     <div class="row gy-4">
         <!-- 상품 상세 정보 -->
         <div class="col-lg-6 d-flex align-items-stretch">
-            <form action="" th:action method="post" enctype="multipart/form-data">
-                <div class="team-member">
-                    <!-- 상품 이미지 -->
-                    <div class="member-img">
-                        <img th:src="@{/admin/img/product/{attach_name}(attach_name=${productDetail.attach_name})}" class="img-fluid img-set" th:alt="${productDetail.attach_name}">
-                    </div>
+            <div class="team-member">
+                <!-- 상품 이미지 -->
+                <div class="member-img" th:data-attach-name="${productDetail.attach_name}">
+                    <img th:src="@{/admin/img/product/{attach_name}(attach_name=${productDetail.attach_name})}"
+                         class="img-fluid img-set" th:alt="${productDetail.attach_name}">
                 </div>
-            </form>
+            </div>
         </div>
 
         <!-- 상품 정보 영역 -->
         <div class="col-lg-6 d-flex align-items-stretch">
             <div class="member-info mb-5">
                 <!-- 상품명 -->
-                <h2><strong th:text="${productDetail.name}"></strong></h2>
+                <h2><strong id="productName" th:text="${productDetail.name}"></strong></h2>
                 <!-- 적립 혜택 -->
                 <p class="mt-3 benefit">
                     구매 혜택: 적립 포인트 5%<br>
@@ -35,11 +34,11 @@
                 <!-- 상품 가격 -->
                 <div>
                     <del class="regular_price">정상가:
-                        <span th:text="${productDetail.regular_price}"></span><span>원</span>
+                        <span id="productRegularPrice" th:text="${#numbers.formatInteger(productDetail.regular_price,3,'COMMA') + '원'}"></span><span></span>
                     </del>
                     <h4>
-                        <p>할인율:&nbsp;<strong class="num_color_red mt-3" th:text="${productDetail.discount_percent}"></strong>%</p>
-                        <p id="total-price">할인 적용가:&nbsp; <strong th:text="${productDetail.sale_price}"></strong> 원 </p>
+                        <p>할인율:&nbsp;<strong class="num_color_red mt-3" id="productDiscount" th:text="${productDetail.discount_percent}"></strong>%</p>
+                        <p id="total-price">할인 적용가:&nbsp; <strong id="productSalePrice" th:text="${#numbers.formatInteger(productDetail.sale_price,3,'COMMA') + '원'}"></strong></p>
                     </h4>
                 </div>
 
@@ -61,25 +60,29 @@
 </div>
 <div class="container">
     <div class="row gy-4">
-            <div class="member-info mb-3">
-                <!-- 추가 정보 -->
-                <div class="product_tab container" style=justify-content:center;>
-                    <h2> <strong class="sort-item">제품 상세 정보</strong></h2>
-                </div>
-                <div style="text-align: center;">
-                    <h5 class="mt-3" th:utext="${productDetail.info}"></h5>
-<!--                    <img th:src="@{/img/product/{attach_info}(attach_info=${productDetail.attach_info})}" th:alt="${productDetail.attach_info}">-->
-                </div>
+        <div class="member-info mb-3">
+            <!-- 추가 정보 -->
+            <div class="product_tab container" style=justify-content:center;>
+                <h2><strong class="sort-item">제품 상세 정보</strong></h2>
             </div>
-            <div>
-                <button type="button" class="btn btn-outline-purple mr-3" th:onclick="history.go(-1)">목록으로</button>
+            <div style="text-align: center;">
+                <h5 class="mt-3" th:utext="${productDetail.info}"></h5>
+                <!--                    <img th:src="@{/img/product/{attach_info}(attach_info=${productDetail.attach_info})}" th:alt="${productDetail.attach_info}">-->
             </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-outline-purple mr-3" th:onclick="history.go(-1)">목록으로</button>
+        </div>
     </div>
 </div>
 
-<!-- Scroll Top -->
-<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- Footer Fragments -->
+<th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
+<!-- /Footer Fragments Close -->
 
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
 
 <!-- Custom Script -->
@@ -100,7 +103,7 @@
             // quantity 의 값을 가져와 int 로 파싱 값이 없거나, 유요한 값이 아닐때 기본값(1)을 설정
             const currentQuantity = parseInt($("#quantity").val()) || 1;
             // th:data - stock 으로 저장한 재고수량을 최대값으로 설정
-            const maxQuantity = parseInt($("#quantity").attr("data-stock")||100); // 최대 기본값 설정.
+            const maxQuantity = parseInt($("#quantity").attr("data-stock") || 100); // 최대 기본값 설정.
 
             if (currentQuantity < maxQuantity) {
                 $("#quantity").val(currentQuantity + 1);
@@ -146,9 +149,68 @@
             alert("장바구니에 상품이 추가되었습니다.");
         });
 
-        // 구매하기 버튼 클릭
+
+        // 쿠키 설정
+        function setCookie(name, value, days) {
+            // 1. 현재 시간을 기준으로 쿠키의 유효기간 설정.
+            const date = new Date();
+            // 입력받은 일 수(days)를 밀리초로 변환하여 현재 시간에 더함.
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            // 쿠키의 만료일을 UTC 형식으로 설정.
+            const expires = "expires=" + date.toUTCString();
+
+
+            // 2. 쿠키를 설정.
+            document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+            // 쿠키 이름(name)과 값(value)을 설정하고, 만료일과 경로를 함께 추가.
+        }
+
+
+
+        // 쿠키 읽기
+        function getCookie(name) {
+            // 1. 현재 브라우저에 저장된 쿠키를 세미콜론과 공백("; ")을 기준으로 분리하여 배열로 만듦.
+            const cookieArr = document.cookie.split("; ");
+
+            // 2. 쿠키 배열에서 해당 이름(name)을 가진 쿠키를 탐색.
+            for (const cookie of cookieArr) {
+                // 쿠키를 "이름=값" 형식으로 분리하여 이름(key)과 값(val)을 추출.
+                const [key, val] = cookie.split("=");
+
+                // 쿠키 이름이 요청한 이름(name)과 일치하는 경우.
+                if (key === name) {
+                    // 값을 URI 디코딩하여 반환.
+                    return decodeURIComponent(val);
+                }
+            }
+
+            // 3. 해당 이름의 쿠키가 없을 경우 null 반환.
+            return null;
+        }
+
+
+        // 구매하기 버튼 클릭 시 실행되는 이벤트 핸들러.
         $("#buy").on("click", function () {
-            alert("구매 페이지로 이동합니다.");
+            const attachName = $(".member-img").data("attach-name"); // attach_name 값 추출
+            // 2. HTML 요소에서 상품 정보를 추출하여 객체로 생성.
+            const productData = {
+                // 상품명 데이터를 HTML 요소의 텍스트 콘텐츠에서 가져옴.
+                name: document.getElementById('productName').textContent,
+                discount: document.getElementById('productDiscount').textContent,
+                regular_price: document.getElementById('productRegularPrice').textContent,
+                sale_price: document.getElementById('productSalePrice').textContent,
+                attach_name: attachName, // attach_name 값 추가
+            };
+
+            // 3. 생성한 `productData` 객체를 JSON 문자열로 변환하여 쿠키에 저장.
+            // "productData"라는 이름의 쿠키에 JSON 문자열 데이터를 저장. 쿠키의 유효기간은 1일로 설정.
+            setCookie("productData", JSON.stringify(productData), 1);
+
+            // 콘솔에 저장된 데이터를 출력하여 디버깅 용도로 사용.
+            console.log("SaveCookie:", productData);
+
+            // 4. 구매 정보를 확인하는 singlePayment 페이지로 브라우저를 리디렉션.
+            window.location.href = "/products/order/singlePayment";
         });
     });
 </script>

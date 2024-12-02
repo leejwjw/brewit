@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class OrderDTO {
     private int order_num;          // 주문 번호
-    private int product_ud;         // 제품 ID
+    private int product_id;         // 제품 ID
     private Integer member_id;      // 회원 ID (nullable)
     private Integer seller_id;      // 판매자 ID (nullable)
     private int amount;            // 수량

@@ -1,13 +1,13 @@
 package com.pt.brewit.controller.main;
 
-import com.pt.brewit.dto.EventProductDTO;
-import com.pt.brewit.dto.PageDTO;
-import com.pt.brewit.dto.Pager;
-import com.pt.brewit.dto.ProductDTO;
+import com.pt.brewit.dto.*;
+import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.EventProductService;
+import com.pt.brewit.service.MemberService;
 import com.pt.brewit.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,7 @@ import java.util.List;
 public class CoffeeController {
 
     private final ProductService productService;
+    private final MemberService memberService;
 
     // 커피 통합 요청
     @GetMapping("/{subcategory_id}")
@@ -58,10 +59,13 @@ public class CoffeeController {
     
     // 커피 상세 페이지 호출
     @GetMapping("/{subcategory_id}/{product_id}")
-    public String productDetail(@PathVariable("subcategory_id") int subcategory_id, @PathVariable("product_id") int product_id, Model model) {
+    public String productDetail(@PathVariable("subcategory_id") int subcategory_id, @PathVariable("product_id") int product_id, Model model, @AuthenticationPrincipal CustomUser user) {
         ProductDTO productDetail = productService.getProductById(product_id);
+        // member id 추출
+        MemberDTO memberDetail = memberService.getMember(user.getUsername());
         log.info("product:{}", productDetail);
         model.addAttribute("productDetail", productDetail);
+        model.addAttribute("memberDetail",memberDetail);
         return "main/productDetail";
     }
 }

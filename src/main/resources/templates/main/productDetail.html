@@ -34,11 +34,15 @@
                 <!-- 상품 가격 -->
                 <div>
                     <del class="regular_price">상품 금액:
-                        <span id="productRegularPrice" th:text="${#numbers.formatInteger(productDetail.regular_price,3,'COMMA') + '원'}"></span><span></span>
+                        <span id="productRegularPrice"
+                              th:text="${#numbers.formatInteger(productDetail.regular_price,3,'COMMA') + '원'}"></span><span></span>
                     </del>
                     <h4>
-                        <p>할인율:&nbsp;<strong class="num_color_red mt-3" id="productDiscount" th:text="${productDetail.discount_percent}"></strong>%</p>
-                        <p id="total-price">결제 금액:&nbsp; <strong id="productSalePrice" th:text="${#numbers.formatInteger(productDetail.sale_price,3,'COMMA') + '원'}">12,000원</strong></p>
+                        <p>할인율:&nbsp;<strong class="num_color_red mt-3" id="productDiscount"
+                                             th:text="${productDetail.discount_percent}"></strong>%</p>
+                        <p id="total-price">결제 금액:&nbsp; <strong id="productSalePrice"
+                                                                 th:text="${#numbers.formatInteger(productDetail.sale_price,3,'COMMA') + '원'}">12,000원</strong>
+                        </p>
                     </h4>
                 </div>
 
@@ -75,6 +79,12 @@
         </div>
     </div>
 </div>
+
+<!-- 숨김 처리로 데이터 추출 -->
+<input type="hidden" id="productId" th:value="${productDetail.product_id}"/>
+<input type="hidden" id="memberId" th:value="${memberDetail.member_id}"/>
+<input type="hidden" id="sellerId" th:value="${productDetail.seller_id}"/>
+
 
 <!-- Footer Fragments -->
 <th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
@@ -165,8 +175,6 @@
             // 쿠키 이름(name)과 값(value)을 설정하고, 만료일과 경로를 함께 추가.
         }
 
-
-
         // 쿠키 읽기
         function getCookie(name) {
             // 1. 현재 브라우저에 저장된 쿠키를 세미콜론과 공백("; ")을 기준으로 분리하여 배열로 만듦.
@@ -188,13 +196,12 @@
             return null;
         }
 
-
         // 구매하기 버튼 클릭 시 실행되는 이벤트 핸들러.
         $("#buy").on("click", function () {
             // attach_name 값 추출
             const attachName = $(".member-img").data("attach-name");
             // 제품 수량 값 추출
-            const productQuantity = parseInt($("#quantity").val())
+            const productQuantity = parseInt($("#quantity").val());
 
             // 기존 상품 가격, 할인 미적용 / 할인 금액 계산 여기서 로직 처리
 
@@ -206,17 +213,22 @@
                 regular_price: document.getElementById('productRegularPrice').textContent,
                 sale_price: document.getElementById('productSalePrice').textContent,
                 attach_name: attachName, // attach_name 값 추가
-                quantity:productQuantity // 제품 수량 값 추가
+                quantity: productQuantity, // 제품 수량 추가
+
+                // 제품 구매를 위한 값 전달
+                product_id: $("#productId").val(),
+                seller_id: $("#sellerId").val(),
+                member_id: $("#memberId").val()
             };
 
             // 3. 생성한 `productData` 객체를 JSON 문자열로 변환하여 쿠키에 저장.
             // "productData"라는 이름의 쿠키에 JSON 문자열 데이터를 저장. 쿠키의 유효기간은 1일로 설정.
             setCookie("productData", JSON.stringify(productData), 1);
 
-            // 콘솔에 저장된 데이터를 출력하여 디버깅 용도로 사용.
+            // 콘솔에 저장된 데이터를 출력하여 재확인 용도로 사용.
             console.log("SaveCookie:", productData);
 
-            // 4. 구매 정보를 확인하는 singlePayment 페이지로 브라우저를 리디렉션.
+            // 4. 구매 정보를 확인하는 singlePayment 페이지로 브라우저를 리다이렉트.
             window.location.href = "/products/order/singlePayment";
         });
     });

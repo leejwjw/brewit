@@ -30,11 +30,11 @@
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #222222;  /* The default color of the main navmenu links */
-  --nav-hover-color: #106eea; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #bd683a; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #222222; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #106eea; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-hover-color: #bd683a; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -240,10 +240,11 @@ h6 {
 
   .navmenu ul {
     margin: 0;
-    padding: 0;
+    padding: 10px;
     display: flex;
     list-style: none;
     align-items: center;
+    gap: 10px;
   }
 
   .navmenu li {
@@ -282,14 +283,16 @@ h6 {
     color: var(--nav-hover-color);
   }
 
+
   .navmenu .dropdown ul {
+
     margin: 0;
     padding: 10px 0;
     background: var(--nav-dropdown-background-color);
     display: block;
     position: absolute;
     visibility: hidden;
-    left: 14px;
+    left: 0;
     top: 130%;
     opacity: 0;
     transition: 0.3s;
@@ -297,14 +300,13 @@ h6 {
     z-index: 99;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   }
-
   .navmenu .dropdown ul li {
-    min-width: 200px;
+    min-width: 115px;
   }
 
   .navmenu .dropdown ul a {
-    padding: 10px 20px;
-    font-size: 15px;
+    padding: 5px 10px;
+    font-size: 14px;
     text-transform: none;
     color: var(--nav-dropdown-color);
   }
@@ -471,7 +473,7 @@ h6 {
 --------------------------------------------------------------*/
 .footer {
   color: var(--default-color);
-  background-color: var(--background-color);
+  background-color: #a59f9d;
   font-size: 14px;
   padding-bottom: 50px;
   position: relative;
@@ -858,6 +860,10 @@ section,
   height: 100%;
   object-fit: cover; /* 이미지 비율에 맞춰 꽉 차도록 */
 }
+.hero .container {
+  position: relative;
+  z-index: 10; /* 슬라이드 위로 텍스트가 오도록 설정 */
+}
 
 .hero:before {
   content: "";
@@ -890,7 +896,16 @@ section,
   font-size: 20px;
   font-weight: 400;
 }
-
+li.button_li  button{
+  all: unset;
+  padding-left: 11px;
+  font-size: 14px;
+  text-transform: none;
+  color: var(--nav-dropdown-color);
+}
+li.button_li.hover > button{
+  color: #bd683a;
+}
 .hero .btn-get-started {
   color: var(--contrast-color);
   background: var(--accent-color);
@@ -1120,6 +1135,10 @@ section,
 /*--------------------------------------------------------------
 # Stats Section
 --------------------------------------------------------------*/
+section.stats {
+  background-color: #a59f9d;
+  margin: 50px 0;
+}
 .stats i {
   background-color: var(--accent-color);
   color: var(--contrast-color);
@@ -1164,6 +1183,7 @@ section,
 --------------------------------------------------------------*/
 .clients {
   padding: 25px 0;
+  background-color: #fff;
 }
 
 .clients .swiper {
@@ -1358,6 +1378,9 @@ section,
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
+section#portfolio {
+  background-color: #f7e1d6;
+}
 .portfolio .portfolio-filters {
   padding: 0;
   margin: 0 auto 20px auto;
@@ -1374,15 +1397,17 @@ section,
   font-weight: 500;
   line-height: 1;
   margin-bottom: 5px;
-  border-radius: 4px;
+  margin-right: 15px;
+  border-radius: 15px;
   transition: all 0.3s ease-in-out;
   font-family: var(--heading-font);
 }
 
 .portfolio .portfolio-filters li:hover,
 .portfolio .portfolio-filters li.filter-active {
-  color: var(--contrast-color);
-  background-color: var(--accent-color);
+  border: none !important;
+  background: #f38f59;
+  color: #ffff;
 }
 
 .portfolio .portfolio-filters li:first-child {
@@ -1465,6 +1490,10 @@ section,
 /*--------------------------------------------------------------
 # Team Section
 --------------------------------------------------------------*/
+
+section.team {
+  background-color: #efcec8;
+}
 .team .team-member {
   background-color: var(--surface-color);
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
@@ -2036,5 +2065,39 @@ div.product_tab > h2 {
 }
 
 
+/*로그인 폼 css 추가 작업*/
+
+div.login_form {
 
 
+}
+div.login_form > div.col-lg-6 {
+  width: 40%;
+  background: #fff;
+  padding: 100px 35px;
+  border-radius: 15px;
+}
+div.login_form > div.col-lg-6 div.form-floating {
+  margin-top: 15px;
+  width: 300px;
+}
+div.login_form button.login {
+  background-color: #d28258;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 0;
+}
+.form-check-input:checked{
+  background-color: #d28258 !important;
+  border-color: #d28258 !important;
+
+}
+/* my page */
+
+div.my_page_form > div.col-lg-6 {
+  width: 40%;
+  background: #fff;
+  padding: 100px 35px;
+  border-radius: 15px;
+}

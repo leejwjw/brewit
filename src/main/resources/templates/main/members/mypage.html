@@ -9,9 +9,8 @@
         <div class="container-fluid">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-6">
-
                         <table>
-                            <div class="card-body">
+                            <div class="card-body my_page_form">
                                 <h6 class="card-title" th:align="center" th:border="4">myPage</h6>
                                 <br/>
                                 <div class="form-group row">
@@ -73,10 +72,7 @@
                                 <br/>
                                 <div style="display: flex;  justify-content: center; ">
                                     <button type="button" class="btn btn-success text-white" th:onclick="|location.href='@{/main/modify/{email}(email=${member.email})}'|">정보수정</button>
-                                    <form th:action="@{/main/delete/{email}(email=${member.email})}" method="post">
-                                        <button type="submit" class="btn btn-danger">회원삭제</button>
-                                    </form>
-                                    <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/}'|">홈으로</button>
+                                    <button type="button" class="btn " th:onclick="|location.href='@{/}'|">홈으로</button>
                                 </div>
 
                             </div>

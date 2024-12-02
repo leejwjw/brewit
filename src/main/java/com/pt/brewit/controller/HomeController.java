@@ -4,8 +4,6 @@ package com.pt.brewit.controller;
 import com.pt.brewit.dto.AttachmentDTO;
 import com.pt.brewit.dto.CountDTO;
 import com.pt.brewit.dto.MemberDTO;
-import com.pt.brewit.dto.ChartDTO;
-import com.pt.brewit.mapper.MemberMapper;
 import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.AdminService;
 import com.pt.brewit.service.MainService;
@@ -84,6 +82,10 @@ public class HomeController {
     // FAQ 페이지
     @GetMapping("/notice")
     public String notice() { return "main/notice"; }
+
+    // 구독상품페이지
+    @GetMapping("/eventpd")
+    public String eventpd() { return "main/eventProduct"; }
 
 
 }

@@ -34,7 +34,7 @@
     </select>
 
     <update id="updateMember">
-        update tb_member set cellphone=#{cellphone},telephone=#{telephone},address1=#{address1},address2=#{address2}
+        update tb_member set name=#{name},cellphone=#{cellphone},telephone=#{telephone},address1=#{address1},address2=#{address2}
         where email = #{email}
     </update>
 

@@ -76,12 +76,19 @@ public class MemberController {
 
     // 회원가입 처리 요청
     @PostMapping("/new")
-    public String newPro(MemberDTO member, String au) {
+    public String newPro(MemberDTO member, String au,Model model) {
         log.info("newPro - member : {}", member);
         log.info("newPro - au : {}", au);
         // 회원 가입 처리
         int result = memberService.register(member, au);
         log.info("newPro - result : {}", result);
+        String varify = "회원가입이 완료 되었습니다";
+        String messgae = " 님의 회원가입을 축하합니다. 알차고 실속있는 서비스로 찾아 뵙겠습니다.";
+        String name = member.getName();
+        model.addAttribute("varify",varify);
+        model.addAttribute("name", name);
+        model.addAttribute("messgae", messgae);
+        log.info("newPro - model : {}", model);
 
         return "/main/members/newCon"; // 페이지 이동 = "/" 경로 코드로 요청 -> @..Mapping("/") 메소드호출
     }
@@ -114,7 +121,7 @@ public class MemberController {
 
     // 판매자전환 처리 요청
     @PostMapping("/trans/{member_id}")
-    public String newTrans(@PathVariable("member_id") String member_id, MemberDTO member,SellerDTO seller) {
+    public String newTrans(@PathVariable("member_id") String member_id, Model model, MemberDTO member,SellerDTO seller) {
         log.info("newTrans - member_id : {}", member_id);
         log.info("newTrans - member : {}", member);
         log.info("newTrans - seller : {}", seller);
@@ -125,7 +132,16 @@ public class MemberController {
         int result = memberService.transRegister(seller);
         log.info("newTrans - result : {}", result);
 
-       return "redirect:/";
+        String messgae = "판매자 전환신청 정보가 완료되었습니다.";
+        String name = member.getName();
+        String email = member.getEmail();
+        model.addAttribute("name", name);
+        model.addAttribute("email", email);
+        model.addAttribute("messgae", messgae);
+        log.info("newTrans - model : {}", model);
+
+        return "/main/members/modifyCon"; // 페이지 이동 = "/" 경로 코드로 요청 -> @..Mapping("/") 메소드호출
+        //return "redirect:/";
     }
 
     // 마이페이지 요청
@@ -147,17 +163,27 @@ public class MemberController {
     }
 
     @PostMapping("/modify/{email}")
-    public String modify(@PathVariable("email") String username, MemberDTO member){
+    public String modify(@PathVariable("email") String username, MemberDTO member,Model model){
         log.info("modifyPage username: {}", username);
         log.info("modifyPage member: {}", member);
-        member.setEmail(member.getEmail());
+        member.setName(member.getName());
         member.setCellphone(member.getCellphone());
         member.setTelephone(member.getTelephone());
         member.setAddress1(member.getAddress1());
         member.setAddress2(member.getAddress2());
         memberService.updateMember(member);
 
-        return "redirect:/main/{email}";
+        String messgae = " 님의 회원정보가 수정 되었습니다.";
+        String name = member.getName();
+        String email = member.getEmail();
+        model.addAttribute("name", name);
+        model.addAttribute("email", email);
+        model.addAttribute("messgae", messgae);
+        log.info("newPro - model : {}", model);
+
+        return "/main/members/modifyCon"; // 페이지 이동 = "/" 경로 코드로 요청 -> @..Mapping("/") 메소드호출
+
+        //return "redirect:/main/{email}";
     }
 
      // 회원 삭제 요청

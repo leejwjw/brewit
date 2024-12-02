@@ -33,12 +33,12 @@
                 </p>
                 <!-- 상품 가격 -->
                 <div>
-                    <del class="regular_price">정상가:
+                    <del class="regular_price">상품 금액:
                         <span id="productRegularPrice" th:text="${#numbers.formatInteger(productDetail.regular_price,3,'COMMA') + '원'}"></span><span></span>
                     </del>
                     <h4>
                         <p>할인율:&nbsp;<strong class="num_color_red mt-3" id="productDiscount" th:text="${productDetail.discount_percent}"></strong>%</p>
-                        <p id="total-price">할인 적용가:&nbsp; <strong id="productSalePrice" th:text="${#numbers.formatInteger(productDetail.sale_price,3,'COMMA') + '원'}"></strong></p>
+                        <p id="total-price">결제 금액:&nbsp; <strong id="productSalePrice" th:text="${#numbers.formatInteger(productDetail.sale_price,3,'COMMA') + '원'}">12,000원</strong></p>
                     </h4>
                 </div>
 
@@ -95,7 +95,7 @@
         function updateTotalPrice() {
             const quantity = parseInt($("#quantity").val());
             const totalPrice = pricePerItem * quantity;
-            $("#total-price").text(`할인 적용가: ${totalPrice.toLocaleString()} 원`);
+            $("#productSalePrice").text(totalPrice.toLocaleString() + "원");
         }
 
         // 수량 증가 버튼
@@ -191,7 +191,13 @@
 
         // 구매하기 버튼 클릭 시 실행되는 이벤트 핸들러.
         $("#buy").on("click", function () {
-            const attachName = $(".member-img").data("attach-name"); // attach_name 값 추출
+            // attach_name 값 추출
+            const attachName = $(".member-img").data("attach-name");
+            // 제품 수량 값 추출
+            const productQuantity = parseInt($("#quantity").val())
+
+            // 기존 상품 가격, 할인 미적용 / 할인 금액 계산 여기서 로직 처리
+
             // 2. HTML 요소에서 상품 정보를 추출하여 객체로 생성.
             const productData = {
                 // 상품명 데이터를 HTML 요소의 텍스트 콘텐츠에서 가져옴.
@@ -200,6 +206,7 @@
                 regular_price: document.getElementById('productRegularPrice').textContent,
                 sale_price: document.getElementById('productSalePrice').textContent,
                 attach_name: attachName, // attach_name 값 추가
+                quantity:productQuantity // 제품 수량 값 추가
             };
 
             // 3. 생성한 `productData` 객체를 JSON 문자열로 변환하여 쿠키에 저장.

@@ -34,12 +34,12 @@
                 </p>
                 <!-- 상품 가격 -->
                 <div>
-                    <del class="regular_price">정상가:
+                    <del class="regular_price">상품 금액:
                         <span th:text="${#numbers.formatInteger(product.reguler_price,3,'COMMA') + '원'}"></span>
                     </del>
                     <h4>
                         <p>할인율:&nbsp;<strong class="num_color_red mt-3" th:text="${product.discount}"></strong>%</p>
-                        <p id="total-price">할인 적용가:&nbsp; <strong th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA') + '원'}"></strong></p>
+                        <p id="total-price">결제 금액:&nbsp; <strong th:text="${#numbers.formatInteger(product.sale_price,3,'COMMA') + '원'}"></strong></p>
                     </h4>
                 </div>
 

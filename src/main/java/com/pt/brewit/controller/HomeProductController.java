@@ -80,22 +80,39 @@ public class HomeProductController {
         // 쿠키 값 "productData"를 읽어옵니다. 기본값은 빈 문자열("")로 설정됩니다.
         if (!productData.isEmpty()) {
             // 쿠키 데이터가 비어있지 않은 경우 JSON 문자열을 파싱합니다.
-            ObjectMapper objectMapper = new ObjectMapper(); // JSON 문자열을 Java 객체로 변환하기 위한 Jackson 라이브러리 객체 생성.
+            // JSON 문자열을 Java 객체로 변환하기 위한 Jackson 라이브러리 객체 생성.
+            ObjectMapper objectMapper = new ObjectMapper();
             try {
                 // JSON 문자열을 Java Map 형태로 변환.
                 Map<String, Object> productMap = objectMapper.readValue(productData, new TypeReference<>() {});
+
                 // 할인 금액 계산 (정가 - 할인가)
+                // 추후 코드 정리 예정
                 String regularPriceStr = ((String) productMap.get("regular_price")).replaceAll("[^0-9]", ""); // 숫자만 남김
                 String salePriceStr = ((String) productMap.get("sale_price")).replaceAll("[^0-9]", "");
                 int regularPrice = Integer.parseInt(regularPriceStr);
                 int salePrice = Integer.parseInt(salePriceStr);
-                // 할인 금액 계산
-                int discountPrice = regularPrice - salePrice;
+                int quantity = Integer.parseInt(productMap.get("quantity").toString());
 
-                // 계산된 할인 금액을 추가
+                // 제품 수량을 포함한 총 값 계산.
+                // 기존 상품 가격, 할인 미적용
+                int regularTotalPrice = regularPrice * quantity;
+
+                // 할인 금액 계산
+                int discountPrice = regularTotalPrice - salePrice;
+
+                // 제품 수량을 포함한 기존 상품 가격, 할인 미적용 추가
                 productMap.put("discount_price", discountPrice);
+
+                // 제품 수량을 포함한 상품 가격, 할인 적용 추가
+                productMap.put("regular_total_price", regularTotalPrice);
+
                 // logo 찍어서 데이터 확인
                 log.info("productMap: {}", productMap);
+                log.info("salePrice: {}", salePrice);
+                log.info("quantity: {}", quantity);
+                log.info("discount_price: {}", discountPrice);
+                log.info("regular_total_price: {}", regularTotalPrice);
                 // 변환된 데이터를 뷰로 전달하기 위해 모델에 추가.
                 model.addAttribute("productData", productMap);
             } catch (JsonProcessingException e) {

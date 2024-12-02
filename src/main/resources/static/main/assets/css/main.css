@@ -839,57 +839,24 @@ section,
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  height: 500px;
+  min-height: 75vh;
   position: relative;
   padding: 60px 0;
   display: flex;
   align-items: center;
   background: transparent;
-  overflow: hidden;
 }
-/* 텍스트 콘텐츠 스타일 (좌측 정렬) */
-.text-content {
-  position: absolute; /* 슬라이더 위에 배치 */
-  top: 50%; /* 부모 컨테이너 기준으로 수직 중앙 */
-  left: 20px; /* 좌측 여백 */
-  transform: translateY(-50%); /* 수직 중앙 정렬 */
-  z-index: 10; /* 슬라이더보다 위에 표시 */
-  text-align: left; /* 텍스트 좌측 정렬 */
-  color: #ffffff; /* 슬라이더 배경과 대비되는 색상 */
-  padding: 20px;
-  border-radius: 10px; /* 모서리 둥글게 */
-  max-width: 400px; /* 텍스트 영역 너비 제한 */
-}
-
-/* 버튼 스타일 */
-.text-content .btn-mainBtn {
-  background-color: #FFFFFF; /* 버튼 색상 */
-  color: #000000;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: 0.3s;
-}
-
-.text-content .btn-mainBtn:hover {
-  background-color: #e0a800; /* 호버 시 색상 변경 */
-  color: #fff;
-}
-
-/* 슬라이더 스타일 */
-.swiper-container {
-  width: 100%;
-  height: 100%; /* 슬라이더 전체 높이 */
-  position: relative; /* 텍스트와 같은 부모 내에 배치 */
-  z-index: 1; /* 텍스트보다 뒤에 배치 */
-}
-
-.swiper-slide img {
+.hero .swiper-container {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지 비율 유지하며 슬라이더 영역 채우기 */
-  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hero .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율에 맞춰 꽉 차도록 */
 }
 
 .hero:before {

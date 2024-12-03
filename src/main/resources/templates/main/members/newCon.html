@@ -8,16 +8,16 @@
         <div class="container-fluid">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-6">
-                    <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalChoice">
-                        <div class="modal-dialog" role="document">
+                    <div class="modal modal-sheet position-static d-block p-4 py-md-5" tabindex="-1" role="dialog" id="modalChoice" style="height: 600px">
+                        <div class="modal-dialog" role="document" style="margin-top: 100px">
                             <div class="modal-content rounded-3 shadow">
                                 <div class="modal-body p-4 text-center">
-                                    <h5 class="mb-0" th:text="${varify}"></h5>
-                                    <p class="mb-0" th:text="${name}"></p><span th:text="${messgae}"></span>
+                                    <h5 class="mb-0" th:text="${varify}" style="padding-bottom: 20px; font-size: 24px"></h5>
+                                    <span th:text="${messgae}"></span>
                                 </div>
                                 <div class="modal-footer flex-nowrap p-0">
-                                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal"><a href="/" th:href="@{/}">홈으로</a></button>
-                                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal"><a href="/login" th:href="@{/login}">로그인</a></button>
+                                    <button type="button" class="btn btn-lg fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal" style="background-color: #e9abab"><a href="/" th:href="@{/}" style="color: #595959">홈으로</a></button>
+                                    <button type="button" class="btn btn-lg fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal" style="background-color: #f7b68f"><a href="/login" th:href="@{/login}" style="color: #595959">로그인</a></button>
                                 </div>
                             </div>
                         </div>

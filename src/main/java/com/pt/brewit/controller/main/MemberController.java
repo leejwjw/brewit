@@ -82,11 +82,11 @@ public class MemberController {
         // 회원 가입 처리
         int result = memberService.register(member, au);
         log.info("newPro - result : {}", result);
-        String varify = "회원가입이 완료 되었습니다";
-        String messgae = " 님의 회원가입을 축하합니다. 알차고 실속있는 서비스로 찾아 뵙겠습니다.";
-        String name = member.getName();
+        String varify = "회원가입이 완료 되었습니다 !";
+        String messgae = member.getName() +" 님의 회원가입을 축하합니다.";
+
         model.addAttribute("varify",varify);
-        model.addAttribute("name", name);
+
         model.addAttribute("messgae", messgae);
         log.info("newPro - model : {}", model);
 

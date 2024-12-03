@@ -2117,13 +2117,50 @@ div.modify_form h5.card-title {
 }
 div.modify_form  div.col-lg-6 {
   margin-left: 15%;
-  margin-top: 50px;
   margin-bottom: 50px;
 }
 div.modify_form  button.modify {
   background-color: #d28258 !important;
+  width: 120px;
+  margin-top: 20px;
 }
 
+div.signup_form div.card-body {
+  background: #fff;
+  padding: 30px 0;
+  width: 100%;
+  border-radius: 10px;
+}
+div.signup_form div.col-sm-9 {
+  width: 40%;
+}
+div.signup_form label.col-form-label {
+  margin-left: 10%;
+}
+div.signup_form h5.card-title {
+  font-size: 24px;
+  padding: 20px 0;
+  text-decoration: underline #f8b498;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 2px;
+
+}
+div.signup_form  div.col-lg-6 {
+  margin-bottom: 50px;
+}
+div.signup_form  button.signup_button {
+  width: 120px;
+  background-color: #d28258 !important;
+}
+div.signup_form  button.cancel_button {
+  width: 120px;
+  background-color: #a4a4a4 !important;
+}
+div.modify_form  button.modify {
+  background-color: #d28258 !important;
+  width: 120px;
+  margin-top: 20px;
+}
 div.coffee_title_box {
   padding: 40px 0;
   text-decoration: underline #f8b498;
@@ -2143,4 +2180,5 @@ div.coffee_title_box {
   width: calc(1320px / 4);
   text-align: center;
   padding: 15px 0 0 0;
+  font-size: 16px;
 }

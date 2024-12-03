@@ -2,6 +2,7 @@ package com.pt.brewit.service;
 
 import com.pt.brewit.dto.EventProductDTO;
 import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.Pager;
 import com.pt.brewit.mapper.EventProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,17 @@ public class EventProductServiceImpl implements EventProductService {
     public void deleteProduct(int id) {
         eventProductMapper.deleteProductById(id);
     }
+
+    @Override
+    public List<EventProductDTO> getSubscriptions(Pager pager) {
+        return eventProductMapper.selectSubscriptions(pager);
+    }
+
+    @Override
+    public int getTotalCount(Pager pager) {
+        return eventProductMapper.countSubscriptions(pager);
+    }
+
     @Override
     public String getFullPath(String filename) {
         return fileDir + '/' +filename;

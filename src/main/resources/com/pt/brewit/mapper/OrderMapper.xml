@@ -5,6 +5,6 @@
 <mapper namespace="com.pt.brewit.mapper.OrderMapper">
     <insert id="insertOrder" parameterType="OrderDTO">
         insert into tb_order (product_id, member_id, seller_id, amount, price, is_subscribe, reg_date)
-        values (#{product_id}, #{member_id}, #{seller_id}, #{amount}, #{price}, #{is_subscribe}, #{reg_date})
+        values (#{product_id}, #{member_id}, #{seller_id}, #{amount}, #{price}, #{is_subscribe}, NOW())
     </insert>
 </mapper>

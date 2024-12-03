@@ -4,11 +4,11 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pt.brewit.mapper.EventProductMapper">
     <select id="getEventProductInfo" resultType="EventProductDTO">
-        select *
-        from tb_term_event
-        where status = 'active' and stock > 0
-        order by discount desc
-        limit 6
+        SELECT *
+        FROM TB_TERM_EVENT
+        WHERE status = 'active' and stock > 0
+        ORDER BY discount DESC
+        LIMIT 6
     </select>
     <select id="insertEventProductOne">
         INSERT INTO
@@ -20,7 +20,7 @@
     <select id="getFindProductForId" resultType="EventProductDTO">
         select *
         from tb_term_event
-        where term_item_id = #{term_item_id}
+        WHERE term_item_id = #{term_item_id}
         and status = 'active'
     </select>
 
@@ -36,9 +36,26 @@
     </select>
 
     <update id="deleteProductById">
-        UPDATE TB_TERM_EVENT
+        UPDATE
         SET status = 'inactive'
         WHERE term_item_id=#{id}
     </update>
+
+
+    <select id="selectSubscriptions" resultType="EventProductDTO">
+        SELECT *
+        FROM
+        TB_TERM_EVENT
+        ORDER BY
+        term_item_id DESC
+        LIMIT
+        5 OFFSET 0;
+
+    </select>
+    <!-- 총 상품 개수 -->
+    <select id="countSubscriptions" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_TERM_EVENT
+    </select>
 
 </mapper>

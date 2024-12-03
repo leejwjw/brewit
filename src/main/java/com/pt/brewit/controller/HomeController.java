@@ -1,11 +1,10 @@
 package com.pt.brewit.controller;
 
 
-import com.pt.brewit.dto.AttachmentDTO;
-import com.pt.brewit.dto.CountDTO;
-import com.pt.brewit.dto.MemberDTO;
+import com.pt.brewit.dto.*;
 import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.AdminService;
+import com.pt.brewit.service.EventProductService;
 import com.pt.brewit.service.MainService;
 import com.pt.brewit.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,6 +25,7 @@ public class HomeController {
      private final MemberService memberService;
      private final AdminService adminService;
      private final MainService mainService;
+     private final EventProductService eventProductService;
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal CustomUser user, Model model) {
@@ -83,9 +84,24 @@ public class HomeController {
     @GetMapping("/notice")
     public String notice() { return "main/notice"; }
 
-    // 구독상품페이지
-    @GetMapping("/eventpd")
-    public String eventpd() { return "main/eventProduct"; }
+    @GetMapping("/subscribe")
+    public String listSubscriptions(
+            @RequestParam(defaultValue = "1") int page, // 현재 페이지
+            @RequestParam(defaultValue = "5") int size, // 페이지 크기
+            Model model
+    ) {
+        Pager pager = new Pager(page, size);
 
+        // 전체 데이터 개수 가져오기
+        int total = eventProductService.getTotalCount(pager);
 
+        // PageDTO 생성
+        PageDTO pageDTO = new PageDTO(pager, total);
+
+        // 데이터와 페이징 정보를 모델에 추가
+        model.addAttribute("products", eventProductService.getSubscriptions(pager));
+        model.addAttribute("pageDTO", pageDTO);
+
+        return "main/subscribeList"; // Thymeleaf 템플릿 이름
+    }
 }

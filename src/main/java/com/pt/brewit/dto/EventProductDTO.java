@@ -28,4 +28,5 @@ public class EventProductDTO {
     private int stock;
     private Date reg_date;
     private String seller_name;
+    private String is_subscribe;
 }

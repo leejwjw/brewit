@@ -4,12 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pt.brewit.dto.EventProductDTO;
+import com.pt.brewit.dto.MemberDTO;
 import com.pt.brewit.dto.ProductDTO;
+import com.pt.brewit.security.domain.CustomUser;
 import com.pt.brewit.service.EventProductService;
 import com.pt.brewit.service.MainService;
+import com.pt.brewit.service.MemberService;
 import com.pt.brewit.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +29,7 @@ public class HomeProductController {
     private final MainService mainService;
     private final EventProductService eventProductService;
     private final ProductService productService;
+    private final MemberService memberService;
 
 
     @GetMapping("")
@@ -66,16 +71,21 @@ public class HomeProductController {
 
     // 구독 상품 상세페이지 연결
     @GetMapping("/{term_item_id}")
-    public String getProduct(@PathVariable("term_item_id") int term_item_id, Model model) {
+    public String getProduct(@PathVariable("term_item_id") int term_item_id, Model model, @AuthenticationPrincipal CustomUser user) {
         EventProductDTO product = eventProductService.getFindProductId(term_item_id);
+        MemberDTO memberDetail = memberService.getMember(user.getUsername());
+
         log.info("findProductId: {}", product);
+        log.info("findMemberDetail: {}", memberDetail);
+
+        model.addAttribute("memberDetail",memberDetail);
         model.addAttribute("product", product);
         return "main/productSubsDetail";
     }
 
-    // 쿠키에 저장된 데이터 꺼내기
-    @GetMapping("/order/singlePayment")
-    public String singlePaymentPage(@CookieValue(value = "productData", defaultValue = "") String productData, Model model) {
+    // 쿠키에 저장된 데이터 꺼내기 / 단일 상품 결제
+    @GetMapping("/order/payment")
+    public String singlePaymentPage(@CookieValue(value = "productData", defaultValue = "") String productData, Model model,@AuthenticationPrincipal CustomUser user) {
 
         // 쿠키 값 "productData"를 읽어옵니다. 기본값은 빈 문자열("")로 설정됩니다.
         if (!productData.isEmpty()) {
@@ -107,8 +117,13 @@ public class HomeProductController {
                 // 제품 수량을 포함한 상품 가격, 할인 적용 추가
                 productMap.put("regular_total_price", regularTotalPrice);
 
+                // 유저 iD 저장
+                MemberDTO memberID = memberService.getMember(user.getUsername());
+                productMap.put("member_id",memberID.getMember_id());
+
                 // logo 찍어서 데이터 확인
                 log.info("productMap: {}", productMap);
+                log.info("member_id: {}", memberID.getMember_id());
                 log.info("salePrice: {}", salePrice);
                 log.info("quantity: {}", quantity);
                 log.info("discount_price: {}", discountPrice);
@@ -119,8 +134,12 @@ public class HomeProductController {
                 e.printStackTrace(); // JSON 파싱 오류가 발생하면 예외를 출력.
             }
         }
-        // singlePayment.html 뷰를 반환하여 해당 페이지를 렌더링.
-        return "main/singlePayment";
+        // payment.html 뷰를 반환하여 해당 페이지를 렌더링.
+        return "main/payment";
     }
+
+    // 쿠키에 저장된 데이터 꺼내기 / 구독 상품 결제
+
+
 
 }

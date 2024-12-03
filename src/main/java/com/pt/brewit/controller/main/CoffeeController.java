@@ -59,13 +59,11 @@ public class CoffeeController {
     
     // 커피 상세 페이지 호출
     @GetMapping("/{subcategory_id}/{product_id}")
-    public String productDetail(@PathVariable("subcategory_id") int subcategory_id, @PathVariable("product_id") int product_id, Model model, @AuthenticationPrincipal CustomUser user) {
+    public String productDetail(@PathVariable("subcategory_id") int subcategory_id, @PathVariable("product_id") int product_id, Model model) {
         ProductDTO productDetail = productService.getProductById(product_id);
         // member id 추출
-        MemberDTO memberDetail = memberService.getMember(user.getUsername());
         log.info("product:{}", productDetail);
         model.addAttribute("productDetail", productDetail);
-        model.addAttribute("memberDetail",memberDetail);
         return "main/productDetail";
     }
 }

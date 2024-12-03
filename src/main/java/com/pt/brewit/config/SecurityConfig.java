@@ -30,6 +30,8 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
+                    // 구매 관련 요청은 인증 필요
+                    .requestMatchers(new AntPathRequestMatcher("/order/**")).authenticated()
                     .requestMatchers(new AntPathRequestMatcher("/mypage/**")).hasAnyRole("member", "admin", "seller")
                     .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyRole("admin","seller")
                     .anyRequest().permitAll())

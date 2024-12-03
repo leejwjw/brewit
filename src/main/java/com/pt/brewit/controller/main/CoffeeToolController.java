@@ -1,11 +1,15 @@
 package com.pt.brewit.controller.main;
 
+import com.pt.brewit.dto.MemberDTO;
 import com.pt.brewit.dto.PageDTO;
 import com.pt.brewit.dto.Pager;
 import com.pt.brewit.dto.ProductDTO;
+import com.pt.brewit.security.domain.CustomUser;
+import com.pt.brewit.service.MemberService;
 import com.pt.brewit.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +25,7 @@ import java.util.List;
 public class CoffeeToolController {
 
     private final ProductService productService;
+    private final MemberService memberService;
 
     // 도구 통합 요청
     @GetMapping("/{subcategory_id}")

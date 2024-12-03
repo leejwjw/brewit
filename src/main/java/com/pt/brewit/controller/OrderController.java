@@ -6,17 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/order")
 @AllArgsConstructor
 @Slf4j
 public class OrderController {
 
-        private final OrderService orderService;
+    private final OrderService orderService;
 
-    @PostMapping("/save")
+    @PostMapping("/order/save")
     @ResponseBody
     public ResponseEntity<?> saveOrder(@RequestBody OrderDTO orderDTO) {
         try {
@@ -31,5 +32,12 @@ public class OrderController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("주문 저장 중 오류 발생: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/auth/check")
+    public boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() &&
+                !"anonymousUser".equals(authentication.getPrincipal());
     }
 }

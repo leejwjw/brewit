@@ -12,7 +12,7 @@ public class OrderDTO {
     private Integer seller_id;      // 판매자 ID (nullable)
     private int amount;            // 수량
     private BigDecimal price;      // 가격
-    private boolean is_subscribe;    // 구독 여부
+    private String is_subscribe;    // 구독 여부
     private Date cancel_date;       // 취소 날짜 (nullable)
     private Date reg_date;          // 등록 날짜
     private String status;    // 주문 상태

@@ -806,8 +806,9 @@ section,
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
-  padding-bottom: 60px;
+  padding-bottom: 20px;
   position: relative;
+  top: -50px;
 }
 
 .section-title h2 {
@@ -1491,9 +1492,7 @@ section#portfolio {
 # Team Section
 --------------------------------------------------------------*/
 
-section.team {
-  background-color: #efcec8;
-}
+
 .team .team-member {
   background-color: var(--surface-color);
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
@@ -1686,7 +1685,7 @@ section.team {
 #faq {
   margin-top: 0; /* 여백 제거 */
   padding-top: 0; /* 상단 패딩 제거 */
-  height: 800px;
+  height: 1000px;
   overflow-y:auto;
 }
 .faq .faq-container .faq-item {
@@ -1752,7 +1751,7 @@ section.team {
 }
 
 .faq .faq-container .faq-active {
-  background-color: #b37972;
+  background-color: #cb918b;
   border-color: var(--accent-color);
   color: var(--contrast-color);
 }
@@ -2026,19 +2025,7 @@ div.sort_bar > p{
 div.sort_bar > p.right_line{
   border-right: 1px solid #c4bebb;
 }
-div.product_tab {
-  display: flex;
-  padding: 10px 130px;
-  justify-content: space-between;
-  border-bottom: 2px solid #c4bebb;
-  margin-bottom: 40px;
-  color: #c4bebb;
-}
 
-div.product_tab > h2 {
-  font-size: 18px;
-
-}
 /*윤서 추가*/
 /* .sort-item 클래스에만 호버 시 볼드체 적용 */
 .sort-item:hover {
@@ -2059,9 +2046,9 @@ div.product_tab > h2 {
   align-items: center;
 }
 .discount {
-  font-size: 20pt;
-  color: #f03f14;
-  margin-right: 8px;
+  font-size: 20px;
+  color: #f9603b;
+  margin-right: 10px;
 }
 
 
@@ -2098,6 +2085,62 @@ div.login_form button.login {
 div.my_page_form > div.col-lg-6 {
   width: 40%;
   background: #fff;
-  padding: 100px 35px;
+  padding: 20px 35px;
   border-radius: 15px;
+}
+div.my_page_form  h5.card-title {
+  font-weight: 600;
+  font-size: 20px;
+}
+div.my_page_form button.brown {
+  background-color: #d28258 !important;
+}
+div.modify_form div.card-body {
+  background: #fff;
+  padding: 30px 0;
+  width: 70%;
+  border-radius: 10px;
+}
+div.modify_form div.col-sm-9 {
+  width: 40%;
+}
+div.modify_form label.col-form-label {
+  margin-left: 10%;
+}
+div.modify_form h5.card-title {
+  font-size: 24px;
+  padding: 20px 0;
+  text-decoration: underline #f8b498;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 2px;
+
+}
+div.modify_form  div.col-lg-6 {
+  margin-left: 15%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+div.modify_form  button.modify {
+  background-color: #d28258 !important;
+}
+
+div.coffee_title_box {
+  padding: 40px 0;
+  text-decoration: underline #f8b498;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 4px;
+}
+
+.product_tab {
+  width: 1320px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  border-bottom: 1px solid #b2b2b2;
+  margin-bottom: 30px;
+}
+.product_small_tab {
+  width: calc(1320px / 4);
+  text-align: center;
+  padding: 15px 0 0 0;
 }

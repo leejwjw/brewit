@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="styles.css">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 
-
+<style>
+    .sort-item.selected {
+        font-weight: bold; /* 선택된 항목의 볼드 스타일 */
+        color: #5d5d5d; /* 선택된 항목의 색상 */
+        background-color: #f8b498;
+        border-radius: 10px 10px 0 0;
+    }
+</style>
 <body class="index-page">
-
-
 <main class="main">
-    </br>
-    <h2 class="team" style="text-align: center; font-weight: bold;">커피</h2>
+    <div class="coffee_title_box">
+        <h2 class="team" style="text-align: center; font-weight: bold;">커피</h2>
 
+    </div>
     <section id="team" class="team section light-background">
         <!-- 정렬 -->
         <div class="sort_bar container">
@@ -21,10 +25,27 @@
         </div>
         <!--subcategory-->
         <div class="product_tab container">
-            <h2><a href="/coffee/0" class="sort-item" onclick="selectCategory(this)">BEST</a></h2>
-            <h2><a href="/coffee/4" class="sort-item" onclick="selectCategory(this)">싱글오리진</a></h2>
-            <h2><a href="/coffee/5" class="sort-item" onclick="selectCategory(this)">블렌드</a></h2>
-            <h2><a href="/coffee/6" class="sort-item" onclick="selectCategory(this)">디 카페인</a></h2>
+            <a href="/coffee/0"  class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>BEST</p>
+                </div>
+            </a>
+            <a href="/coffee/4" class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>싱글오리진</p>
+                </div>
+            </a>
+            <a href="/coffee/5" class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>블렌드</p>
+                </div>
+            </a>
+            <a href="/coffee/6" class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>디 카페인</p>
+                </div>
+            </a>
+
         </div>
 
         <div class="container">
@@ -92,20 +113,10 @@
             console.log(host + path);
             // 쿼리 스트링 생성 (기존 코드)
             let queryStr = "&page=" + pageDTO.pager.page + "&size=" + pageDTO.pager.size + "&keyword=" + pageDTO.pager.keyword + "&searchType=" + pageDTO.pager.searchType;
-            // 모든 .sort-item에서 'selected' 클래스 제거 (클릭된 항목을 제외한 나머지 항목에서 볼드체 제거)
-            var items = document.querySelectorAll('.sort-item');
-            items.forEach(function(item) {
-                item.classList.remove('selected');
-            });
-            // 클릭된 항목에 'selected' 클래스 추가하여 볼드체 유지
-            element.classList.add('selected');
             // 페이지 요청 (기존 코드)
             window.location.href = "http://" + host + path + "?sortType=" + sortType + queryStr;
 
         }
-    </script>
-
-    <script>
         function selectCategory(element) {
             // 모든 .category-item에서 'selected' 클래스 제거
             var items = document.querySelectorAll('.sort-item');
@@ -117,7 +128,6 @@
         }
 
     </script>
-
 
 <!-- Vendor JS Files -->
 <script src="/main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -132,6 +142,18 @@
 
 <!-- Main JS File -->
 <script src="/main/assets/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            const currentPath = window.location.pathname;
+            $('.sort-item').each(function () {
+                const href = $(this).attr('href');
+                if (href === currentPath) {
+                    $(this).addClass('selected');
+                }
+            });
+        });
+
+    </script>
 </main>
 </body>
 </html>

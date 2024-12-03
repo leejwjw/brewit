@@ -52,7 +52,7 @@
         <!--   GNB 메뉴  -->
         <div class="branding d-flex align-items-center">
             <div class="container position-relative d-flex align-items-center justify-content-between">
-                 <a href="/" class="logo d-flex align-items-center">
+                <a href="/" class="logo d-flex align-items-center">
                     <!-- Uncomment the line below if you also wish to use an image logo -->
                     <!-- <img src="/main/assets/img/logo.png" alt=""> -->
                     <h1 class="sitename">Brewit.</h1>
@@ -65,23 +65,24 @@
                                 <li><a href="#">입점 브랜드 소개</a></li>
                             </ul>
                         </li>
-                        <li><a href="/eventpd">Subscribe</a></li>
-                        <li>
-                        <li class="dropdown"><a href="/tea/0"><span>Tea</span> </a>
+
+                        <li><a href="/eventpd">구독</a></li>
+
+                        <li class="dropdown"><a href="/tea/0"><span>차</span> </a>
                             <ul>
                                 <li><a href="/tea/1">티백</a></li>
                                 <li><a href="/tea/2">잎차</a></li>
                                 <li><a href="/tea/3">디 카페인</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="/coffee/0"><span>Coffee</span> </a>
+                        <li class="dropdown"><a href="/coffee/0"><span>커피</span> </a>
                             <ul>
                                 <li><a href="/coffee/4">싱글 오리진</a></li>
                                 <li><a href="/coffee/5">블렌드</a></li>
                                 <li><a href="/coffee/6">디 카페인</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="/teatool/0"><span>Tea Gear</span> </a>
+                        <li class="dropdown"><a href="/teatool/0"><span>차 용품</span> </a>
                             <ul>
                                 <li><a href="/teatool/7">드립주전자</a></li>
                                 <li><a href="/teatool/8">전기포트</a></li>
@@ -89,7 +90,7 @@
                                 <li><a href="/teatool/10">다기세트</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="/coffeetool/0"><span>Coffee Gear</span> </a>
+                        <li class="dropdown"><a href="/coffeetool/0"><span>커피 용품</span> </a>
                             <ul>
                                 <li><a href="/coffeetool/11">커피머신</a></li>
                                 <li><a href="/coffeetool/12">그라인더</a></li>
@@ -99,31 +100,31 @@
                         </li>
                         <li><a href="/notice">FAQ</a></li>
 
-                        <li sec:authorize="isAnonymous()"><a href="/main/new" th:href="@{/main/new}">Sign up</a></li>
-<!--                            <ul class="gnb">-->
+                        <li sec:authorize="isAnonymous()"><a href="/main/new" th:href="@{/main/new}">회원가입</a></li>
+                        <!--                            <ul class="gnb">-->
 
 
-                            <li sec:authorize="isAuthenticated()" class="dropdown">
-                                <a th:href="@{/main/{email}(email=${#authentication.name})}">
-                                    <img src="/img/home/login.png" style="width: 25px; height: 25px;"/>
-                                </a>
-                                <ul>
-                                    <li sec:authorize="isAuthenticated()" class="button_li">
-                                        <form action="" th:action="@{/logout}" method="post">
-                                            <button type="submit">Log out</button>
-                                        </form>
-                                    </li>
-                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/main/payments/{email}(email=${#authentication.name})}">구매목록</a></li>
-                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/main/trans/{email}(email=${#authentication.name})}">판매자전환신청</a></li>
-                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/main/{email}(email=${#authentication.name})}">My Page</a></li>
-                                </ul>
+                        <li sec:authorize="isAuthenticated()" class="dropdown">
+                            <a th:href="@{/main/{email}(email=${#authentication.name})}">
+                                <img src="/img/home/login.png" style="width: 25px; height: 25px;"/>
+                            </a>
+                            <ul>
+                                <li sec:authorize="isAuthenticated()" class="button_li">
+                                    <form action="" th:action="@{/logout}" method="post">
+                                        <button type="submit">로그아웃</button>
+                                    </form>
+                                </li>
+                                <li sec:authorize="isAuthenticated()"><a th:href="@{/main/payments/{email}(email=${#authentication.name})}">구매목록</a></li>
+                                <li sec:authorize="isAuthenticated()"><a th:href="@{/main/trans/{email}(email=${#authentication.name})}">판매자전환신청</a></li>
+                                <li sec:authorize="isAuthenticated()"><a th:href="@{/main/{email}(email=${#authentication.name})}">마이페이지</a></li>
+                            </ul>
 
-                            </li>
-                            <li sec:authorize="isAnonymous()"><a href="/login" th:href="@{/login}">Log in</a></li>
-                            <li><a href="#"><img src="/img/home/cart.png" style="width: 25px; height: 25px;"/></a></li>
-                        </ul>
+                        </li>
+                        <li sec:authorize="isAnonymous()"><a href="/login" th:href="@{/login}">로그인</a></li>
+                        <li><a href="#"><img src="/img/home/cart.png" style="width: 25px; height: 25px;"/></a></li>
+                    </ul>
 
-                        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
             </div>
         </div>

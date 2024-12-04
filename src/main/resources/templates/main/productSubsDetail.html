@@ -9,7 +9,7 @@
 <link href="/main/assets/css/productDetail.css" rel="stylesheet">
 <link rel="stylesheet" href="../../static/main/assets/css/main.css">
 
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom: 50px">
     <div class="row gy-4">
         <!-- 상품 상세 정보 -->
         <div class="col-lg-6 d-flex" style="justify-content: right">
@@ -33,7 +33,7 @@
                 <div class="price_box">
                     <span class="regular_price">
                         <del id="productRegularPrice"
-                             th:text="${#numbers.formatInteger(product.regular_price,3,'COMMA')}"><span>원</span>
+                             th:text="${#numbers.formatInteger(product.regular_price,3,'COMMA')} + '원'"><span></span>
                         </del>
                     </span>
                     <h4 class="flex">
@@ -77,8 +77,8 @@
                 <!--                    <img th:src="@{/img/product/{attach_info}(attach_info=${product.attach_info})}" th:alt="${product.attach_info}">-->
             </div>
         </div>
-        <div>
-            <button type="button" class="btn btn-outline-purple mr-3" th:onclick="history.go(-1)">목록으로</button>
+        <div style="text-align: center; margin-bottom: 30px ">
+            <button type="button" class="btn  mr-3" th:onclick="history.go(-1)" style="background: darkgrey; border: none; color: #fff;">목록으로</button>
         </div>
     </div>
 </div>

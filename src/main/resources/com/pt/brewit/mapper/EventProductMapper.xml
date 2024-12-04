@@ -81,7 +81,7 @@
     <select id="countSubscriptions" resultType="long">
         SELECT COUNT(*)
         FROM TB_TERM_EVENT
-        <include refid="searchKeyword"></include>
+        WHERE status = 'active'
     </select>
 
 </mapper>

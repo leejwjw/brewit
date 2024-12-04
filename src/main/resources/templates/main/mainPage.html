@@ -76,10 +76,6 @@
     <th:block th:replace="~{/main/fragments/subscribe :: fragment-subscribe}"></th:block>
     <!-- /Subscribe Section Close -->
 
-    <!-- Review Section -->
-<!--    <th:block th:replace="~{/main/fragments/review :: fragment-review}"></th:block>-->
-    <!-- /Review Section Close -->
-
     <!-- Clients Section -->
     <th:block th:replace="~{/main/fragments/clients :: fragment-clients}"></th:block>
     <!-- /Clients Section Close -->
@@ -105,6 +101,17 @@
     <script src="/main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <!-- Main JS File -->
     <script src="/main/assets/js/main.js"></script>
+
+    <script>
+        $("#cart").on("click", function () {
+            alert("장바구니 기능은 추후 업데이트 예정입니다.");
+        });
+        $("#twitter, #facebook, #instagram").on("click", function () {
+            alert("현재 SNS 개설중 입니다.\n빠른 시일 내에 찾아뵙겠습니다.");
+        });
+
+
+    </script>
 </main>
 </body>
 </html>

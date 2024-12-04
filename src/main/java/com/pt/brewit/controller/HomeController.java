@@ -13,7 +13,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 import java.util.List;
@@ -89,7 +88,6 @@ public class HomeController {
     public String listSubscriptions(Model model, Pager pager) {
         log.info("GET/Board/list - pager: {}", pager);
 
-
         // 페이징 정보 설정
         int total = eventProductService.getTotalCount(pager);
 
@@ -103,10 +101,6 @@ public class HomeController {
             model.addAttribute("subscriptions", subscriptions);
             model.addAttribute("pageDTO", new PageDTO(pager, total));
         }
-
-
-        // 데이터와 페이징 정보를 모델에 추가
-
         return "main/subscribeList"; // Thymeleaf 템플릿 이름
     }
 }

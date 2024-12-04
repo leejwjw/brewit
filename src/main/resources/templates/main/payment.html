@@ -142,6 +142,7 @@
             const memberId = $("#memberId").val();
             const sellerId = $("#sellerId").val();
             const isSubscribe = $("#isSubscribe").val();
+            // [^\d.-]: 숫자(\d), 소수점(.), 하이픈(-)을 제외한 모든 문자 g: 문자열 전체에서 매칭되는 모든 항목을 제거(global).
             const quantity = parseInt($("#quantity").text().replace(/[^\d.-]/g, ''));
             const price = parseInt($("#finalPrice").text().replace(/[^\d.-]/g, ''));
 

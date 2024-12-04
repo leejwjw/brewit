@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -25,10 +27,15 @@ public class OrderController {
             log.info("받은 데이터: {}", orderDTO);
 
             // 주문 처리 로직 실행
+            String prefix = "2024";
+            int randomNumber = new Random().nextInt(900000) + 100000;
+            orderDTO.setOrder_num(Integer.parseInt(prefix + String.valueOf(randomNumber)));
+
             orderService.saveOrder(orderDTO);
+            orderService.savePayment(orderDTO);
             return ResponseEntity.ok("주문이 성공적으로 처리되었습니다.");
         } catch (Exception e) {
-            // 오류 로그 출력
+
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("주문 저장 중 오류 발생: " + e.getMessage());
         }

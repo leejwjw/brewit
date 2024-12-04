@@ -2,42 +2,53 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <!-- header fragments -->
+
+<style>
+    table > thead > tr > th {
+        background: #efc9ac;
+    }
+</style>
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 <!-- header fragments close -->
 <th:block th:fragment="content">
     <div class="container-fluid">
         <div class="row justify-content-center text-center">
-            <div class="col-md-5 col-lg-4 order-md-last">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">구매목록</span>
-                </h4>
-                <ul class="list-group mb-3" th:each="payment : ${lists}">
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div>
-                            <h6 class="my-0">구매번호</h6>
-                            <small class="text-body-secondary" th:text="${payment.payment_id}">payment_id</small>
-                        </div>
-                        <div>
-                            <span class="text-body-secondary">
-                            <h6 class="my-0">상품명</h6>
-                            <small class="text-body-secondary" th:text="${payment.product_name}">product_name</small>
-                        </span>
-                        </div>
-                          <span class="text-body-secondary">
-                            <h6 class="my-0">구매가격(원)</h6>
-                            <small class="text-body-secondary" th:text="${payment.amount}">amount</small>
-                          </span>
-                        <div>
-                        </div>
-                        <span class="text-body-secondary">
-                            <h6 class="my-0">구매상태</h6>
-                            <small class="text-body-secondary" th:text="${payment.status}">status</small>
-                          </span>
-                        <div>
-                          <span class="text-body-secondary"><button type="button" th:data-payid="${payment.payment_id}" class="btn btn-primary refundBtn">환불신청</button></span>
-                        </div>
-                    </li>
-                </ul>
+            <div class="col-md-10 col-lg-8">
+                <h4 style="
+                    text-decoration: underline #cc822e;
+                    text-underline-offset: 10px;
+                    text-decoration-thickness: 3px;
+                    margin: 40px 0;
+                    ">
+                    <span class="">구매목록</span>
+                </h4 >
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">주문번호</th>
+                        <th scope="col">상품명</th>
+                        <th scope="col">금액(원)</th>
+                        <th scope="col">구매수량</th>
+                        <th scope="col">상태</th>
+                        <th scope="col">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="payment : ${lists}">
+                        <td th:text="${payment.order_num}" style="background: #efc9ac;"></td>
+                        <td th:text="${payment.product_name}"  style="background: #efc9ac;"></td>
+                        <td th:text="${payment.price}" style="background: #efc9ac;"></td>
+                        <td th:text="${payment.amount} + '개'" style="background: #efc9ac;"></td>
+                        <td th:text="${payment.status == 'complete' ? '결제완료' : '환불'}" style="background: #efc9ac;"></td>
+                        <td>
+                            <button type="button" th:data-payid="${payment.payment_id}" class="btn refundBtn"
+                            style="    background: #ff6565;color: #fff;border-radius: 2px;">
+                                환불신청
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -51,9 +62,8 @@
                     success: function(result){
                         console.log("환불 신청 요청 성공!");
                         console.log(result);
-                        // 성공시, 화면 변경 처리 -> 모달/alert 띄우고 -> 새로 현재 페이지 요청
-                        alert("환불 신청 처리 되었습니다"); // or 모달
-                        window.location.href="/"; // or reload
+                        alert("환불 신청 처리 되었습니다");
+                        location.reload();
                     },
                     error: function(e){
                         console.log("환불신청 처리 실패...");

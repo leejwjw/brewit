@@ -16,4 +16,8 @@ public class OrderServiceImple implements OrderService {
             orderMapper.insertOrder(orderDTO);
         }
 
+        public void savePayment(OrderDTO orderDTO) {
+            orderMapper.insertPayment(orderDTO);
+        }
+
 }

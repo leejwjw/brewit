@@ -25,21 +25,21 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">주문번호</th>
-                        <th scope="col">상품명</th>
-                        <th scope="col">금액(원)</th>
-                        <th scope="col">구매수량</th>
-                        <th scope="col">상태</th>
-                        <th scope="col">#</th>
+                        <th  style="background: #efc9ac;" scope="col">주문번호</th>
+                        <th  style="background: #efc9ac;" scope="col">상품명</th>
+                        <th  style="background: #efc9ac;" scope="col">금액(원)</th>
+                        <th  style="background: #efc9ac;" scope="col">구매수량</th>
+                        <th  style="background: #efc9ac;" scope="col">상태</th>
+                        <th  style="background: #efc9ac;" scope="col">#</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="payment : ${lists}">
-                        <td th:text="${payment.order_num}" style="background: #efc9ac;"></td>
-                        <td th:text="${payment.product_name}"  style="background: #efc9ac;"></td>
-                        <td th:text="${payment.price}" style="background: #efc9ac;"></td>
-                        <td th:text="${payment.amount} + '개'" style="background: #efc9ac;"></td>
-                        <td th:text="${payment.status == 'complete' ? '결제완료' : '환불'}" style="background: #efc9ac;"></td>
+                        <td th:text="${payment.order_num}"></td>
+                        <td th:text="${payment.product_name}"></td>
+                        <td th:text="${payment.price}" ></td>
+                        <td th:text="${payment.amount} + '개'"></td>
+                        <td th:text="${payment.status == 'complete' ? '결제완료' : '환불'}"></td>
                         <td>
                             <button type="button" th:data-payid="${payment.payment_id}" class="btn refundBtn"
                             style="    background: #ff6565;color: #fff;border-radius: 2px;">

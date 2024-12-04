@@ -4,14 +4,22 @@
 
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 
-
+<style>
+    .sort-item.selected {
+        font-weight: bold; /* 선택된 항목의 볼드 스타일 */
+        color: #F3F3F3; /* 선택된 항목의 색상 */
+        background-color: #a5c562;
+        border-radius: 10px 10px 0 0;
+    }
+</style>
 <body class="index-page">
 
 
 <main class="main">
     </br>
-    <h2 class="team" style="text-align: center; font-weight: bold;">차(TEA)</h2>
-
+    <div class="tea_title_box">
+        <h2 class="team" style="text-align: center; font-weight: bold;">차(TEA)</h2>
+    </div>
     <section id="team" class="team section light-background">
         <!-- 정렬 -->
         <div class="sort_bar container">
@@ -20,11 +28,29 @@
             <p class="sort-item" onclick="requestSort('many-review', this)">리뷰많은순</p>
         </div>
         <!--subcategory-->
+
+
         <div class="product_tab container">
-            <h2><a href="/tea/0" class="sort-item" onclick="selectCategory(this)">BEST</a></h2>
-            <h2><a href="/tea/1" class="sort-item" onclick="selectCategory(this)">티백</a></h2>
-            <h2><a href="/tea/2" class="sort-item" onclick="selectCategory(this)">잎차</a></h2>
-            <h2><a href="/tea/3" class="sort-item" onclick="selectCategory(this)">디 카페인</a></h2>
+            <a href="/tea/0"  class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>BEST</p>
+                </div>
+            </a>
+            <a href="/tea/1" class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>티백</p>
+                </div>
+            </a>
+            <a href="/tea/2" class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>잎차</p>
+                </div>
+            </a>
+            <a href="/tea/3" class="sort-item" onclick="selectCategory(this)">
+                <div class="product_small_tab">
+                    <p>디 카페인</p>
+                </div>
+            </a>
         </div>
 
         <div class="container">
@@ -35,7 +61,7 @@
                     <div class="team-member">
                         <div class="member-img">
                             <a th:href="@{/tea/{subcategory_id}/{product_id}(subcategory_id=${product.subcategory_id}, product_id=${product.product_id})}">
-                                <img th:src="@{'/admin/img/product/' + ${product.attach_name} }" class="img-fluid" th:alt="${product.name}" >
+                                <img th:src="@{'/img/product/' + ${product.attach_name} }" class="img-fluid" th:alt="${product.name}" >
                             </a>
                         </div>
                         <div class="member-info" style="text-align: right">
@@ -132,6 +158,18 @@
 <script src="/main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
 <!-- Main JS File -->
+    <script>
+        $(document).ready(function () {
+            const currentPath = window.location.pathname;
+            $('.sort-item').each(function () {
+                const href = $(this).attr('href');
+                if (href === currentPath) {
+                    $(this).addClass('selected');
+                }
+            });
+        });
+
+    </script>
 <script src="/main/assets/js/main.js"></script>
 </main>
 </body>

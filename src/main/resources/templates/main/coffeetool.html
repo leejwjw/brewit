@@ -4,19 +4,26 @@
 
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
 
-
+<style>
+  .sort-item.selected {
+    font-weight: bold; /* 선택된 항목의 볼드 스타일 */
+    color: #5d5d5d; /* 선택된 항목의 색상 */
+    background-color: #f8b498;
+    border-radius: 10px 10px 0 0;
+  }
+  .product_small_tab {
+    width: calc(1320px / 5);
+  }
+</style>
 <body class="index-page">
 
 
 <main class="main">
   </br>
-  <h2 class="team" style="text-align: center; font-weight: bold;">커피용품</h2>
-  <div class="container" style="text-align: center">
-    </br><p>
-    <a href="/teatool/0" class="sort-item" onclick="selectCategory(this)">차(Tea)용품</a> |
-    <a href="/coffeetool/0" class="sort-item" onclick="selectCategory(this)">커피용품</a>
-    </p>
+  <div class="coffee_title_box">
+    <h2 class="team" style="text-align: center; font-weight: bold;">커피용품</h2>
   </div>
+
 
   <section id="team" class="team section light-background">
     <!-- 정렬 -->
@@ -27,11 +34,31 @@
     </div>
     <!--subcategory-->
     <div class="product_tab container">
-      <h2><a href="/coffeetool/0" class="sort-item" onclick="selectCategory(this)">BEST</a></h2>
-      <h2><a href="/coffeetool/11" class="sort-item" onclick="selectCategory(this)">커피머신</a></h2>
-      <h2><a href="/coffeetool/12" class="sort-item" onclick="selectCategory(this)">그라인더</a></h2>
-      <h2><a href="/coffeetool/13" class="sort-item" onclick="selectCategory(this)">커피메이커</a></h2>
-      <h2><a href="/coffeetool/14" class="sort-item" onclick="selectCategory(this)">핸드드립 세트</a></h2>
+      <a href="/coffeetool/0"  class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>BEST</p>
+        </div>
+      </a>
+      <a href="/coffeetool/11"  class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>커피머신</p>
+        </div>
+      </a>
+      <a href="/coffeetool/12" class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>그라인더</p>
+        </div>
+      </a>
+      <a href="/coffeetool/13" class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>커피메이커</p>
+        </div>
+      </a>
+      <a href="/coffeetool/14" class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>핸드드립 세트</p>
+        </div>
+      </a>
     </div>
 
     <div class="container">
@@ -139,6 +166,18 @@
 
   <!-- Main JS File -->
   <script src="/main/assets/js/main.js"></script>
+  <script>
+    $(document).ready(function () {
+      const currentPath = window.location.pathname;
+      $('.sort-item').each(function () {
+        const href = $(this).attr('href');
+        if (href === currentPath) {
+          $(this).addClass('selected');
+        }
+      });
+    });
+
+  </script>
 </main>
 </body>
 </html>

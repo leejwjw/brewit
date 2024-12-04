@@ -3,19 +3,25 @@
 <link rel="stylesheet" href="styles.css">
 
 <th:block th:replace="~{/main/fragments/header :: fragment-header}"></th:block>
-
+<style>
+  .sort-item.selected {
+    font-weight: bold; /* 선택된 항목의 볼드 스타일 */
+    color: #F3F3F3; /* 선택된 항목의 색상 */
+    background-color: #a5c562;
+    border-radius: 10px 10px 0 0;
+  }
+  .product_small_tab {
+    width: calc(1320px / 5);
+  }
+</style>
 
 <body class="index-page">
 
 
 <main class="main">
   </br>
-  <h2 class="team" style="text-align: center; font-weight: bold;">차(Tea)용품</h2>
-  <div class="container" style="text-align: center">
-    </br><p>
-      <a href="/teatool/0" class="sort-item" onclick="selectCategory(this)">차(Tea)용품</a> |
-      <a href="/coffeetool/0" class="sort-item" onclick="selectCategory(this)">커피용품</a>
-    </p>
+  <div class="tea_title_box">
+    <h2 class="team" style="text-align: center; font-weight: bold;">차(Tea)용품</h2>
   </div>
 
   <section id="team" class="team section light-background">
@@ -27,11 +33,31 @@
     </div>
     <!--subcategory-->
     <div class="product_tab container">
-      <h2><a href="/teatool/0" class="sort-item" onclick="selectCategory(this)">BEST</a></h2>
-      <h2><a href="/teatool/7" class="sort-item" onclick="selectCategory(this)">드립주전자</a></h2>
-      <h2><a href="/teatool/8" class="sort-item" onclick="selectCategory(this)">전기포트</a></h2>
-      <h2><a href="/teatool/9" class="sort-item" onclick="selectCategory(this)">핸드드립 세트</a></h2>
-      <h2><a href="/teatool/10" class="sort-item" onclick="selectCategory(this)">다기세트</a></h2>
+      <a href="/teatool/0"  class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>BEST</p>
+        </div>
+      </a>
+      <a href="/teatool/7"  class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>드립주전자</p>
+        </div>
+      </a>
+      <a href="/teatool/8" class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>전기포트</p>
+        </div>
+      </a>
+      <a href="/teatool/9" class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>핸드드립 세트</p>
+        </div>
+      </a>
+      <a href="/teatool/10" class="sort-item" onclick="selectCategory(this)">
+        <div class="product_small_tab">
+          <p>다기세트</p>
+        </div>
+      </a>
     </div>
 
     <div class="container">
@@ -139,6 +165,18 @@
 
   <!-- Main JS File -->
   <script src="/main/assets/js/main.js"></script>
+  <script>
+    $(document).ready(function () {
+      const currentPath = window.location.pathname;
+      $('.sort-item').each(function () {
+        const href = $(this).attr('href');
+        if (href === currentPath) {
+          $(this).addClass('selected');
+        }
+      });
+    });
+
+  </script>
 </main>
 </body>
 </html>

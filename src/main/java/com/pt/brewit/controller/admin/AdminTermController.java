@@ -68,7 +68,7 @@ public class AdminTermController {
             String orgFilename = file.getOriginalFilename();
             String uuid = UUID.randomUUID().toString();
             String ext = orgFilename.substring(orgFilename.lastIndexOf(".")); // .png
-            String saveFilename = "term" + uuid + ext; // 저장할 파일명
+            String saveFilename = uuid + ext; // 저장할 파일명
             File destinationFile = new File(fileDir, saveFilename);
             try {
                 // 파일 저장-->

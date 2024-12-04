@@ -3,18 +3,20 @@ package com.pt.brewit.controller;
 
 import com.pt.brewit.dto.*;
 import com.pt.brewit.security.domain.CustomUser;
-import com.pt.brewit.service.AdminService;
-import com.pt.brewit.service.EventProductService;
-import com.pt.brewit.service.MainService;
-import com.pt.brewit.service.MemberService;
+import com.pt.brewit.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class HomeController {
      private final AdminService adminService;
      private final MainService mainService;
      private final EventProductService eventProductService;
+    private final ProductService productService;
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal CustomUser user, Model model) {
@@ -81,6 +84,15 @@ public class HomeController {
         return "admin/index";
     }
 
+    // 이미지 요청
+    @ResponseBody // 데이터 리턴
+    @GetMapping("/img/product/{filename}")
+    public Resource getImages(@PathVariable("filename") String filename) throws MalformedURLException {
+        log.info("GET /product/images - filename : {}", filename);
+        log.info("이미지 요청@@@@@@@");
+        return new UrlResource("file:" + productService.getFullPath(filename));
+    }
+
     // FAQ 페이지
     @GetMapping("/notice")
     public String notice() { return "main/notice"; }
@@ -106,7 +118,6 @@ public class HomeController {
 
 
         // 데이터와 페이징 정보를 모델에 추가
-
         return "main/subscribeList"; // Thymeleaf 템플릿 이름
     }
 }

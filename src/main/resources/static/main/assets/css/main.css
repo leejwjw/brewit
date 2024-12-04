@@ -788,7 +788,7 @@ section,
 .section {
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 60px 0;
+  padding: 100px 0 40px 0;
   scroll-margin-top: 78px;
   overflow: clip;
 }
@@ -1137,13 +1137,11 @@ li.button_li.hover > button{
 # Stats Section
 --------------------------------------------------------------*/
 section.stats {
-  background-color: #a59f9d;
   margin: 50px 0;
 }
 .stats i {
   background-color: var(--accent-color);
-  color: var(--contrast-color);
-  border: 6px solid var(--surface-color);
+  border: 6px solid #b9b9b9;
   width: 64px;
   height: 64px;
   font-size: 24px;
@@ -1380,7 +1378,7 @@ section.stats {
 # Portfolio Section
 --------------------------------------------------------------*/
 section#portfolio {
-  background-color: #f7e1d6;
+  background-color: #f1e6e1;
 }
 .portfolio .portfolio-filters {
   padding: 0;
@@ -2164,6 +2162,12 @@ div.modify_form  button.modify {
 div.coffee_title_box {
   padding: 40px 0;
   text-decoration: underline #f8b498;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 4px;
+}
+div.tea_title_box {
+  padding: 40px 0;
+  text-decoration: underline #a5c562;
   text-underline-offset: 10px;
   text-decoration-thickness: 4px;
 }

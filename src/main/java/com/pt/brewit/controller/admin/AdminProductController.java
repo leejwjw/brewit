@@ -31,7 +31,7 @@ import java.util.UUID;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/admin")
+
 public class AdminProductController {
     private final AdminService adminService;
     private final CategoryMapper categoryMapper;
@@ -42,7 +42,7 @@ public class AdminProductController {
     @Value("${file.dir}")
     private String fileDir;
 
-    @GetMapping("/registProduct")
+    @GetMapping("/admin/registProduct")
     public String registProduct(Model model) {
         List<CategoryDTO> categories = categoryMapper.getAllCategories();
         log.info("categories: {}", categories);
@@ -51,7 +51,7 @@ public class AdminProductController {
         return "admin/registProduct";
     }
 
-    @PostMapping("/registProduct")
+    @PostMapping("/admin/registProduct")
     public String registProduct(@ModelAttribute ProductDTO productDTO, Model model, @AuthenticationPrincipal CustomUser user) {
         // 파일 저장 로직
 
@@ -90,7 +90,7 @@ public class AdminProductController {
     }
 
 
-    @GetMapping("/products")
+    @GetMapping("/admin/products")
     public String showProducts(Model model) {
         log.info("products site open !");
         List<ProductDTO> products = productService.selectAllProducts();
@@ -100,7 +100,7 @@ public class AdminProductController {
     }
     // 이미지 요청
     @ResponseBody // 데이터 리턴
-    @GetMapping("/img/product/{filename}")
+    @GetMapping("/admin/img/product/{filename}")
     public Resource getImages(@PathVariable("filename") String filename) throws MalformedURLException {
         log.info("GET /product/images - filename : {}", filename);
         log.info("이미지 요청@@@@@@@");
@@ -109,7 +109,7 @@ public class AdminProductController {
 
 
     //수정페이지
-    @GetMapping("products/edit/{id}")
+    @GetMapping("/admin/products/edit/{id}")
     public String editProduct(@PathVariable("id") int id, Model model) {
         log.info("id값---> :{}",id);
         ProductDTO product = productService.getProductById(id);
@@ -120,13 +120,13 @@ public class AdminProductController {
         return "admin/editProduct";
     }
     //수정 요청
-    @PostMapping("products/editProduct/{id}")
+    @PostMapping("/admin/products/editProduct/{id}")
     public String updateProduct(@PathVariable("id") int id, @ModelAttribute ProductDTO product) {
         productService.updateProduct(id, product); // 서비스 레이어에서  정보 업데이트
         return "redirect:/admin/products"; // 수정 후 회원 목록 페이지로 리다이렉트
     }
     //삭제 요청 처리
-    @PostMapping("products/delete/{id}")
+    @PostMapping("/admin/products/delete/{id}")
     public String deleteProduct(@PathVariable("id") int id, @ModelAttribute ProductDTO product) {
         productService.deleteProduct(id, product);
         return "redirect:/admin/products";

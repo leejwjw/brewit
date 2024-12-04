@@ -27,7 +27,7 @@
     <select id="getEventProduct" resultType="EventProductDTO">
         SELECT e.*, s.company_name, s.b_number, m.name AS seller_name
         FROM TB_TERM_EVENT e
-        JOIN TB_SELLER s ON e.seller_id = s.seller_id
+        JOIN TB_SELLER s ON e.seller_id = s.member_id
         JOIN TB_MEMBER m ON e.seller_id = m.member_id
         WHERE e.status='active'
         <if test="auth == 'seller'">
@@ -61,17 +61,18 @@
     </sql>
 
     <select id="selectSubscriptions" resultType="EventProductDTO">
-        SELECT *
-        FROM TB_TERM_EVENT
+        SELECT e.*, m.name AS seller_name
+        FROM TB_TERM_EVENT e
+        JOIN TB_MEMBER m ON e.seller_id = m.member_id
         <choose>
             <when test="searchType != null and searchType != ''">
                 <include refid="searchKeyword"/>
-                AND status = 'active'
-                AND stock > 0
+                AND e.status = 'active'
+                AND e.stock > 0
             </when>
             <otherwise>
-                WHERE status = 'active'
-                AND stock > 0
+                WHERE e.status = 'active'
+                AND e.stock > 0
             </otherwise>
         </choose>
         ORDER BY term_item_id DESC

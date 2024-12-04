@@ -5,14 +5,14 @@
 <!-- Header Fragments Close -->
 <body>
 <main class="container mt-4">
-    <div class="mt-3 mb-3">
+    <div class="mt-3 mb-5">
         <h2 class="team text-center fw-bold">상품 구매</h2>
     </div>
 
     <!-- 상품 정보 섹션 -->
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-secondary ">
-            <h5 class="text-center text-white fw-bold mb-0">상품 정보</h5>
+        <div class="card-header">
+            <h5 class="text-center text-white fw-bold">상품 정보</h5>
         </div>
         <div class="row g-0 align-items-center">
             <!-- 상품 이미지 -->
@@ -25,13 +25,13 @@
             <!-- 상품 설명 -->
             <div class="col-md-8 d-flex align-items-center">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">상품명: <span id="productName" th:text="${productData.name}">[상품명]</span></h5>
+                    <h5 class="card-title fw-bold" style="font-size: 24px; margin-bottom:80px;">상품명 : <span id="productName" th:text="${productData.name}">[상품명]</span></h5>
                     <p class="card-text">상품 수량: <span id="quantity" th:text="${productData.quantity}">[상품수량]</span>개</p>
-                    <p class="card-text">상품 금액:
-                        <del th:text="${#numbers.formatInteger(productData.regular_total_price,3,'COMMA') + '원'}">0원
-                        </del>
-                    </p>
-                    <p class="card-text">할인율: <strong th:text="${productData.discount}" style="color: red">0</strong>%</p>
+                    <!--                    <p class="card-text">상품 금액:-->
+                    <!--                        <del th:text="${#numbers.formatInteger(productData.regular_total_price,3,'COMMA') + '원'}">0원-->
+                    <!--                        </del>-->
+                    <!--                    </p>-->
+                    <!--                    <p class="card-text">할인율: <strong th:text="${productData.discount}" style="color: red">0</strong>%</p>-->
                     <p class="card-text">결제 금액:
                         <strong th:text="${productData.sale_price}">0원</strong>
                     </p>
@@ -43,15 +43,15 @@
 
     <!-- 결제 정보 섹션 -->
     <div class="card shadow-sm">
-        <div class="card-header bg-light">
-            <h5 class="text-center fw-bold mb-0">결제 정보</h5>
+        <div class="card-header">
+            <h5 class="text-center mb-0">결제 정보</h5>
         </div>
         <div class="card-body">
             <!-- 한 줄에 카드와 기호 정렬 -->
             <div class="d-flex align-items-center justify-content-around text-center">
                 <!-- 상품 금액 -->
                 <div class="card text-center shadow-sm" style="width: 15%;">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary">
                         <h6 class="fw-bold mb-0 text-white">상품 금액</h6>
                     </div>
                     <div class="card-body">
@@ -93,7 +93,7 @@
 
                 <!-- 결제 금액 -->
                 <div class="card text-center shadow-sm" style="width: 15%;">
-                    <div class="card-header bg-success text-white">
+                    <div class="card-header bg-secondary text-white">
                         <h6 class="fw-bold mb-0 text-white">결제 금액</h6>
                     </div>
                     <div class="card-body">
@@ -106,9 +106,9 @@
 
     <!-- 결제 버튼 -->
     <div class="row mt-4 mb-5">
-        <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-secondary me-2" th:onclick="history.go(-1)">돌아가기</button>
-            <button type="button" class="btn btn-success" id="confirmOrder">
+        <div class="col-md-12 text-center single_button_box">
+            <button type="button" class="btn btn-gray-600 me-2" th:onclick="history.go(-1)" style="background-color: #181818; border-radius: 3px; color: #fff;">주문취소</button>
+            <button type="submit" class="btn btn-gray-800" id="confirmOrder" style="background-color: #181818; border-radius: 3px; color: #fff;">
                 <strong th:text="${productData.sale_price}"></strong> 결제하기
             </button>
         </div>
@@ -126,7 +126,7 @@
 
 <!-- Footer Fragments -->
 <th:block th:replace="~{/main/fragments/footer :: fragment-footer}"></th:block>
-    <!-- /Footer Fragments Close -->
+<!-- /Footer Fragments Close -->
 
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
@@ -155,7 +155,7 @@
                 seller_id: sellerId,
                 amount: quantity,
                 price: price,
-                is_subscribe: isSubscribe,
+                is_subscribe: isSubscribe
             };
 
             // AJAX 요청
@@ -181,3 +181,5 @@
 </script>
 </body>
 </html>
+
+

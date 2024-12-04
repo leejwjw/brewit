@@ -10,7 +10,7 @@ public class Pager {
     private String searchType; // 검색 타입   t, c, w, tw, tc, twc
     private String keyword;    // 검색 키워드
 
-    public Pager(){ this(1, 12); }//한페이지에 8개씩
+    public Pager(){ this(1, 12); }//한페이지에 `12`개씩
     public Pager(int page, int size) {
         this.page = page;
         this.size = size;

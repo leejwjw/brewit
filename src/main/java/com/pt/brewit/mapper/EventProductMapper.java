@@ -17,7 +17,7 @@ public interface EventProductMapper {
 
     // 페이징
     List<EventProductDTO> selectSubscriptions(Pager pager); // 페이징된 상품 리스트
-    int countSubscriptions(Pager pager); // 총 상품 개수
+    Long countSubscriptions(Pager pager); // 총 상품 개수
 
     //삭제
     void deleteProductById(int id);

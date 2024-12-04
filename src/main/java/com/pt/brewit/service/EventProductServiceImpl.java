@@ -47,12 +47,15 @@ public class EventProductServiceImpl implements EventProductService {
 
     @Override
     public List<EventProductDTO> getSubscriptions(Pager pager) {
-        return eventProductMapper.selectSubscriptions(pager);
+        pager.setSize(5);
+        List<EventProductDTO> eventProductPager = eventProductMapper.selectSubscriptions(pager);
+        return eventProductPager;
     }
 
     @Override
     public int getTotalCount(Pager pager) {
-        return eventProductMapper.countSubscriptions(pager);
+        Long count = eventProductMapper.countSubscriptions(pager);
+        return count.intValue();
     }
 
     @Override

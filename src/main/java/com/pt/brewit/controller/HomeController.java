@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -85,22 +86,26 @@ public class HomeController {
     public String notice() { return "main/notice"; }
 
     @GetMapping("/subscribe")
-    public String listSubscriptions(
-            @RequestParam(defaultValue = "1") int page, // 현재 페이지
-            @RequestParam(defaultValue = "5") int size, // 페이지 크기
-            Model model
-    ) {
-        Pager pager = new Pager(page, size);
+    public String listSubscriptions(Model model, Pager pager) {
+        log.info("GET/Board/list - pager: {}", pager);
 
-        // 전체 데이터 개수 가져오기
+
+        // 페이징 정보 설정
         int total = eventProductService.getTotalCount(pager);
 
-        // PageDTO 생성
-        PageDTO pageDTO = new PageDTO(pager, total);
+        if (total == 0) {
+            // 데이터가 없는 경우 빈 리스트와 PageDTO 설정
+            model.addAttribute("subscriptions", Collections.emptyList());
+            model.addAttribute("pageDTO", new PageDTO(pager, 0));
+        } else {
+            // 데이터가 있는 경우 정상 설정
+            List<EventProductDTO> subscriptions = eventProductService.getSubscriptions(pager);
+            model.addAttribute("subscriptions", subscriptions);
+            model.addAttribute("pageDTO", new PageDTO(pager, total));
+        }
+
 
         // 데이터와 페이징 정보를 모델에 추가
-        model.addAttribute("products", eventProductService.getSubscriptions(pager));
-        model.addAttribute("pageDTO", pageDTO);
 
         return "main/subscribeList"; // Thymeleaf 템플릿 이름
     }

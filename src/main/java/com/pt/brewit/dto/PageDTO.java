@@ -33,13 +33,10 @@ public class PageDTO {
 
         this.pageNumbers = new ArrayList<>();
         for(int i = startPage; i <= endPage; i++) {
-            this.pageNumbers.add(i);
+            if (i <= realEnd) {  // 유효한 페이지 번호만 추가
+                this.pageNumbers.add(i);
+            }
         }
 
     }
-
-
-
-
-
 }

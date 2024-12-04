@@ -73,14 +73,11 @@ public class HomeProductController {
 
     // 구독 상품 상세페이지 연결
     @GetMapping("/{term_item_id}")
-    public String getProduct(@PathVariable("term_item_id") int term_item_id, Model model, @AuthenticationPrincipal CustomUser user) {
+    public String getProduct(@PathVariable("term_item_id") int term_item_id, Model model) {
         EventProductDTO product = eventProductService.getFindProductId(term_item_id);
-        MemberDTO memberDetail = memberService.getMember(user.getUsername());
 
         log.info("findProductId: {}", product);
-        log.info("findMemberDetail: {}", memberDetail);
 
-        model.addAttribute("memberDetail",memberDetail);
         model.addAttribute("product", product);
         return "main/productSubsDetail";
     }

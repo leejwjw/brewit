@@ -23,7 +23,6 @@
     <update id="updateSellerMember">
         UPDATE TB_SELLER SET status='active' WHERE member_id = ${id}
     </update>
-    <!-- 회원 삭제 -->
     <update id="deleteMemberById">
         UPDATE TB_MEMBER SET status="inactive" WHERE member_id = #{id}
     </update>

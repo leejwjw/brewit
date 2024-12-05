@@ -26,22 +26,20 @@ public class AdminHistoryController {
     private final HistoryService historyService;
     @GetMapping("/orders")
     public String Orders(Model model) {
-        log.info("Orders Site Open !!");
-        // 회원 목록
+
         List<OrderDTO> orders = historyService.getAllOrders();
         model.addAttribute("orders", orders);
-        log.info("orders!!!!!!!!!!!!!!!!! : {}", orders);
+        log.info("orders : {}", orders);
 
         return "admin/orders";
     }
 
     @GetMapping("/payments")
     public String Payments(Model model) {
-        log.info("Payments Site Open !!");
-        // 회원 목록
+
         List<PaymentDTO> payments = historyService.getAllPayments();
         model.addAttribute("payments", payments);
-        log.info("payments!!!!!!!!!!!!!!!!! : {}", payments);
+        log.info("payments : {}", payments);
 
         return "admin/payments";
     }

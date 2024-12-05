@@ -21,29 +21,21 @@ public class AdminMemberController {
 
     @GetMapping("/allMember")
     public String allMember(Model model) {
-        log.info("allMember Site Open !!");
         // 회원 목록
         List<MemberDTO> members = adminService.getMemberList();
         model.addAttribute("members", members);
-        log.info("GET /admin/allMember - members : {}", members);
-
         return "admin/allMember";
     }
     @GetMapping("/confirmSeller")
     public String getConfirmSeller(Model model) {
-        log.info("confirmSeller Site Open !!");
-        // 회원 목록
         List<SellerDTO> members = adminService.getSellerConfrimList();
         model.addAttribute("members", members);
-        log.info("GET /admin/allMember - members : {}", members);
-
         return "admin/confirmSeller";
     }
     // 승인 처리
     @PostMapping("confirmSeller/confirm/{id}")
     public String confirmMember(@PathVariable("id") int id) {
         log.info("confrim member with id: {}", id);
-        log.info("confrim!!!");
         adminService.confirmSeller(id);
         adminService.updateSeller(id);
         return "redirect:/admin/confirmSeller"; // 삭제 후 목록으로 리다이렉트

@@ -607,17 +607,17 @@
         if (user.auth == 'admin') {
           var chartData1 = [];
         }
-          var chartData2 = [];
-          var chartData3 = [];
+        var chartData2 = [];
+        var chartData3 = [];
 
         for (var i = 0; i < 12; i++) {
+
           if (user.auth == 'admin') {
             chartData1.push([i, (memberCounts[i] ? memberCounts[i] : 0)]);
           }
           chartData2.push([i, (orderCounts[i] ? orderCounts[i] : 0)]);
           chartData3.push([i, (termEventCounts[i] ? termEventCounts[i] : 0)]);
         }
-
         var options = {
           series: {
             lines: { show: true },

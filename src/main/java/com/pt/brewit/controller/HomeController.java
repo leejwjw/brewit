@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.MalformedURLException;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -67,8 +68,8 @@ public class HomeController {
         MemberDTO logged_member = memberService.getMember(user.getUsername());
 
         // 해당 회원의 월별 가입 수 가져오기
-        List<Long> memberCounts = adminService.getMonthlyMemberCount(2024);
-        List<Long> orderCounts = adminService.getMonthlyOrderCount(2024, logged_member);
+        List<Long> memberCounts = adminService.getMonthlyMemberCount(LocalDate.now().getYear());
+        List<Long> orderCounts = adminService.getMonthlyOrderCount(LocalDate.now().getYear(), logged_member);
         List<Long> termEventCounts = adminService.getMonthlyTermEventCount(2024, logged_member);
 
         model.addAttribute("count", countDTO);

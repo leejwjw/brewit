@@ -28,7 +28,7 @@
                         container.empty();
                         data.forEach(product => {
                             const productHtml = `
-                                <div class="rolling-item">
+                                <div class="rolling-item" style="height: 450px;">
                                     <a href="/products/${product.term_item_id}" class="product-link subsClick">
                                         <div class="team-member">
                                             <div class="member-img">
@@ -36,7 +36,7 @@
                                             </div>
                                             <div class="member-info">
                                                 <h4>${product.event_name}</h4>
-                                                <span>${product.event_info}</span>
+
                                             </div>
                                         </div>
                                     </a>
